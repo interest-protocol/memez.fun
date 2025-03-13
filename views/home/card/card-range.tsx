@@ -8,11 +8,19 @@ const CardRange: FC = () => {
   const rangeWidth = `${((value[0] - 0) / (100 - 0)) * 100}%`;
 
   return (
-    <Div py="1rem">
+    <Div
+      py="1rem"
+      gap="1rem"
+      display="flex"
+      color="#fff"
+      fontSize="0.8rem"
+      alignItems="center"
+    >
       <Range
         min={0}
         max={100}
         values={value}
+        disabled
         onChange={(values) => setValue(values)}
         renderThumb={({ props }) => (
           <Div
@@ -28,24 +36,25 @@ const CardRange: FC = () => {
             {...props}
             style={{
               ...props.style,
-              height: '10px',
               width: '100%',
-              background: '#FFFFFF0D',
+              height: '10px',
               borderRadius: '8px',
+              background: '#FFFFFF0D',
             }}
           >
             {children}
             <Div
               style={{
                 height: '100%',
-                background: '#F6C853',
                 width: rangeWidth,
                 borderRadius: '8px',
+                background: '#F6C853',
               }}
             />
           </Div>
         )}
       />
+      Bonding
     </Div>
   );
 };
