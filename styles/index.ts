@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
 
 export const GlobalStyles = css`
+  @font-face {
+    font-family: 'NDot';
+    src: url('/fonts/ndot-47-inspired-by-nothing.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
   * {
     margin: 0;
     padding: 0;
