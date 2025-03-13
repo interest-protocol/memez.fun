@@ -7,8 +7,8 @@ const ConnectWalletButton: FC = () => {
   return (
     <Button
       all="unset"
+      px="1rem"
       gap="1rem"
-      px="1.5rem"
       py="0.5rem"
       display="flex"
       color="#F5B722"
