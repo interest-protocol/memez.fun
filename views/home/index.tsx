@@ -15,7 +15,6 @@ const Home: FC = () => (
       display="grid"
       flexWrap="wrap"
       justifyContent="center"
-      border={['1px solid blue', '1px solid green']}
       gridTemplateColumns={[
         '21rem',
         '25rem',

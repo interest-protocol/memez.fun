@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react';
 
 import { CardIconProps } from './card.types';
 
-const CardIcon: FC<CardIconProps> = () => {
+const CardIcon: FC<CardIconProps> = ({ imgSrc }) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
   const getImageColor = (imgSrc: string) => {
@@ -20,7 +20,7 @@ const CardIcon: FC<CardIconProps> = () => {
     };
   };
   useEffect(() => {
-    getImageColor('/suiMan.png');
+    getImageColor(imgSrc);
   }, []);
 
   return (
@@ -53,7 +53,7 @@ const CardIcon: FC<CardIconProps> = () => {
         02
       </Div>
       <Div width="6.25rem" height="6.25rem">
-        <Img src="/suiMan.png" alt="SuiMan" width="100%" />
+        <Img src={imgSrc} alt="SuiMan" width="100%" />
       </Div>
     </Div>
   );
