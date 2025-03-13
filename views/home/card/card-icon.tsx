@@ -24,36 +24,38 @@ const CardIcon: FC<CardIconProps> = ({ imgSrc }) => {
   }, []);
 
   return (
-    <Div
-      p="0.7rem"
-      display="flex"
-      height="15.524rem"
-      position="relative"
-      alignItems="center"
-      borderRadius="1.3rem"
-      justifyContent="center"
-      background={dominantColor ?? 'red'}
-    >
+    <Div p="0.5rem">
       <Div
-        py="0.2rem"
-        px="0.8rem"
-        color="#fff"
-        top="0.7rem"
-        width="4rem"
-        left="0.7rem"
+        p="0.7rem"
         display="flex"
-        fontFamily="NDot"
-        fontSize="1.8rem"
-        borderRadius="2rem"
+        height="15.524rem"
+        position="relative"
         alignItems="center"
-        position="absolute"
+        borderRadius="1.3rem"
         justifyContent="center"
-        backgroundColor="#0000001A"
+        background={dominantColor ?? 'red'}
       >
-        02
-      </Div>
-      <Div width="6.25rem" height="6.25rem">
-        <Img src={imgSrc} alt="SuiMan" width="100%" />
+        <Div
+          py="0.2rem"
+          px="0.8rem"
+          color="#fff"
+          top="0.7rem"
+          width="4rem"
+          left="0.7rem"
+          display="flex"
+          fontFamily="NDot"
+          fontSize="1.8rem"
+          borderRadius="2rem"
+          alignItems="center"
+          position="absolute"
+          justifyContent="center"
+          backgroundColor="#0000001A"
+        >
+          02
+        </Div>
+        <Div width="6.25rem" height="6.25rem">
+          <Img src={imgSrc} alt="SuiMan" width="100%" />
+        </Div>
       </Div>
     </Div>
   );
