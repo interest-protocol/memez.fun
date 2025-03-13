@@ -16,6 +16,7 @@ export const GlobalStyles = css`
   body,
   html {
     overflow-x: hidden;
+    background: #0a090d;
   }
 
   a {
