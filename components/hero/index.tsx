@@ -1,25 +1,17 @@
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
 import { Div, Img } from '@stylin.js/elements';
 import { FC } from 'react';
-import { Carousel } from 'react-responsive-carousel';
+
+import Carousel from './hero-carousel';
 
 const Hero: FC = () => {
   return (
     <Div height="27.688rem">
-      <Carousel
-        showArrows={false}
-        showThumbs={false}
-        showStatus={false}
-        useKeyboardArrows={false}
-        autoPlay
-        infiniteLoop
-      >
-        <Div height="27.688rem" objectFit="contain">
-          <Img src="/hero-bg.png" height="100%" />
+      <Carousel>
+        <Div height="100%" width="100%" objectFit="contain">
+          <Img src="/hero-bg.png" width="100%" />
         </Div>
-        <Div height="27.688rem" objectFit="cover">
-          <Img src="/hero-bg-2.png" height="100%" />
+        <Div height="100%" width="100%" objectFit="contain">
+          <Img src="/hero-bg-2.png" width="100%" />
         </Div>
       </Carousel>
     </Div>
