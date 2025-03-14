@@ -29,7 +29,7 @@ const Home: FC = () => {
           '25rem',
           'repeat(2, 21rem)',
           'repeat(3, 20rem)',
-          'repeat(4, 18rem)',
+          'repeat(4, 24.5%)',
         ]}
       >
         {CARDS.map((card) => (

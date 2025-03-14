@@ -62,12 +62,12 @@ const FilterButton: FC = () => {
         <div ref={dropdownRef}>
           <Div
             zIndex="5"
-            width="100%"
-            position="absolute"
             bg="#24282D"
+            width="12rem"
             display="flex"
             color="#E4E7EB"
             borderRadius="1rem"
+            position="absolute"
             flexDirection="column"
           >
             <FilterButtonItem title="item" />
