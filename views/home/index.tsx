@@ -5,6 +5,7 @@ import { v4 } from 'uuid';
 import { Layout } from '@/components';
 import CreateCoinButton from '@/components/creat-coin-button';
 import FilterButton from '@/components/filter-button';
+import Hero from '@/components/hero';
 import SearchButton from '@/components/search-button';
 
 import Card from './card';
@@ -15,6 +16,7 @@ const Home: FC = () => {
 
   return (
     <Layout>
+      <Hero />
       <Div py="2rem" display="flex" justifyContent="space-between">
         <Div gap="0.5rem" display="flex">
           <FilterButton />
