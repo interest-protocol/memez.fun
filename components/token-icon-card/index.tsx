@@ -5,9 +5,13 @@ import { FC, useEffect, useState } from 'react';
 import { DottedArrowSVG, VerifiedSVG } from '@/components/svg';
 import { getImageColor } from '@/utils';
 
-import { CardIconProps } from './card.types';
+import { TokenCardIconProps } from './token-icon-card.types';
 
-const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
+const TokenCardIcon: FC<TokenCardIconProps> = ({
+  imgSrc,
+  isCardHovered,
+  showCardDetails,
+}) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
   useEffect(() => {
@@ -31,24 +35,26 @@ const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
         justifyContent="center"
         background={dominantColor ?? 'red'}
       >
-        <Div
-          py="0.2rem"
-          px="0.8rem"
-          color="#fff"
-          top="0.7rem"
-          width="4rem"
-          left="0.7rem"
-          display="flex"
-          fontFamily="NDot"
-          fontSize="1.8rem"
-          borderRadius="2rem"
-          alignItems="center"
-          position="absolute"
-          justifyContent="center"
-          backgroundColor="#0000001A"
-        >
-          02
-        </Div>
+        {showCardDetails && (
+          <Div
+            py="0.2rem"
+            px="0.8rem"
+            color="#fff"
+            top="0.7rem"
+            width="4rem"
+            left="0.7rem"
+            display="flex"
+            fontFamily="NDot"
+            fontSize="1.8rem"
+            borderRadius="2rem"
+            alignItems="center"
+            position="absolute"
+            justifyContent="center"
+            backgroundColor="#0000001A"
+          >
+            02
+          </Div>
+        )}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{
@@ -120,4 +126,4 @@ const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
   );
 };
 
-export default CardIcon;
+export default TokenCardIcon;

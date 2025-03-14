@@ -1,5 +1,9 @@
 export { default as ArrowDownSVG } from './arrow-down';
+export { default as CetusSVG } from './cetus';
+export { default as ClipBoardSVG } from './clipboard';
+export { default as CubeSVG } from './cube';
 export { default as DiscordSVG } from './discord';
+export { default as DollarSignSVG } from './dollar-sign';
 export { default as DottedArrowSVG } from './dottedArrow';
 export { default as FilledHeartSVG } from './filled-heart';
 export { default as FiltersSVG } from './filters';
@@ -11,5 +15,6 @@ export { default as SearchSVG } from './search';
 export { default as StarSVG } from './star';
 export { default as Telegram } from './telegram';
 export { default as VerifiedSVG } from './verified';
+export { default as VerticalCoinSVG } from './vertical-coin';
 export { default as WalletSVG } from './wallet';
 export { default as XSVG } from './x';
