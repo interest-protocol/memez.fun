@@ -1,6 +1,8 @@
 export { default as ArrowDownSVG } from './arrow-down';
 export { default as DiscordSVG } from './discord';
+export { default as DottedArrowSVG } from './dottedArrow';
 export { default as FilledHeartSVG } from './filled-heart';
+export { default as FiltersSVG } from './filters';
 export { default as HeartSVG } from './heart';
 export { default as MemeZLogoSVG } from './meme-z-logo';
 export { default as MemeZLogoIconSVG } from './meme-z-logo-icon';

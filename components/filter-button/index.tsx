@@ -1,9 +1,10 @@
 import { Button, Div } from '@stylin.js/elements';
+import { motion } from 'framer-motion';
 import { FC, useId, useState } from 'react';
 
 import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
-import { ArrowDownSVG, SearchSVG } from '../svg';
+import { ArrowDownSVG, FiltersSVG } from '../svg';
 import FilterButtonItem from './filter-button-item';
 
 const FilterButton: FC = () => {
@@ -36,14 +37,17 @@ const FilterButton: FC = () => {
       <Button
         mb="0.5rem"
         px="1.4rem"
-        border="none"
         bg="#24282D"
-        cursor="pointer"
+        border="none"
+        display="flex"
         color="#E4E7EB"
+        height="2.75rem"
+        cursor="pointer"
+        alignItems="center"
+        justifyContent="center"
         onClick={handleOnClick}
-        width={['1.5rem', '1.5rem', 'auto', 'auto', 'auto']}
-        borderRadius={['50%', '50%', '1.5rem', '1.5rem', '1.5rem']}
-        height={['1.5rem', '1.5rem', '2.75rem', '2.75rem', '2.75rem']}
+        width={['1.5rem', '1.5rem', '1.5rem', 'auto', 'auto']}
+        borderRadius={['2rem', '2rem', '1.5rem', '1.5rem', '1.5rem']}
       >
         <Div
           gap="1rem"
@@ -55,27 +59,35 @@ const FilterButton: FC = () => {
           <ArrowDownSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
         </Div>
         <Div display={['flex', 'flex', 'flex', 'none', 'none']}>
-          <SearchSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
+          <FiltersSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
         </Div>
       </Button>
+
       {isDropdownOpen && (
         <div ref={dropdownRef}>
-          <Div
-            zIndex="5"
-            bg="#24282D"
-            width="12rem"
-            display="flex"
-            color="#E4E7EB"
-            borderRadius="1rem"
-            position="absolute"
-            flexDirection="column"
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
           >
-            <FilterButtonItem title="item" />
-            <FilterButtonItem title="item" />
-            <FilterButtonItem title="item" />
-            <FilterButtonItem title="item" />
-            <FilterButtonItem title="item" />
-          </Div>
+            <Div
+              zIndex="5"
+              bg="#24282D"
+              width="12rem"
+              display="flex"
+              color="#E4E7EB"
+              borderRadius="1rem"
+              position="absolute"
+              flexDirection="column"
+            >
+              <FilterButtonItem title="item" />
+              <FilterButtonItem title="item" />
+              <FilterButtonItem title="item" />
+              <FilterButtonItem title="item" />
+              <FilterButtonItem title="item" />
+            </Div>
+          </motion.div>
         </div>
       )}
     </Div>

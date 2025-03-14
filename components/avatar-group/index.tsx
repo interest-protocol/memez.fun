@@ -9,7 +9,7 @@ const AvatarGroup: FC = () => {
   const ITEMS = [1, 2, 3];
 
   return (
-    <Div gap="0.1rem" display="flex">
+    <Div color="#F6C853" gap="0.1rem" display="flex">
       {ITEMS.map(() => (
         <Avatar key={v4()} />
       ))}

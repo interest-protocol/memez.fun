@@ -9,7 +9,6 @@ const SearchBar: FC = () => {
       py="0.5rem"
       gap="0.7rem"
       px="1rem"
-      display="flex"
       color="#90939D"
       width="26.625rem"
       transition="0.3s"
@@ -18,6 +17,7 @@ const SearchBar: FC = () => {
       min-width="26.625rem"
       justifyContent="center"
       border="1px solid #90939D"
+      display={['none', 'none', 'none', 'flex', 'flex']}
     >
       <SearchSVG maxWidth="1.3rem" maxHeight="1.3rem" width="1.3rem" />
       <Input

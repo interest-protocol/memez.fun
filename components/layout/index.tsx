@@ -10,7 +10,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => (
     py="1.5rem"
     maxWidth="1400px"
     position="relative"
-    px={['1.5rem', '1.5rem', '1.5rem', '2rem', '2rem']}
+    px={['0.7rem', '2rem', '1.5rem', '2rem', '2rem']}
   >
     <Header />
     {children}

@@ -1,4 +1,5 @@
 import { Button, Div } from '@stylin.js/elements';
+import { motion } from 'framer-motion';
 import { FC, useState } from 'react';
 
 import { OctagonPlusSVG, StarSVG } from '../svg';
@@ -26,17 +27,50 @@ const CreateCoinButton: FC<CreateCoinButtonProps> = ({ onClick }) => {
     >
       {isButtonHover && (
         <>
-          <Div top="-1.4rem" left="-0.6rem" position="absolute">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: -10 }}
+            animate={{ opacity: 1, scale: [1, 1.3, 1], y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+            style={{ position: 'absolute', top: '-1.4rem', left: '-0.6rem' }}
+          >
             <StarSVG maxHeight="1.3rem" maxWidth="1.3rem" width="1.3rem" />
-          </Div>
-          <Div top="-1.6rem" left="3rem" position="absolute">
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: -10 }}
+            animate={{ opacity: 1, scale: [1, 1.2, 1], y: 0 }}
+            transition={{
+              duration: 0.5,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+            style={{ position: 'absolute', top: '-1.6rem', left: '3rem' }}
+          >
             <StarSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
-          </Div>
-          <Div top="-1.6rem" left="8rem" position="absolute">
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: -10 }}
+            animate={{ opacity: 1, scale: [1, 1.4, 1], y: 0 }}
+            transition={{
+              duration: 0.7,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+            style={{ position: 'absolute', top: '-1.6rem', left: '8rem' }}
+          >
             <StarSVG maxHeight="1.1rem" maxWidth="1.1rem" width="1.1rem" />
-          </Div>
+          </motion.div>
         </>
       )}
+
       <Button
         onMouseEnter={handleOnMouseEnter}
         onMouseLeave={handleOnMouseLeave}

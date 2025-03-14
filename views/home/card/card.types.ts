@@ -5,4 +5,5 @@ export interface CardProps {
 
 export interface CardIconProps {
   imgSrc: string;
+  isCardHovered: boolean;
 }
