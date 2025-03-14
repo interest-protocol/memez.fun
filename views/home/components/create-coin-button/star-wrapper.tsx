@@ -15,7 +15,7 @@ const StarContainer: FC = () => {
         filter="drop-shadow(0 0 0 #fffdef)"
         transition="all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96)"
       >
-        <img src="./first-start.svg" alt="first start" />
+        <img src="./first-star.svg" alt="first start" />
       </Div>
       <Div
         top="45%"
@@ -28,7 +28,7 @@ const StarContainer: FC = () => {
         filter="drop-shadow(0 0 0 #fffdef)"
         transition="all 1s cubic-bezier(0, 0.4, 0, 1.01)"
       >
-        <img src="./second-start.svg" alt="second start" />
+        <img src="./second-star.svg" alt="second start" />
       </Div>
       <Div
         top="40%"
@@ -41,7 +41,7 @@ const StarContainer: FC = () => {
         filter="drop-shadow(0 0 0 #fffdef)"
         transition="all 1s cubic-bezier(0, 0.4, 0, 1.01)"
       >
-        <img src="./third-start.svg" alt="third start" />
+        <img src="./third-star.svg" alt="third start" />
       </Div>
       <Div
         top="20%"
@@ -54,7 +54,7 @@ const StarContainer: FC = () => {
         filter="drop-shadow(0 0 0 #fffdef)"
         transition="all .8s cubic-bezier(0, 0.4, 0, 1.01)"
       >
-        <img src="./fourth-start.svg" alt="fourth start" />
+        <img src="./fourth-star.svg" alt="fourth start" />
       </Div>
       <Div
         top="25%"
@@ -67,7 +67,7 @@ const StarContainer: FC = () => {
         filter="drop-shadow(0 0 0 #fffdef)"
         transition="all .6s cubic-bezier(0, 0.4, 0, 1.01)"
       >
-        <img src="./fiveth-start.svg" alt="fiveth start" />
+        <img src="./fiveth-star.svg" alt="fiveth start" />
       </Div>
       <Div
         top="5%"
@@ -80,7 +80,7 @@ const StarContainer: FC = () => {
         transition="all .8s ease"
         filter="drop-shadow(0 0 0 #fffdef)"
       >
-        <img src="./sixth-start.svg" alt="sixth start" />
+        <img src="./sixth-star.svg" alt="sixth start" />
       </Div>
     </>
   );
