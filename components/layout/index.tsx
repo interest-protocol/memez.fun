@@ -1,6 +1,7 @@
 import { Main } from '@stylin.js/elements';
 import { FC, PropsWithChildren } from 'react';
 
+import Footer from './footer';
 import Header from './header';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => (
@@ -13,6 +14,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => (
   >
     <Header />
     {children}
+    <Footer />
   </Main>
 );
 
