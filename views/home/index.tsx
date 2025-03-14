@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 
 import { Layout } from '@/components';
 import CreateCoinButton from '@/components/creat-coin-button';
+import FilterButton from '@/components/filter-button';
 
 import Card from './card';
 import { CARDS } from './card.data';
@@ -13,7 +14,8 @@ const Home: FC = () => {
 
   return (
     <Layout>
-      <Div py="2rem" display="flex">
+      <Div py="2rem" display="flex" justifyContent="space-between">
+        <FilterButton />
         <CreateCoinButton onClick={handleCreatCointButtonClick} />
       </Div>
       <Div

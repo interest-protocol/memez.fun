@@ -1,3 +1,4 @@
+export { default as ArrowDownSVG } from './arrow-down';
 export { default as FilledHeartSVG } from './filled-heart';
 export { default as HeartSVG } from './heart';
 export { default as MemeZLogoSVG } from './meme-z-logo';

@@ -7,8 +7,12 @@ import { CreateCoinButtonProps } from './create-coin-button.types';
 const CreateCoinButton: FC<CreateCoinButtonProps> = ({ onClick }) => {
   const [isButtonHover, setIsButtonHover] = useState(false);
 
-  const handleButtonHover = () => {
-    setIsButtonHover(!isButtonHover);
+  const handleOnMouseEnter = () => {
+    setIsButtonHover(true);
+  };
+
+  const handleOnMouseLeave = () => {
+    setIsButtonHover(false);
   };
 
   return (
@@ -34,8 +38,8 @@ const CreateCoinButton: FC<CreateCoinButtonProps> = ({ onClick }) => {
         </>
       )}
       <Button
-        onMouseEnter={handleButtonHover}
-        onMouseLeave={handleButtonHover}
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
         nHover={{
           marginTop: '-0.5rem',
         }}
