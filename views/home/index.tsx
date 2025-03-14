@@ -5,6 +5,7 @@ import { v4 } from 'uuid';
 import { Layout } from '@/components';
 import CreateCoinButton from '@/components/creat-coin-button';
 import FilterButton from '@/components/filter-button';
+import SearchButton from '@/components/search-button';
 
 import Card from './card';
 import { CARDS } from './card.data';
@@ -15,7 +16,10 @@ const Home: FC = () => {
   return (
     <Layout>
       <Div py="2rem" display="flex" justifyContent="space-between">
-        <FilterButton />
+        <Div gap="0.5rem" display="flex">
+          <FilterButton />
+          <SearchButton />
+        </Div>
         <CreateCoinButton onClick={handleCreatCointButtonClick} />
       </Div>
       <Div
@@ -25,7 +29,7 @@ const Home: FC = () => {
         flexWrap="wrap"
         justifyContent="center"
         gridTemplateColumns={[
-          '21rem',
+          '100%',
           '25rem',
           'repeat(2, 21rem)',
           'repeat(3, 20rem)',
