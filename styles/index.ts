@@ -40,8 +40,7 @@ export const GlobalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
-      Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Satoshi';
   }
 
   html {
