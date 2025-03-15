@@ -1,3 +1,15 @@
+export { default as BannerProfileSVG } from './banner-profile';
+export { default as ChevronDownSVG } from './chevron-down';
+export { default as CommandSVG } from './command';
+export { default as CopySVG } from './copy';
+export { default as DocIDSVG } from './doc-id';
+export { default as ExplorerSVG } from './explorer';
+export { default as LoaderSVG } from './loader';
+export { default as LogoutSVG } from './logout';
 export { default as MemeZLogoSVG } from './meme-z-logo';
+export { default as PencilSVG } from './pencil';
 export { default as SearchSVG } from './search';
+export { default as SwitchSVG } from './switch';
+export { default as ToggleSVG } from './toggle';
+export { default as UserSVG } from './user';
 export { default as WalletSVG } from './wallet';

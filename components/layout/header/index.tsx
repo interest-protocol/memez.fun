@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import SearchBar from '@/components/search-bar';
 import { MemeZLogoSVG } from '@/components/svg';
-import Wallet from '@/components/wallet';
+import WalletButton from '@/components/wallet-button';
 
 const HeaderBar: FC = () => {
   const { push } = useRouter();
@@ -12,10 +12,13 @@ const HeaderBar: FC = () => {
   return (
     <Header
       py="1rem"
+      pr="1.5rem"
       width="100%"
       display="flex"
+      maxWidth="1400px"
       alignItems="center"
       justifyContent="space-between"
+      mx="auto"
     >
       <Div
         gap="1rem"
@@ -27,7 +30,7 @@ const HeaderBar: FC = () => {
         <MemeZLogoSVG maxHeight="10rem" maxWidth="10rem" width="100%" />
       </Div>
       <SearchBar />
-      <Wallet />
+      <WalletButton />
     </Header>
   );
 };
