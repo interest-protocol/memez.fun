@@ -1,4 +1,8 @@
 export { default as ArrowDownSVG } from './arrow-down';
+export { default as ArrowDownCircleSVG } from './arrow-down-circle';
+export { default as ArrowUpCircleSVG } from './arrow-up-circle';
+export { default as CetusSVG } from './cetus';
+export { default as CheckedSVG } from './checked';
 export { default as DiscordSVG } from './discord';
 export { default as DottedArrowSVG } from './dottedArrow';
 export { default as FilledHeartSVG } from './filled-heart';
@@ -7,6 +11,7 @@ export { default as HeartSVG } from './heart';
 export { default as MemeZLogoSVG } from './meme-z-logo';
 export { default as MemeZLogoIconSVG } from './meme-z-logo-icon';
 export { default as OctagonPlusSVG } from './octagon-plus';
+export { default as RadioCircleSVG } from './radio-circle';
 export { default as SearchSVG } from './search';
 export { default as StarSVG } from './star';
 export { default as Telegram } from './telegram';

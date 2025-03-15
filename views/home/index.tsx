@@ -10,6 +10,7 @@ import SearchButton from '@/components/search-button';
 
 import Card from './card';
 import { CARDS } from './card.data';
+import CreateCoinForm from './components/create-coin';
 
 const Home: FC = () => {
   const handleCreatCointButtonClick = () => {};
@@ -22,6 +23,7 @@ const Home: FC = () => {
           <FilterButton />
           <SearchButton />
         </Div>
+        <CreateCoinForm />
         <CreateCoinButton onClick={handleCreatCointButtonClick} />
       </Div>
       <Div
