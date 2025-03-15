@@ -21,7 +21,7 @@ const HeaderBar: FC = () => {
       mx="auto"
     >
       <Div
-        gap="1rem"
+        ml="-0.8rem"
         display="flex"
         cursor="pointer"
         alignItems="center"

@@ -10,6 +10,7 @@ const Motion = motion.create(Div);
 const Profile: FC = () => (
   <Motion
     gap="0.5rem"
+    zIndex={99999}
     mt="3.5rem"
     bg="#131419"
     display="flex"

@@ -29,6 +29,13 @@ export const GlobalStyles = css`
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'NDot';
+    src: url('/fonts/ndot-47-inspired-by-nothing.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -73,5 +80,18 @@ export const GlobalStyles = css`
     background: #888;
     border-radius: 0.5rem;
     border: 5px solid transparent;
+  }
+
+  .single-direction-range .range-slider__thumb {
+    display: none;
+  }
+
+  .single-direction-range .range-slider__range {
+    background-color: #f6c853;
+  }
+
+  .single-direction-range .range-slider {
+    height: 4px;
+    background-color: #ffffff0d !important;
   }
 `;
