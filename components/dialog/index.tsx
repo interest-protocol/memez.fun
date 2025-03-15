@@ -24,6 +24,7 @@ const Dialog: FC<DialogProps> = ({
     flexDirection="column"
     justifyContent="center"
     backdropFilter="blur(19px)"
+    color="#fff"
   >
     <Div textAlign="center">{Icon}</Div>
     <H2

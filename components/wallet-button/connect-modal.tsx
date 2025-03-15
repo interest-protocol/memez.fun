@@ -4,7 +4,7 @@ import { Div, H2, Img, Li, P, Ul } from '@stylin.js/elements';
 import { FC } from 'react';
 import unikey from 'unikey';
 
-import { LoaderSVG } from '@/components/svg';
+import { LoaderSVG, MemeZLogoSVG } from '@/components/svg';
 import { useDialog } from '@/hooks/use-dialog';
 
 const ConnectModal: FC = () => {
@@ -16,7 +16,7 @@ const ConnectModal: FC = () => {
     await mutateAsync({ wallet });
   };
 
-  const handleConnect = (wallet: WalletWithRequiredFeatures) =>
+  const handleConnect = (wallet: WalletWithRequiredFeatures) => {
     dialog.promise(connectWallet(wallet), {
       success: () => ({
         timeout: 10000,
@@ -25,12 +25,15 @@ const ConnectModal: FC = () => {
         message:
           'Your wallet is now securely connected, opening the door to the world of crypto opportunities.',
         Icon: (
-          <Img
-            alt="Success"
-            width="7rem"
-            height="7rem"
-            src="/dialogs/success.png"
-          />
+          <Div
+            gap="1rem"
+            display="flex"
+            cursor="pointer"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <MemeZLogoSVG maxHeight="10rem" maxWidth="10rem" width="100%" />
+          </Div>
         ),
       }),
       loading: () => ({
@@ -58,6 +61,7 @@ const ConnectModal: FC = () => {
         ),
       }),
     });
+  };
 
   return (
     <Div
