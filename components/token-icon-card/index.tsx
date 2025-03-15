@@ -8,6 +8,8 @@ import { getImageColor } from '@/utils';
 import { TokenCardIconProps } from './token-icon-card.types';
 
 const TokenCardIcon: FC<TokenCardIconProps> = ({
+  width,
+  height,
   imgSrc,
   isCardHovered,
   showCardDetails,
@@ -28,11 +30,12 @@ const TokenCardIcon: FC<TokenCardIconProps> = ({
       <Div
         p="0.7rem"
         display="flex"
-        height="15.524rem"
         position="relative"
         alignItems="center"
         borderRadius="1.3rem"
         justifyContent="center"
+        width={width ?? 'auto'}
+        height={height ?? '15.524rem'}
         background={dominantColor ?? 'red'}
       >
         {showCardDetails && (

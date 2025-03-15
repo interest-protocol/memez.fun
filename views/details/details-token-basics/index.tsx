@@ -23,18 +23,18 @@ const DetailsTokenBasics = () => {
       bg="#131419"
       width="20.625rem"
       transition="0.3s"
+      max-height="53.438rem"
       borderRadius="1.5rem"
       border="1px solid #24282D"
     >
       <Div
         px="1rem"
-        pt="0.8rem"
         pb="1.25rem"
         display="flex"
         color="#fff"
         justifyContent="space-between"
       >
-        <Span fontSize="1rem" fontWeight="500" fontFamily="Satoshi">
+        <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
           Ocean Token
         </Span>
         <Like invertOrder isLiked />
@@ -45,6 +45,7 @@ const DetailsTokenBasics = () => {
         gap="0.5rem"
         display="flex"
         color="#FBFBFB"
+        alignItems="center"
         justifyContent="center"
       >
         <P fontSize="0.75rem">0x2::sui..SUI</P>

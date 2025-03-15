@@ -8,7 +8,9 @@ const DetailsTokenBasicsFooter: FC = () => {
     <Div
       pt="1rem"
       px="1rem"
+      height="4rem"
       display="flex"
+      alignItems="center"
       justifyContent="space-between"
       borderTop="1px solid #24282D"
       borderBottomLeftRadius="1.5rem"

@@ -20,18 +20,18 @@ const DetailsTokenBasicsSocials: FC<DetailsTokenBasicsSocialsProps> = ({
       {SOCIAL.map(({ Icon, title }) => (
         <Link href="" key={title}>
           <Div
-            opacity={isDisabled ? '0.6' : '1'}
             mr="0.5rem"
             color="#FFF"
             width="2.5rem"
             display="flex"
             height="2.5rem"
-            cursor={isDisabled ? 'not-allowed' : 'pointer'}
             transition="0.3s"
             borderRadius="50%"
             alignItems="center"
             justifyContent="center"
             border="1px solid #494C54"
+            opacity={isDisabled ? '0.6' : '1'}
+            cursor={isDisabled ? 'not-allowed' : 'pointer'}
             nHover={isDisabled ? {} : { background: '#202b37' }}
           >
             <Icon maxHeight="1.5rem" maxWidth="1.5rem" width="100%" />

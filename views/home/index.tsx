@@ -17,7 +17,7 @@ const Home: FC = () => {
   return (
     <Layout>
       <Hero />
-      <Div maxWidth="1400px" mx="auto">
+      <Div px="1.5rem" maxWidth="1400px" mx="auto">
         <Div py="2rem" display="flex" justifyContent="space-between">
           <Div gap="0.5rem" display="flex">
             <FilterButton />
@@ -34,7 +34,7 @@ const Home: FC = () => {
           gridTemplateColumns={[
             '100%',
             '25rem',
-            'repeat(2, 21rem)',
+            'repeat(2, 50%)',
             'repeat(3, 20rem)',
             'repeat(4, 24.5%)',
           ]}

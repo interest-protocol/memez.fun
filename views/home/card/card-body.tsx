@@ -1,7 +1,7 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
-import CardRange from './card-range';
+import RangeBar from '@/components/range';
 
 const CardBody: FC = () => {
   return (
@@ -32,7 +32,10 @@ const CardBody: FC = () => {
           143k
         </Span>
       </Div>
-      <CardRange />
+      <RangeBar />
+      <Div display="flex" justifyContent="space-between">
+        Bonding
+      </Div>
     </Div>
   );
 };
