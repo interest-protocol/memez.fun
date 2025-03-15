@@ -8,7 +8,9 @@ const FooterBar = () => {
   return (
     <Footer
       py="2rem"
+      mx="auto"
       display="flex"
+      maxWidth="1400px"
       alignItems="center"
       justifyContent="space-between"
     >

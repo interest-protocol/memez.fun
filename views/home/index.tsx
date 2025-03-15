@@ -17,30 +17,32 @@ const Home: FC = () => {
   return (
     <Layout>
       <Hero />
-      <Div py="2rem" display="flex" justifyContent="space-between">
-        <Div gap="0.5rem" display="flex">
-          <FilterButton />
-          <SearchButton />
+      <Div maxWidth="1400px" mx="auto">
+        <Div py="2rem" display="flex" justifyContent="space-between">
+          <Div gap="0.5rem" display="flex">
+            <FilterButton />
+            <SearchButton />
+          </Div>
+          <CreateCoinButton onClick={handleCreatCointButtonClick} />
         </Div>
-        <CreateCoinButton onClick={handleCreatCointButtonClick} />
-      </Div>
-      <Div
-        width="100%"
-        gap="0.5rem"
-        display="grid"
-        flexWrap="wrap"
-        justifyContent="center"
-        gridTemplateColumns={[
-          '100%',
-          '25rem',
-          'repeat(2, 21rem)',
-          'repeat(3, 20rem)',
-          'repeat(4, 24.5%)',
-        ]}
-      >
-        {CARDS.map((card) => (
-          <Card key={v4()} imgSrc={card.imgSrc} />
-        ))}
+        <Div
+          width="100%"
+          gap="0.5rem"
+          display="grid"
+          flexWrap="wrap"
+          justifyContent="center"
+          gridTemplateColumns={[
+            '100%',
+            '25rem',
+            'repeat(2, 21rem)',
+            'repeat(3, 20rem)',
+            'repeat(4, 24.5%)',
+          ]}
+        >
+          {CARDS.map((card) => (
+            <Card key={v4()} imgSrc={card.imgSrc} />
+          ))}
+        </Div>
       </Div>
     </Layout>
   );
