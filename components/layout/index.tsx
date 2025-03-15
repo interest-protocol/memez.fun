@@ -1,21 +1,17 @@
-import { Main } from '@stylin.js/elements';
+import { Div, Main } from '@stylin.js/elements';
 import { FC, PropsWithChildren } from 'react';
 
 import Footer from './footer';
 import Header from './header';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => (
-  <Main
-    mx="auto"
-    py="1.5rem"
-    maxWidth="1400px"
-    position="relative"
-    px={['0.7rem', '2rem', '1.5rem', '2rem', '2rem']}
-  >
+  <Div display="flex" minHeight="100vh" flexDirection="column">
     <Header />
-    {children}
-    <Footer />
-  </Main>
+    <Main flex="1">
+      {children}
+      <Footer />
+    </Main>
+  </Div>
 );
 
 export default Layout;
