@@ -12,10 +12,10 @@ const FilterButton: FC = () => {
   const boxId = useId();
 
   const closeDropdown = (event: MouseEvent | TouchEvent) => {
-    const path = event.composedPath();
+    const path = event?.composedPath();
 
     if (
-      path.some((node: EventTarget) => {
+      path?.some((node: EventTarget) => {
         const element = node as HTMLElement;
         return element?.id === boxId;
       })
