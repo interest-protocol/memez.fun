@@ -29,3 +29,8 @@ export interface DropdownProps {
   menuItems: [] | string[];
   onSelect?: (value: string) => void;
 }
+
+export interface TagProps {
+  label: string;
+  onClose: () => void;
+}
