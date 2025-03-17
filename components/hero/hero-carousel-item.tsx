@@ -6,9 +6,11 @@ import HeroCarouselItemTokenIcon from './hero-carousel-item-token-icon';
 import HoverFloatItem from './hover-float-item';
 
 const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
+  isHot,
   iconUrl,
   marketCap,
   volume24h,
+  tokenName,
   allTimeVolume,
 }) => {
   return (
@@ -33,7 +35,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             <HoverFloatItem value={marketCap} labelKey="marketCap" />
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
-            <HeroCarouselItemTokenIcon iconUrl={iconUrl} />
+            <HeroCarouselItemTokenIcon isHot={isHot} iconUrl={iconUrl} />
           </Div>
         </Div>
       </Div>
@@ -47,7 +49,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
         display={['none', 'none', 'none', 'flex', 'flex']}
       >
         <Span fontFamily="GoodGame" fontSize="6rem">
-          Suiman
+          {tokenName}
         </Span>
       </Div>
       <Div flex="2" height="100%" display="flex" justifyContent="flex-start">
