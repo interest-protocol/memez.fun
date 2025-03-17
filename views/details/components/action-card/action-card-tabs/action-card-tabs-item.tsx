@@ -5,6 +5,7 @@ import { ActionCardTabsItemProps } from './acction-card-tabs.types';
 
 const ActionCardTabsItem: FC<ActionCardTabsItemProps> = ({
   title,
+  onClick,
   isActive,
   activeColor,
 }) => {
@@ -15,6 +16,7 @@ const ActionCardTabsItem: FC<ActionCardTabsItemProps> = ({
       width="3.063rem"
       cursor="pointer"
       transition="0.3s"
+      onClick={onClick}
       textAlign="center"
       alignItems="center"
       boxSizing="border-box"

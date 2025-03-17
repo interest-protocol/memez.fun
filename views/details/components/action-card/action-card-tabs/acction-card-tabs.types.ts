@@ -3,7 +3,8 @@ export interface ActionCardTabsProps {
 }
 
 export interface ActionCardTabsItemProps {
-  isActive?: string;
   title: string;
+  isActive: boolean;
   activeColor: string;
+  onClick: () => void;
 }

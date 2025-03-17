@@ -28,6 +28,7 @@ export { default as OctagonPlusSVG } from './octagon-plus';
 export { default as PencilSVG } from './pencil';
 export { default as SearchSVG } from './search';
 export { default as StarSVG } from './star';
+export { default as SuiLogoSVG } from './sui-logo';
 export { default as SwitchSVG } from './switch';
 export { default as Telegram } from './telegram';
 export { default as ToggleSVG } from './toggle';

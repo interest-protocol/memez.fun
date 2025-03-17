@@ -9,9 +9,13 @@ import {
 import { getImageColor } from '@/utils';
 
 import TokenField from '../token-field';
+import ActionCardBuyButton from './action-card-buttons/action-card-buy-button';
+import ActionCardDumpButton from './action-card-buttons/action-card-sell-button';
 import ActionTabsCard from './action-card-tabs';
 
 const ActionCard = () => {
+  const [cardType, setCardType] = useState<string>('buy');
+
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
   useEffect(() => {
@@ -36,7 +40,13 @@ const ActionCard = () => {
       <Div zIndex="1" position="absolute">
         <Img src="/sell-background.png" />
       </Div>
-      <Div px="4rem">
+      <Div
+        height="100%"
+        px="4rem"
+        display="flex"
+        justifyContent="space-between"
+        flexDirection="column"
+      >
         <Div
           py="3rem"
           zIndex="2"
@@ -47,38 +57,54 @@ const ActionCard = () => {
           <ActionTabsCard activeColor={dominantColor} />
         </Div>
         <Div
-          py="1rem"
           zIndex="2"
-          gap="0.5rem"
           display="flex"
           position="relative"
-          justifyContent="flex-end"
+          flexDirection="column"
         >
-          <Div cursor="pointer">
-            <CircleQuarterSVG
-              width="0.875rem"
-              maxWidth="0.875rem"
-              maxHeight="0.875rem"
-            />
+          <Div
+            py="1rem"
+            zIndex="2"
+            gap="0.5rem"
+            display="flex"
+            position="relative"
+            justifyContent="flex-end"
+          >
+            <Div cursor="pointer">
+              <CircleQuarterSVG
+                width="0.875rem"
+                maxWidth="0.875rem"
+                maxHeight="0.875rem"
+              />
+            </Div>
+            <Div cursor="pointer">
+              <CircleHalfSVG
+                width="0.875rem"
+                maxWidth="0.875rem"
+                maxHeight="0.875rem"
+              />
+            </Div>
+            <Div cursor="pointer">
+              <CircleCompletedSVG
+                width="0.875rem"
+                maxWidth="0.875rem"
+                maxHeight="0.875rem"
+              />
+            </Div>
           </Div>
-          <Div cursor="pointer">
-            <CircleHalfSVG
-              width="0.875rem"
-              maxWidth="0.875rem"
-              maxHeight="0.875rem"
-            />
-          </Div>
-          <Div cursor="pointer">
-            <CircleCompletedSVG
-              width="0.875rem"
-              maxWidth="0.875rem"
-              maxHeight="0.875rem"
-            />
+          <Div
+            gap="3rem"
+            display="flex"
+            position="relative"
+            flexDirection="column"
+          >
+            <TokenField type="slippage" />
+            <TokenField type="slippage" />
           </Div>
         </Div>
-
-        <Div display="flex" zIndex="2" position="relative">
-          <TokenField />
+        <Div py="3rem" display="flex" justifyContent="center" width="100%">
+          <ActionCardBuyButton onClick={() => {}} />
+          <ActionCardDumpButton onClick={() => {}} />
         </Div>
       </Div>
     </Div>
