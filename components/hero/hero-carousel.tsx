@@ -18,13 +18,19 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 9000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   return (
-    <Div position="relative" overflow="hidden" width="100%">
+    <Div
+      zIndex="2"
+      width="100%"
+      height="100%"
+      overflow="hidden"
+      position="relative"
+    >
       <Div
         display="flex"
         height="400px"

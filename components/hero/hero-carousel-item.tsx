@@ -8,6 +8,7 @@ import HoverFloatItem from './hover-float-item';
 const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
   isHot,
   iconUrl,
+  iconSize,
   marketCap,
   volume24h,
   tokenName,
@@ -35,7 +36,11 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             <HoverFloatItem value={marketCap} labelKey="marketCap" />
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
-            <HeroCarouselItemTokenIcon isHot={isHot} iconUrl={iconUrl} />
+            <HeroCarouselItemTokenIcon
+              isHot={isHot}
+              size={iconSize}
+              iconUrl={iconUrl}
+            />
           </Div>
         </Div>
       </Div>
@@ -54,6 +59,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
       </Div>
       <Div flex="2" height="100%" display="flex" justifyContent="flex-start">
         <Div
+          pl="6rem"
           height="100%"
           display="flex"
           alignItems="center"
@@ -68,7 +74,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             alignItems="flex-start"
             display={['none', 'none', 'none', 'flex', 'flex']}
           >
-            <Div mt="5rem" ml="-3rem">
+            <Div mt="6rem" ml="-3rem">
               <HoverFloatItem value={allTimeVolume} labelKey="allTimeVolume" />
             </Div>
           </Div>
