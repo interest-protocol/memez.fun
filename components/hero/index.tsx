@@ -4,6 +4,7 @@ import { useEventListener } from 'usehooks-ts';
 import { v4 } from 'uuid';
 
 import { DATA } from './hero.data';
+import HeroBackground from './hero-background';
 import Carousel from './hero-carousel';
 import HeroCarouselItem from './hero-carousel-item';
 import MiniHeroCarouselItem from './mini-hero-carousel-item';
@@ -23,13 +24,15 @@ const Hero: FC = () => {
   useEventListener('resize', handleSetDesktop);
 
   return (
-    <Div px="1rem" height="27.688rem">
+    <Div flex="1" height="27.688rem" position="relative">
+      <HeroBackground />
       <Carousel>
         {DATA.map((item) => (
           <>
             {!isMobile ? (
               <HeroCarouselItem
                 key={v4()}
+                iconSize="10rem"
                 iconUrl={item.iconUrl}
                 tokenName={item.tokenName}
                 marketCap={item.marketCap}

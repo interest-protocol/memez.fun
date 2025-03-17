@@ -28,7 +28,8 @@ const HeroCarouselItemTokenIcon: FC<HeroCarouselItemTokenIconProps> = ({
       position="relative"
       justifyContent="center"
       background="#FFFFFF40"
-      backdropFilter="blur(0.5rem)"
+      backdropFilter="blur(0.7rem)"
+      border="1px solid #FFFFFF40"
     >
       {isHot && (
         <Div
