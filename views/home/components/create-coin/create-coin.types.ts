@@ -1,4 +1,6 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
+
+import { SVGProps } from '@/components/svg/svg.types';
 
 export interface CreateCoinFormProps {
   label: string;
@@ -33,4 +35,15 @@ export interface DropdownProps {
 export interface TagProps {
   label: string;
   onClose: () => void;
+}
+
+export type SocialLinkProps = {
+  pathname: string;
+  title: string;
+  Icon: FC<SVGProps>;
+  isDisabled?: boolean;
+};
+
+export interface LikeComponentProps {
+  disabled?: boolean;
 }
