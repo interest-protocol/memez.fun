@@ -12,7 +12,7 @@ const HeaderBar: FC = () => {
   return (
     <Header
       py="1rem"
-      pr="1.5rem"
+      px="1.5rem"
       width="100%"
       display="flex"
       maxWidth="1400px"
