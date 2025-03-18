@@ -45,9 +45,30 @@ const Home: FC = () => {
             'repeat(4, 24.5%)',
           ]}
         >
-          {CARDS.map((card) => (
-            <Card key={v4()} imgSrc={card.imgSrc} />
-          ))}
+          {CARDS.map(
+            ({
+              imgSrc,
+              user,
+              number,
+              isVerified,
+              isCardHovered,
+              tokenName,
+              marketCap,
+              lastPurchase,
+            }) => (
+              <Card
+                key={v4()}
+                user={user}
+                imgSrc={imgSrc}
+                cardNumber={number}
+                isVerified={isVerified}
+                tokenName={tokenName}
+                marketCap={marketCap}
+                lastPurchase={lastPurchase}
+                isCardHovered={isCardHovered}
+              />
+            )
+          )}
         </Div>
       </Div>
     </Layout>
