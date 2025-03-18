@@ -36,6 +36,14 @@ export const GlobalStyles = css`
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'GoodGame';
+    src: url('/fonts/good-game/Good-Game.ttf') format('opentype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+
   * {
     margin: 0;
     padding: 0;
