@@ -32,7 +32,10 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
           position="relative"
           justifyContent="space-between"
         >
-          <Div mr="5rem" display={['none', 'none', 'none', 'block', 'block']}>
+          <Div
+            mr={['unset', 'unset', 'unset', '2rem', '5rem']}
+            display={['none', 'none', 'none', 'block', 'block']}
+          >
             <HoverFloatItem value={marketCap} labelKey="marketCap" />
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
@@ -66,7 +69,11 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
           position="relative"
           justifyContent="space-between"
         >
-          <Div mt="10rem" display={['none', 'none', 'none', 'block', 'block']}>
+          <Div
+            mt="10rem"
+            ml={['5rem', '5rem', '5rem', '-5rem', '5rem']}
+            display={['none', 'none', 'none', 'block', 'block']}
+          >
             <HoverFloatItem value={volume24h} labelKey="volume24h" />
           </Div>
           <Div

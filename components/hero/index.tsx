@@ -41,6 +41,7 @@ const Hero: FC = () => {
               />
             ) : (
               <MiniHeroCarouselItem
+                key={v4()}
                 iconSize="8rem"
                 iconUrl={item.iconUrl}
                 tokenName={item.tokenName}

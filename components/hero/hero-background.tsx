@@ -58,43 +58,52 @@ const HeroBackground = () => {
         style={{
           position: 'absolute',
           top: '20%',
-          left: '15%',
+          left: '12%',
         }}
         animate={floatAnimation2}
       >
         <Ball2SVG maxHeight="1.379rem" maxWidth="1.379rem" width="1.379rem" />
       </motion.div>
       <Div display={['none', 'none', 'none', 'block', 'block']}>
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: '15%',
-            left: '12vw',
-          }}
-          animate={floatAnimation3}
+        <Div
+          bottom="15%"
+          position="absolute"
+          left={['5%', '5%', '5%', '10rem', '14rem']}
         >
-          <Ball2SVG maxHeight="1.379rem" maxWidth="1.379rem" width="1.379rem" />
-        </motion.div>
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '15%',
-            right: '22vw',
-          }}
-          animate={floatAnimation1}
+          <motion.div animate={floatAnimation3}>
+            <Ball2SVG
+              maxHeight="1.379rem"
+              maxWidth="1.379rem"
+              width="1.379rem"
+            />
+          </motion.div>
+        </Div>
+        <Div
+          top="12%"
+          position="absolute"
+          right={['5%', '5%', '5%', '22vw', '20rem']}
         >
-          <Ball2SVG maxHeight="1.379rem" maxWidth="1.379rem" width="1.379rem" />
-        </motion.div>
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: '5%',
-            right: '15vw',
-          }}
-          animate={floatAnimation3}
+          <motion.div animate={floatAnimation1}>
+            <Ball2SVG
+              maxHeight="1.379rem"
+              maxWidth="1.379rem"
+              width="1.379rem"
+            />
+          </motion.div>
+        </Div>
+        <Div
+          position="absolute"
+          bottom="5%"
+          right={['5%', '5%', '5%', '22vw', '13rem']}
         >
-          <Ball1SVG maxHeight="2.856rem" maxWidth="2.856rem" width="2.856rem" />
-        </motion.div>
+          <motion.div animate={floatAnimation3}>
+            <Ball1SVG
+              maxHeight="2.856rem"
+              maxWidth="2.856rem"
+              width="2.856rem"
+            />
+          </motion.div>
+        </Div>
       </Div>
       <motion.div
         style={{
