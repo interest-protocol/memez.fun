@@ -9,7 +9,7 @@ const ActionCardBuyButton: FC<ActionCardButtonProps> = ({ onClick }) => {
     <motion.div
       whileHover={{
         backgroundColor: ['#8BF3C5', '#D1FAE8', '#8BF3C5'],
-        scale: [1, 1.05, 1], // Aumenta suavemente no hover
+        scale: [1, 1.05, 1],
       }}
       transition={{
         duration: 0.7,

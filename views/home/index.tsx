@@ -16,8 +16,14 @@ const Home: FC = () => {
 
   return (
     <Layout>
-      <Hero />
-      <Div px="1.5rem" maxWidth="1400px" mx="auto">
+      <Div
+        mx="auto"
+        maxWidth="1400px"
+        px={['unset', 'unset', 'unset', '1.5rem', '1.5rem']}
+      >
+        <Hero />
+      </Div>
+      <Div pt="3rem" px="1.5rem" maxWidth="1400px" mx="auto">
         <Div py="2rem" display="flex" justifyContent="space-between">
           <Div gap="0.5rem" display="flex">
             <FilterButton />

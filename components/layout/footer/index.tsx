@@ -7,6 +7,7 @@ import { SOCIAL } from '@/constants/socials';
 const FooterBar = () => {
   return (
     <Footer
+      px="1rem"
       py="2rem"
       mx="auto"
       display="flex"

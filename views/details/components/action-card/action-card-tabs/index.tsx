@@ -1,15 +1,17 @@
 import { Div } from '@stylin.js/elements';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { v4 } from 'uuid';
 
 import { ActionCardTabsProps } from './acction-card-tabs.types';
 import { TABS_DATA } from './action-card-tabs.data';
 import ActionCardTabsItem from './action-card-tabs-item';
 
-const ActionTabsCard: FC<ActionCardTabsProps> = ({ activeColor }) => {
-  const [activeTab, setActiveTab] = useState('buy');
-
-  const handleClick = (type: string) => {
+const ActionTabsCard: FC<ActionCardTabsProps> = ({
+  activeTab,
+  activeColor,
+  setActiveTab,
+}) => {
+  const handleClick = (type: 'buy' | 'sell' | 'burn') => {
     setActiveTab(type);
   };
 
@@ -20,8 +22,8 @@ const ActionTabsCard: FC<ActionCardTabsProps> = ({ activeColor }) => {
           title={el}
           key={v4()}
           activeColor={activeColor}
-          isActive={el === activeTab}
-          onClick={() => handleClick(el)}
+          isActive={el.toLowerCase() === activeTab}
+          onClick={() => handleClick(el as 'buy' | 'sell' | 'burn')}
         />
       ))}
     </Div>

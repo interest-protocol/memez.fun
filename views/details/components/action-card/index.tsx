@@ -1,45 +1,69 @@
-import { Div, Img } from '@stylin.js/elements';
-import { useEffect, useState } from 'react';
+import { Div } from '@stylin.js/elements';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
 import {
   CircleCompletedSVG,
   CircleHalfSVG,
   CircleQuarterSVG,
+  GreenActionCardBackgroundSVG,
 } from '@/components/svg';
-import { getImageColor } from '@/utils';
 
 import TokenField from '../token-field';
-import ActionCardBuyButton from './action-card-buttons/action-card-buy-button';
-import ActionCardDumpButton from './action-card-buttons/action-card-sell-button';
+import { ACTIVE_COLORS, BACKGROUND_SVGS, BUTTONS } from './action.data';
 import ActionTabsCard from './action-card-tabs';
 
 const ActionCard = () => {
-  const [cardType, setCardType] = useState<string>('buy');
+  const [activeTab, setActiveTab] = useState<'buy' | 'sell' | 'burn'>('buy');
 
-  const [dominantColor, setDominantColor] = useState<string>('#000000');
+  const handleactiveTabSelction = (type: 'buy' | 'sell' | 'burn') => {
+    setActiveTab(String(type).toLowerCase() as 'buy' | 'sell' | 'burn');
+  };
 
-  useEffect(() => {
-    const fetchImageColor = async () => {
-      const color = await getImageColor('/sell-background.png');
-      setDominantColor(color);
-    };
+  const BackgroundSVG =
+    BACKGROUND_SVGS[activeTab] || GreenActionCardBackgroundSVG;
 
-    fetchImageColor();
-  }, []);
+  const CardButton = BUTTONS[activeTab];
 
   return (
-    <Div
-      bg="#131419"
-      overflow="hidden"
-      height="39.563rem"
-      position="relative"
-      borderRadius="1.5rem"
-      border="1px solid #24282D"
-      background={`linear-gradient(180deg, #131419 80%, ${dominantColor} 200%)`}
+    <motion.div
+      style={{
+        backgroundColor: '#131419',
+        overflow: 'hidden',
+        height: '39.563rem',
+        position: 'relative',
+        borderRadius: '1.5rem',
+        border: '1px solid #24282D',
+      }}
+      animate={{
+        background: `linear-gradient(180deg, #131419 80%, ${ACTIVE_COLORS[activeTab]} 200%)`,
+      }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
     >
-      <Div zIndex="1" position="absolute">
-        <Img src="/sell-background.png" />
-      </Div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 1,
+          }}
+        >
+          <BackgroundSVG
+            maxHeight="21.875rem"
+            maxWidth="11.688rem"
+            width="11.688rem"
+            height="25rem"
+          />
+        </motion.div>
+      </AnimatePresence>
       <Div
         height="100%"
         px="4rem"
@@ -54,7 +78,11 @@ const ActionCard = () => {
           position="relative"
           justifyContent="center"
         >
-          <ActionTabsCard activeColor={dominantColor} />
+          <ActionTabsCard
+            activeTab={activeTab}
+            activeColor={ACTIVE_COLORS[activeTab]}
+            setActiveTab={handleactiveTabSelction}
+          />
         </Div>
         <Div
           zIndex="2"
@@ -103,11 +131,20 @@ const ActionCard = () => {
           </Div>
         </Div>
         <Div py="3rem" display="flex" justifyContent="center" width="100%">
-          <ActionCardBuyButton onClick={() => {}} />
-          <ActionCardDumpButton onClick={() => {}} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            >
+              <CardButton onClick={() => {}} />
+            </motion.div>
+          </AnimatePresence>
         </Div>
       </Div>
-    </Div>
+    </motion.div>
   );
 };
 
