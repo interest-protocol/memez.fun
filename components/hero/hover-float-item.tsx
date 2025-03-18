@@ -20,6 +20,7 @@ const HoverFloatItem: FC<HoverFloatItemProps> = ({ value, labelKey }) => {
       height="4rem"
       alignItems="center"
       borderRadius="2rem"
+      whiteSpace="nowrap"
       display="inline-flex"
     >
       <Div mr="0.5rem" height="1.5rem" width="1.5rem">
@@ -30,10 +31,16 @@ const HoverFloatItem: FC<HoverFloatItemProps> = ({ value, labelKey }) => {
         )}
       </Div>
       <Div>
-        <P mb="0.1rem" color="white" fontSize="0.75rem" fontWeight="300">
+        <P
+          mb="0.1rem"
+          color="white"
+          fontWeight="300"
+          fontSize="0.75rem"
+          whiteSpace="nowrap"
+        >
           {LABELS[labelKey]}
         </P>
-        <P color="white" fontSize="1.25rrem">
+        <P color="white" fontSize="1.25rrem" whiteSpace="nowrap">
           {value ?? '000.0'}
         </P>
       </Div>

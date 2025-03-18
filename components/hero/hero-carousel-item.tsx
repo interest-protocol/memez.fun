@@ -8,6 +8,7 @@ import HoverFloatItem from './hover-float-item';
 const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
   isHot,
   iconUrl,
+  iconSize,
   marketCap,
   volume24h,
   tokenName,
@@ -31,11 +32,18 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
           position="relative"
           justifyContent="space-between"
         >
-          <Div mr="5rem" display={['none', 'none', 'none', 'block', 'block']}>
+          <Div
+            mr={['unset', 'unset', 'unset', '2rem', '5rem']}
+            display={['none', 'none', 'none', 'block', 'block']}
+          >
             <HoverFloatItem value={marketCap} labelKey="marketCap" />
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
-            <HeroCarouselItemTokenIcon isHot={isHot} iconUrl={iconUrl} />
+            <HeroCarouselItemTokenIcon
+              isHot={isHot}
+              size={iconSize}
+              iconUrl={iconUrl}
+            />
           </Div>
         </Div>
       </Div>
@@ -54,13 +62,18 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
       </Div>
       <Div flex="2" height="100%" display="flex" justifyContent="flex-start">
         <Div
+          pl="6rem"
           height="100%"
           display="flex"
           alignItems="center"
           position="relative"
           justifyContent="space-between"
         >
-          <Div mt="10rem" display={['none', 'none', 'none', 'block', 'block']}>
+          <Div
+            mt="10rem"
+            ml={['5rem', '5rem', '5rem', '-5rem', '5rem']}
+            display={['none', 'none', 'none', 'block', 'block']}
+          >
             <HoverFloatItem value={volume24h} labelKey="volume24h" />
           </Div>
           <Div
@@ -68,7 +81,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             alignItems="flex-start"
             display={['none', 'none', 'none', 'flex', 'flex']}
           >
-            <Div mt="5rem" ml="-3rem">
+            <Div mt="6rem" ml="-3rem">
               <HoverFloatItem value={allTimeVolume} labelKey="allTimeVolume" />
             </Div>
           </Div>

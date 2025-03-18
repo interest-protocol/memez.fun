@@ -1,6 +1,8 @@
 export { default as ArrowDownSVG } from './arrow-down';
 export { default as ArrowDownCircleSVG } from './arrow-down-circle';
 export { default as ArrowUpCircleSVG } from './arrow-up-circle';
+export { default as Ball1SVG } from './ball1';
+export { default as Ball2SVG } from './ball2';
 export { default as BannerProfileSVG } from './banner-profile';
 export { default as CetusSVG } from './cetus';
 export { default as CheckedSVG } from './checked';
@@ -17,6 +19,7 @@ export { default as FilledBarChartSVG } from './filled-bar-chart';
 export { default as FilledHeartSVG } from './filled-heart';
 export { default as FiltersSVG } from './filters';
 export { default as HeartSVG } from './heart';
+export { default as HeroVectorSVG } from './hero-vector';
 export { default as LoaderSVG } from './loader';
 export { default as LogoutSVG } from './logout';
 export { default as MemeZLogoSVG } from './meme-z-logo';
