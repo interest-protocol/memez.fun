@@ -102,4 +102,57 @@ export const GlobalStyles = css`
     height: 4px;
     background-color: #ffffff0d !important;
   }
+
+  @keyframes react-loading-skeleton {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .react-loading-skeleton {
+    --base-color: #f0f0f0; /* Cor base mais suave */
+    --highlight-color: #e0e0e0; /* Cor de destaque mais suave */
+    --animation-duration: 2s; /* Animação mais lenta */
+    --animation-direction: normal;
+    --pseudo-element-display: block; /* Habilita a animação */
+
+    background-color: var(--base-color);
+    width: 100%;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    line-height: 1;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .react-loading-skeleton::after {
+    content: ' ';
+    display: var(--pseudo-element-display);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+      90deg,
+      var(--base-color) 0%,
+      var(--highlight-color) 50%,
+      var(--base-color) 100%
+    );
+    transform: translateX(-100%);
+
+    animation-name: react-loading-skeleton;
+    animation-direction: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease-in-out; /* Curva de animação suave */
+    animation-iteration-count: infinite;
+  }
+
+  @media (prefers-reduced-motion) {
+    .react-loading-skeleton {
+      --pseudo-element-display: none; /* Desabilita a animação */
+    }
+  }
 `;
