@@ -1,8 +1,9 @@
 import { Div, Footer } from '@stylin.js/elements';
-import Link from 'next/link';
+import { v4 } from 'uuid';
 
 import { MemeZLogoIconSVG } from '@/components/svg';
 import { SOCIAL } from '@/constants/socials';
+import SocialLink from '@/views/home/components/create-coin/social';
 
 const FooterBar = () => {
   return (
@@ -18,28 +19,14 @@ const FooterBar = () => {
       <Div>
         <MemeZLogoIconSVG maxHeight="4rem" maxWidth="4rem" width="4rem" />
       </Div>
-      <Div display="flex" justifyContent="center" alignItems="center">
+      <Div
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        gap="0.5rem"
+      >
         {SOCIAL.map(({ title, Icon, link }) => (
-          <Link href={link} target="blank" key={title} title={title}>
-            <Div
-              mr="0.5rem"
-              bg="#171F28"
-              color="#FFF"
-              width="2.5rem"
-              display="flex"
-              height="2.5rem"
-              cursor="pointer"
-              transition="0.3s"
-              borderRadius="50%"
-              alignItems="center"
-              justifyContent="center"
-              nHover={{
-                background: '#202b37',
-              }}
-            >
-              <Icon maxHeight="1.5rem" maxWidth="1.5rem" width="100%" />
-            </Div>
-          </Link>
+          <SocialLink pathname={link} title={title} Icon={Icon} key={v4()} />
         ))}
       </Div>
     </Footer>

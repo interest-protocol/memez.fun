@@ -7,7 +7,13 @@ import { DottedArrowSVG, VerifiedSVG } from '@/components/svg';
 
 import { CardIconProps } from './card.types';
 
-const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
+const CardIcon: FC<CardIconProps> = ({
+  user,
+  imgSrc,
+  isVerified,
+  cardNumber,
+  isCardHovered,
+}) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
   const getImageColor = (imgSrc: string) => {
@@ -55,7 +61,7 @@ const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
           justifyContent="center"
           backgroundColor="#0000001A"
         >
-          02
+          {cardNumber}
         </Div>
         <motion.div
           initial={{ opacity: 0, x: 20 }}
@@ -113,14 +119,20 @@ const CardIcon: FC<CardIconProps> = ({ imgSrc, isCardHovered }) => {
             borderBottomRightRadius: '1.3rem',
           }}
         >
-          Created by • username
+          Created by • {user}
           <Div
             ml="0.3rem"
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            <VerifiedSVG maxHeight="0.7rem" maxWidth="0.7rem" width="0.7rem" />
+            {isVerified && (
+              <VerifiedSVG
+                maxHeight="0.7rem"
+                maxWidth="0.7rem"
+                width="0.7rem"
+              />
+            )}
           </Div>
         </motion.div>
       </Div>

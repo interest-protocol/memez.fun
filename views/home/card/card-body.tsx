@@ -1,14 +1,19 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
+import { CardBodyProps } from './card.types';
 import CardRange from './card-range';
 
-const CardBody: FC = () => {
+const CardBody: FC<CardBodyProps> = ({
+  tokenName,
+  marketCap,
+  lastPurchase,
+}) => {
   return (
     <Div px="1rem">
       <Div py="0.2rem" color="#fff">
         <Span fontSize="1rem" fontWeight="500" fontFamily="Satoshi">
-          Ocean Token
+          {tokenName}
         </Span>
       </Div>
       <Div
@@ -26,10 +31,10 @@ const CardBody: FC = () => {
       </Div>
       <Div display="flex" justifyContent="space-between" color="#fff">
         <Span fontSize="1rem" fontWeight="500">
-          9,098,514
+          {marketCap}
         </Span>
         <Span fontSize="1rem" fontWeight="500">
-          143k
+          {lastPurchase}K
         </Span>
       </Div>
       <CardRange />
