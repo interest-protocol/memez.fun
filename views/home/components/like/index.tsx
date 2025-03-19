@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 
 import { HeartSVG } from '@/components/svg';
 
-import { LikeComponentProps } from '../create-coin.types';
+import { LikeComponentProps } from './like.types';
 
 export const LikeComponent: FC<LikeComponentProps> = ({ disabled }) => {
   const [like, setLike] = useState(false);
