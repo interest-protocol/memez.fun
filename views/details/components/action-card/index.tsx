@@ -28,11 +28,11 @@ const ActionCard = () => {
   return (
     <motion.div
       style={{
-        backgroundColor: '#131419',
         overflow: 'hidden',
         height: '39.563rem',
         position: 'relative',
         borderRadius: '1.5rem',
+        backgroundColor: '#131419',
         border: '1px solid #24282D',
       }}
       animate={{
@@ -43,33 +43,40 @@ const ActionCard = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           style={{
-            position: 'absolute',
             top: 0,
             left: 0,
+            zIndex: 1,
             width: '100%',
             height: '100%',
-            zIndex: 1,
+            position: 'absolute',
           }}
         >
-          <BackgroundSVG
-            maxHeight="21.875rem"
+          <Div
+            maxHeight="25rem"
             maxWidth="11.688rem"
-            width="11.688rem"
-            height="25rem"
-          />
+            height={['12rem', '23rem', '23rem', '12rem', '23rem']}
+            width={['6rem', '11.688rem', '11.688rem', '5.688rem', '11.688rem']}
+          >
+            <BackgroundSVG
+              width="100%"
+              height="100%"
+              maxWidth="100%"
+              maxHeight="100%"
+            />
+          </Div>
         </motion.div>
       </AnimatePresence>
       <Div
-        height="100%"
         px="4rem"
+        height="100%"
         display="flex"
-        justifyContent="space-between"
         flexDirection="column"
+        justifyContent="space-between"
       >
         <Div
           py="3rem"

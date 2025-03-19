@@ -3,7 +3,6 @@ import { Div, P, Span } from '@stylin.js/elements';
 import RangeBar from '@/components/range';
 
 import ActionCard from '../components/action-card';
-import DetailsCard from '../components/details-card';
 
 const DetailsCenterContent = () => {
   return (
@@ -14,7 +13,18 @@ const DetailsCenterContent = () => {
       transition="0.3s"
       flexDirection="column"
     >
-      <DetailsCard>
+      <Div
+        p="1.2rem"
+        width="100%"
+        bg="#131419"
+        height="13rem"
+        display="flex"
+        transition="0.3s"
+        borderRadius="1.5rem"
+        flexDirection="column"
+        border="1px solid #24282D"
+        justifyContent="space-between"
+      >
         <Div display="flex" justifyContent="space-between">
           <Span fontSize="1.25rem" color="#FBFBFB">
             Bonding
@@ -29,7 +39,7 @@ const DetailsCenterContent = () => {
             Bonding progress • 18.94%
           </P>
         </Div>
-      </DetailsCard>
+      </Div>
       <ActionCard />
     </Div>
   );

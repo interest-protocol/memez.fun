@@ -1,9 +1,14 @@
-import { BarChartSVG } from '@/components/svg';
+import {
+  BarChartSVG,
+  CalendarSVG,
+  DollarSignSVG,
+  DonutChartSVG,
+} from '@/components/svg';
 
 export const DATA = [
   {
     title: 'Volume',
-    Icon: BarChartSVG,
+    Icon: DollarSignSVG,
     description: '$50,000',
   },
   {
@@ -13,12 +18,13 @@ export const DATA = [
   },
   {
     title: 'Volume',
-    Icon: BarChartSVG,
+    Icon: CalendarSVG,
     description: '$50,000',
   },
   {
     title: 'Volume',
-    Icon: BarChartSVG,
+    Icon: DonutChartSVG,
     description: '$50,000',
+    isVestingPeriod: true,
   },
 ];

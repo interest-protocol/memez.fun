@@ -10,13 +10,7 @@ const DetailsTokenBasicsSocials: FC<DetailsTokenBasicsSocialsProps> = ({
   isDisabled,
 }) => {
   return (
-    <Div
-      py="2rem"
-      gap="0.5rem"
-      display="flex"
-      color="#FBFBFB"
-      justifyContent="center"
-    >
+    <Div gap="0.5rem" display="flex" color="#FBFBFB" justifyContent="center">
       {SOCIAL.map(({ Icon, title }) => (
         <Link href="" key={title}>
           <Div

@@ -11,6 +11,7 @@ export { default as CircleQuarterSVG } from './circle-quarter';
 export { default as CircleCompletedSVG } from './cirlce-completed';
 export { default as CircleHalfSVG } from './cirlce-half';
 export { default as ClipBoardSVG } from './clipboard';
+export { default as ClipBoardPaperSVG } from './clipboard-paper';
 export { default as CommandSVG } from './command';
 export { default as CopySVG } from './copy';
 export { default as CubeSVG } from './cube';

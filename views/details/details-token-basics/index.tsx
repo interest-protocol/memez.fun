@@ -21,11 +21,11 @@ const DetailsTokenBasics = () => {
     <Div
       py="1rem"
       bg="#131419"
-      width="20.625rem"
       transition="0.3s"
-      max-height="53.438rem"
       borderRadius="1.5rem"
+      max-height="53.438rem"
       border="1px solid #24282D"
+      display={['none', 'none', 'none', 'block', 'block']}
     >
       <Div
         px="1rem"
@@ -72,9 +72,15 @@ const DetailsTokenBasics = () => {
       <Div py="1rem" display="flex" justifyContent="center">
         <Div
           px="1rem"
-          width="18.625rem"
           borderRadius="1rem"
           border="1px solid #24282D"
+          width={[
+            '18.625rem',
+            '18.625rem',
+            '18.625rem',
+            '16.625rem',
+            '18.625rem',
+          ]}
         >
           <Div
             py="0.8rem"

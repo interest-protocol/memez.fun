@@ -16,8 +16,8 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
 
   return (
     <Div
+      height="2rem"
       cursor="pointer"
-      height="2"
       width="11.063rem"
       onClick={onClick}
       position="relative"
@@ -27,6 +27,8 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
       onMouseLeave={handleOnMouseLeave}
     >
       <Button
+        all="unset"
+        mb="2rem"
         px="1rem"
         width="100%"
         gap="0.5rem"
@@ -40,7 +42,6 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
         background="#E85965"
         borderRadius="1.5rem"
         justifyContent="center"
-        mb={isButtonHover ? '-0.5rem' : '0'}
       >
         Burn
       </Button>

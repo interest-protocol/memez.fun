@@ -8,11 +8,10 @@ import { getImageColor } from '@/utils';
 import { TokenCardIconProps } from './token-icon-card.types';
 
 const TokenCardIcon: FC<TokenCardIconProps> = ({
-  width,
-  height,
   imgSrc,
   isCardHovered,
   showCardDetails,
+  isMiniDetailsCard,
 }) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
@@ -28,15 +27,16 @@ const TokenCardIcon: FC<TokenCardIconProps> = ({
   return (
     <Div p="0.5rem">
       <Div
+        px="1rem"
         p="0.7rem"
         display="flex"
         position="relative"
         alignItems="center"
-        borderRadius="1.3rem"
         justifyContent="center"
-        width={width ?? 'auto'}
-        height={height ?? '15.524rem'}
-        background={dominantColor ?? 'red'}
+        background={dominantColor ?? '#24282D'}
+        width={isMiniDetailsCard ? '3.875rem' : 'auto'}
+        height={isMiniDetailsCard ? '100%' : '15.524rem'}
+        borderRadius={isMiniDetailsCard ? '1rem' : '1.3rem'}
       >
         {showCardDetails && (
           <Div
@@ -89,8 +89,18 @@ const TokenCardIcon: FC<TokenCardIconProps> = ({
             <DottedArrowSVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
           </Div>
         </motion.div>
-        <Div width="6.25rem" height="6.25rem">
-          <Img src={imgSrc} alt="SuiMan" width="100%" />
+        <Div
+          display="flex"
+          width="6.25rem"
+          alignItems="center"
+          justifyContent="center"
+          height={isMiniDetailsCard ? 'auto' : '6.25rem'}
+        >
+          <Img
+            src={imgSrc}
+            alt="SuiMan"
+            width={isMiniDetailsCard ? '2rem' : '100%'}
+          />
         </Div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

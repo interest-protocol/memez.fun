@@ -1,8 +1,6 @@
 import { DiscordSVG, Telegram, XSVG } from '@/components/svg';
 
-import { SocialProps } from './../components/layout/footer/footer.types';
-
-export const SOCIAL: SocialProps[] = [
+export const SOCIAL = [
   {
     title: 'X',
     Icon: XSVG,
