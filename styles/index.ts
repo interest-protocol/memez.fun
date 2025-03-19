@@ -97,12 +97,11 @@ export const GlobalStyles = css`
 
   .tooltip .tooltiptext {
     visibility: hidden;
-    min-width: 4.75rem;
+    min-width: 3rem;
     z-index: 1;
     left: 4.8rem;
     bottom: 80%;
     color: #90939d;
-    padding: 0.5rem;
     font-size: 0.8rem;
     text-align: center;
     background-color: #131419;
@@ -111,6 +110,12 @@ export const GlobalStyles = css`
     margin-left: -3.75rem;
     opacity: 0;
     transition: opacity 0.3s;
+    border: 2px solid #24282d;
+    padding: 0.5rem;
+  }
+
+  .tooltip .textArea {
+    bottom: 90% !important;
   }
 
   .tooltip .tooltiptext::after {

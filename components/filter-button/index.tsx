@@ -62,7 +62,6 @@ const FilterButton: FC = () => {
           <FiltersSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
         </Div>
       </Button>
-
       {isDropdownOpen && (
         <div ref={dropdownRef}>
           <motion.div
