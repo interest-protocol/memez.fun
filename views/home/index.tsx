@@ -20,8 +20,14 @@ const Home: FC = () => {
 
   return (
     <Layout>
-      <Hero />
-      <Div maxWidth="1400px" mx="auto">
+      <Div
+        mx="auto"
+        maxWidth="1400px"
+        px={['unset', 'unset', 'unset', '1.5rem', '1.5rem']}
+      >
+        <Hero />
+      </Div>
+      <Div pt="3rem" px="1.5rem" maxWidth="1400px" mx="auto">
         <Div py="2rem" display="flex" justifyContent="space-between">
           <Div gap="0.5rem" display="flex">
             <FilterButton />
@@ -43,9 +49,30 @@ const Home: FC = () => {
             'repeat(4, 24.5%)',
           ]}
         >
-          {CARDS.map((card) => (
-            <Card key={v4()} imgSrc={card.imgSrc} />
-          ))}
+          {CARDS.map(
+            ({
+              imgSrc,
+              user,
+              number,
+              isVerified,
+              isCardHovered,
+              tokenName,
+              marketCap,
+              lastPurchase,
+            }) => (
+              <Card
+                key={v4()}
+                user={user}
+                imgSrc={imgSrc}
+                cardNumber={number}
+                isVerified={isVerified}
+                tokenName={tokenName}
+                marketCap={marketCap}
+                lastPurchase={lastPurchase}
+                isCardHovered={isCardHovered}
+              />
+            )
+          )}
         </Div>
       </Div>
     </Layout>
