@@ -2,7 +2,7 @@ import { Div, P } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
 
-import LikeComponent from '../components/create-coin/like';
+import LikeComponent from '../components/like';
 
 const CardLikes: FC = () => {
   const [isLiked, setIsLiked] = useState<boolean>(false);

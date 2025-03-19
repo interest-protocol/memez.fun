@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { CloseSVG } from '@/components/svg';
 
-import { TagProps } from '../create-coin.types';
+import { TagProps } from './tag.types';
 
 const Tag: FC<TagProps> = ({ label, onClose }) => {
   return (

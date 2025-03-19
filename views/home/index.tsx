@@ -1,4 +1,5 @@
 import { Div } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { v4 } from 'uuid';
 
@@ -7,12 +8,15 @@ import CreateCoinButton from '@/components/creat-coin-button';
 import FilterButton from '@/components/filter-button';
 import Hero from '@/components/hero';
 import SearchButton from '@/components/search-button';
+import { Routes, RoutesEnum } from '@/constants';
 
 import Card from './card';
 import { CARDS } from './card.data';
 
 const Home: FC = () => {
-  const handleCreatCointButtonClick = () => {};
+  const { push } = useRouter();
+
+  const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
 
   return (
     <Layout>
@@ -29,7 +33,7 @@ const Home: FC = () => {
             <FilterButton />
             <SearchButton />
           </Div>
-          <CreateCoinButton onClick={handleCreatCointButtonClick} />
+          <CreateCoinButton onClick={handleCreateCoinButtonClick} />
         </Div>
         <Div
           width="100%"

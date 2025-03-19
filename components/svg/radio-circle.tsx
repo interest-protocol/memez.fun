@@ -10,7 +10,7 @@ const RadioCircle: FC<SVGProps & { isChecked?: boolean }> = ({
 }) => {
   if (!isChecked)
     return (
-      <svg style={{ maxHeight, maxWidth }} viewBox="0 0 20 20" {...props}>
+      <svg style={{ maxHeight, maxWidth }} viewBox="0 0 22 25" {...props}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"

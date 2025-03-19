@@ -2,7 +2,7 @@ import { Div } from '@stylin.js/elements';
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { SocialLinkProps } from '../create-coin.types';
+import { SocialLinkProps } from './social.types';
 
 const SocialLink: FC<SocialLinkProps> = ({
   pathname,
