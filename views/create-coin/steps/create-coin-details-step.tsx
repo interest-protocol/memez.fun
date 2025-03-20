@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import unikey from 'unikey';
 
-import CreateCoinFormImage from '../components/create-token-form-upload-image';
+import InputField from '../../../components/input-field';
+import CreateCoinFormImage from '../../../components/upload-image';
 import DexCard from '../components/dex-card';
-import InputField from '../components/input-field';
 import { CreateCoinDexData } from '../create-coin.data';
 import { CreateCoinForm } from '../create-coin.types';
 
