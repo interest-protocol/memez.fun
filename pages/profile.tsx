@@ -1,5 +1,5 @@
 import { SEO } from '@/components';
-import Profile from '@/components/profile';
+import Profile from '@/views/profile';
 
 const ProfilePage = () => (
   <>
