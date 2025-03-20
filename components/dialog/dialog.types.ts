@@ -15,4 +15,5 @@ export interface DialogProps {
 
 export interface DialogCountdownProps {
   timeout: number;
+  onComplete: () => void;
 }

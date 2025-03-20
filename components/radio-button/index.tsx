@@ -1,17 +1,21 @@
 import { Div } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
-import { color } from 'framer-motion';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
 
-import { RadioCircleSVG } from '@/components/svg';
+import { RadioCircleSVG } from '../svg';
+import { RadioButtonProps } from './radio-button.types';
 
-import { RadioFieldProps } from '../create-coin.types';
+const Motion = motion.create(Div);
 
-export const RadioField: FC<RadioFieldProps> = ({ disabled }) => {
-  const [selected, setSelected] = useState(false);
+export const RadioButton: FC<RadioButtonProps> = ({
+  onClick,
+  disabled,
+  defaultValue,
+}) => {
+  const [selected, setSelected] = useState(defaultValue ?? false);
 
-  const Motion = motion.create(Div);
+  const color = selected ? '#F5B722' : '#ddd';
 
   const variants = {
     hover: {
@@ -23,21 +27,22 @@ export const RadioField: FC<RadioFieldProps> = ({ disabled }) => {
   const handleChange = () => {
     if (disabled) return;
     setSelected(not);
+    onClick?.(not(selected));
   };
 
   return (
     <Div
+      gap="1rem"
       display="flex"
-      width="1rem"
-      height="1rem"
       flexWrap="wrap"
       onClick={handleChange}
-      aria-label="radioWrapper"
       cursor={disabled ? 'not-allowed' : 'pointer'}
+      aria-label="radioWrapper"
     >
       <Motion
         display="flex"
-        role="radio"
+        width="1.25rem"
+        height="1.25rem"
         whileHover="hover"
         borderRadius="50%"
         alignItems="center"
@@ -45,13 +50,15 @@ export const RadioField: FC<RadioFieldProps> = ({ disabled }) => {
         initial="withoutHover"
         justifyContent="center"
         transition={{ duration: 0.5 }}
+        color={disabled ? 'onSurface' : color}
         opacity={disabled ? '0.32' : '1'}
-        color={disabled ? '#24282D' : '#F6C853'}
+        role="radio"
       >
         <RadioCircleSVG
           width="100%"
-          maxWidth="100%"
-          maxHeight="100%"
+          height="100%"
+          maxWidth="1.25rem"
+          maxHeight="1.25rem"
           isChecked={selected}
         />
       </Motion>
@@ -59,4 +66,4 @@ export const RadioField: FC<RadioFieldProps> = ({ disabled }) => {
   );
 };
 
-export default RadioField;
+export * from './radio-button.types';

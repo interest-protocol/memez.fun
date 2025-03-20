@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 
 import { MemeZLogoIconSVG } from '@/components/svg';
 import { SOCIAL } from '@/constants/socials';
-import SocialLink from '@/views/home/components/create-coin/social';
+import SocialLink from '@/views/home/components/social';
 
 const FooterBar = () => {
   return (
