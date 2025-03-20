@@ -102,4 +102,40 @@ export const GlobalStyles = css`
     height: 4px;
     background-color: #ffffff0d !important;
   }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    min-width: 3rem;
+    z-index: 1;
+    left: 4.8rem;
+    bottom: 80%;
+    color: #90939d;
+    font-size: 0.8rem;
+    text-align: center;
+    background-color: #131419;
+    border-radius: 6.188rem;
+    position: absolute;
+    margin-left: -3.75rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 2px solid #24282d;
+    padding: 0.5rem;
+  }
+
+  .tooltip .textArea {
+    bottom: 90% !important;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: '';
+    top: 100%;
+    left: 50%;
+    position: absolute;
+    margin-left: -0.313rem;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
 `;

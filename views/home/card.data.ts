@@ -1,32 +1,78 @@
 export const CARDS = [
   {
+    cardNumber: 1,
+    user: 'McBattle',
+    isVerified: false,
+    marketCap: 3.71,
+    imgSrc:
+      'https://coin-images.coingecko.com/coins/images/33610/large/pug-head.png?1702513072',
+    lastPurchase: 500.0,
+    tokenName: 'FUD the Pug',
+  },
+  {
+    cardNumber: 2,
+    user: 'McBattle',
+    isVerified: true,
+    marketCap: 143.38,
+    imgSrc: '/tLogo.png',
+    lastPurchase: 144.84,
+    tokenName: 'USDT',
+  },
+  {
+    cardNumber: 3,
+    user: 'UnKnown',
+    isVerified: true,
+    marketCap: 2.16,
+    lastPurchase: 4.84,
+    tokenName: 'Hipo',
+    imgSrc: 'https://s2.coinmarketcap.com/static/img/coins/200x200/10297.png',
+  },
+  {
+    cardNumber: 4,
+    user: 'Kipas',
+    isVerified: false,
+    marketCap: 24.27,
+    lastPurchase: 4.84,
+    tokenName: 'Deep',
+    imgSrc:
+      'https://coin-images.coingecko.com/coins/images/50648/large/DEEP_Logo_256x256_px_%282%29.png?1728612340',
+  },
+  {
+    cardNumber: 5,
+    user: 'Kipas',
+    isVerified: false,
+    marketCap: 24.27,
+    lastPurchase: 4.84,
+    tokenName: 'Cetus',
+    imgSrc:
+      'https://sui.directory/wp-content/uploads/2023/04/Cetus-1000x600-1.png',
+  },
+  {
+    cardNumber: 6,
+    user: 'UnKnown',
+    isVerified: false,
+    marketCap: 2.16,
+    lastPurchase: 4.84,
+    tokenName: 'Hipo',
+    imgSrc: 'https://s2.coinmarketcap.com/static/img/coins/200x200/10297.png',
+  },
+  {
+    cardNumber: 7,
+    user: 'Kipas',
+    isVerified: true,
+    marketCap: 24.27,
+    lastPurchase: 4.84,
+    tokenName: 'Sui man',
     imgSrc: '/suiMan.png',
   },
   {
-    imgSrc: '/tLogo.png',
-  },
-  {
-    imgSrc: '/suiMan.png',
-  },
-  {
-    imgSrc: '/tLogo.png',
-  },
-  {
-    imgSrc: '/suiMan.png',
-  },
-  {
-    imgSrc: '/tLogo.png',
-  },
-  {
-    imgSrc: '/suiMan.png',
-  },
-  {
-    imgSrc: '/tLogo.png',
-  },
-  {
-    imgSrc: '/suiMan.png',
-  },
-  {
-    imgSrc: '/tLogo.png',
+    cardNumber: 8,
+    user: 'McBattle',
+    isVerified: true,
+    marketCap: 3.71,
+    imgSrc:
+      'https://d23exngyjlavgo.cloudfront.net/solana_6TG19kngJTNC8ufuct9ypXRpVfUkYTBnEQnfomUhYvwf',
+    lastPurchase: 500.0,
+    tokenName: ' Murph',
   },
 ];

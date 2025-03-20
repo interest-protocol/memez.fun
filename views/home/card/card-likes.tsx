@@ -1,15 +1,22 @@
-import { Div, P } from '@stylin.js/elements';
+import { not } from 'ramda';
+import { FC, useState } from 'react';
 
-import { HeartSVG } from '@/components/svg';
+import LikeComponent from '../components/like';
 
-const CardLikes = () => {
+const CardLikes: FC = () => {
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [likeCounter, setLikeCounter] = useState<number>(5);
+
+  const handleLike = () => {
+    setIsLiked(not);
+    setLikeCounter((likeCounter) => likeCounter + 1);
+  };
   return (
-    <Div gap="0.4rem" display="flex" alignItems="center" color="#F6C853">
-      <P fontSize="0.8rem">000k</P>
-      <Div cursor="pointer">
-        <HeartSVG maxHeight="1.2rem" maxWidth="1.2rem" width="1.2rem" />
-      </Div>
-    </Div>
+    <LikeComponent
+      likeCounter={likeCounter}
+      handleLikes={handleLike}
+      disabled={isLiked}
+    />
   );
 };
 

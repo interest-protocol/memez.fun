@@ -7,7 +7,15 @@ import CardBody from './card-body';
 import CardFooter from './card-footer';
 import CardIcon from './card-icon';
 
-const Card: FC<CardProps> = ({ imgSrc }) => {
+const Card: FC<CardProps> = ({
+  imgSrc,
+  user,
+  cardNumber,
+  isVerified,
+  tokenName,
+  marketCap,
+  lastPurchase,
+}) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { push } = useRouter();
 
@@ -22,7 +30,6 @@ const Card: FC<CardProps> = ({ imgSrc }) => {
   const handleOnMouseLeave = () => {
     setIsCardHovered(false);
   };
-
   return (
     <Div
       width="100%"
@@ -31,15 +38,25 @@ const Card: FC<CardProps> = ({ imgSrc }) => {
       transition="0.3s"
       borderRadius="1.5rem"
       onClick={handleOnCardClick}
-      border="1px solid #24282D"
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
+      border="1px solid #24282D"
       nHover={{
-        borderColor: '#F8D375',
+        borderColor: isCardHovered ? '#F8D375' : 'none',
       }}
     >
-      <CardIcon isCardHovered={isCardHovered} imgSrc={imgSrc} />
-      <CardBody />
+      <CardIcon
+        user={user}
+        imgSrc={imgSrc}
+        isVerified={isVerified}
+        cardNumber={cardNumber}
+        isCardHovered={isCardHovered}
+      />
+      <CardBody
+        tokenName={tokenName}
+        marketCap={marketCap}
+        lastPurchase={lastPurchase}
+      />
       <CardFooter />
     </Div>
   );
