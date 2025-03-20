@@ -38,7 +38,7 @@ const CardBody: FC<CardBodyProps> = ({
           {lastPurchase}K
         </Span>
       </Div>
-      <RangeBar />
+      <RangeBar value={50} />
       <Div display="flex" justifyContent="space-between">
         Bonding
       </Div>

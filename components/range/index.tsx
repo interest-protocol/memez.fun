@@ -1,19 +1,21 @@
 import { Div } from '@stylin.js/elements';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Range } from 'react-range';
 
-const RangeBar: FC = () => {
-  const [value, setValue] = useState([50]);
+import { RangeBarProps } from './range.types';
 
-  const rangeWidth = `${((value[0] - 0) / (100 - 0)) * 100}%`;
+const RangeBar: FC<RangeBarProps> = ({ value }) => {
+  const values = [value];
+
+  const rangeWidth = `${((values[0] - 0) / (100 - 0)) * 100}%`;
 
   return (
     <Range
       min={0}
       max={100}
-      values={value}
       disabled
-      onChange={(values) => setValue(values)}
+      values={values}
+      onChange={() => {}}
       renderThumb={({ props }) => (
         <Div
           {...props}

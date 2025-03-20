@@ -1,5 +1,6 @@
 import { Div, P, Span } from '@stylin.js/elements';
 import { FC, useState } from 'react';
+import { useWatch } from 'react-hook-form';
 
 import AvatarGroup from '@/components/avatar-group';
 import Like from '@/components/like';
@@ -15,12 +16,14 @@ import {
 import TokenCardIcon from '@/components/token-icon-card';
 import { copyToClipboard } from '@/utils';
 
+import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
 
 const MiniDetailsTokenBasics: FC = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
-
   const [showMoreDetails, setShowMoreDetails] = useState(false);
+
+  const formValues = useWatch<DetailsForm>();
 
   const handleClick = () => {
     setShowMoreDetails(!showMoreDetails);
@@ -33,7 +36,7 @@ const MiniDetailsTokenBasics: FC = () => {
       color="#fff"
       transition="0.3s"
       borderRadius="1.5rem"
-      max-height="53.438rem"
+      maxHeight="53.438rem"
       border="1px solid #24282D"
       display={['block', 'block', 'block', 'none', 'none']}
     >
@@ -55,7 +58,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 fontWeight="500"
                 fontFamily="Satoshi"
               >
-                Ocean Token
+                {formValues.name}
               </Span>
               <Div
                 gap="0.5rem"
@@ -63,11 +66,14 @@ const MiniDetailsTokenBasics: FC = () => {
                 color="#90939D"
                 alignItems="center"
               >
-                <P fontSize="0.75rem">0x2::sui..SUI</P>
+                <P fontSize="0.75rem">{formValues.type}</P>{' '}
                 <Div
                   cursor="pointer"
                   onClick={() =>
-                    copyToClipboard('0x2::sui..SUI', clipBoardSuccessMessage)
+                    copyToClipboard(
+                      formValues.type as string,
+                      clipBoardSuccessMessage
+                    )
                   }
                 >
                   <ClipBoardPaperSVG
@@ -90,7 +96,7 @@ const MiniDetailsTokenBasics: FC = () => {
           borderRadius="0.75rem"
           justifyContent="center"
         >
-          <RangeBar />
+          <RangeBar value={formValues.range as number} />
           <P fontWeight="300" fontSize="0.875rem" color="#FFFFFF">
             Bonding
           </P>
@@ -113,7 +119,7 @@ const MiniDetailsTokenBasics: FC = () => {
             color="#FBFBFB"
             justifyContent="center"
           >
-            <P fontSize="1rem">Created by • @lhcelli</P>
+            <P fontSize="1rem">Created by • {formValues.createdBy}</P>
           </Div>
         </Div>
         <Div px="1rem">
@@ -152,7 +158,7 @@ const MiniDetailsTokenBasics: FC = () => {
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
                 <CetusSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-                <Span fontSize="1.25rem">Cetus</Span>
+                <Span fontSize="1.25rem">{formValues.dex}</Span>
               </Div>
             </Div>
             <Div
@@ -180,7 +186,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Total supply:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">1K</Span>
+                <Span fontSize="1.25rem">{formValues.volume}</Span>
               </Div>
             </Div>
             <Div
@@ -200,15 +206,15 @@ const MiniDetailsTokenBasics: FC = () => {
                   justifyContent="center"
                 >
                   <VerticalCoinSVG
-                    maxHeight="0.8rem"
-                    maxWidth="0.8rem"
                     width="0.8rem"
+                    maxWidth="0.8rem"
+                    maxHeight="0.8rem"
                   />
                 </Div>
                 <P fontSize="0.875rem">Quote coin:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">SUI</Span>
+                <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>
               </Div>
             </Div>
           </Div>

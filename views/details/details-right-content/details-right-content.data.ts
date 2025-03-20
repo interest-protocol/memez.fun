@@ -7,24 +7,24 @@ import {
 
 export const DATA = [
   {
-    title: 'Volume',
+    title: 'Market Cap',
     Icon: DollarSignSVG,
     description: '$50,000',
   },
   {
     title: 'Volume',
     Icon: BarChartSVG,
-    description: '$50,000',
+    description: '6,893.98',
   },
   {
-    title: 'Volume',
+    title: 'Team Allocation',
     Icon: CalendarSVG,
-    description: '$50,000',
+    description: '15%',
   },
   {
-    title: 'Volume',
+    title: 'Vesting Period',
     Icon: DonutChartSVG,
-    description: '$50,000',
+    description: '64',
     isVestingPeriod: true,
   },
 ];
