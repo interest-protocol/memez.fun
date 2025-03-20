@@ -10,6 +10,7 @@ const DetailsTokenBasicsFooter: FC = () => {
       px="1rem"
       height="4rem"
       display="flex"
+      maxHeight="4rem"
       alignItems="center"
       justifyContent="space-between"
       borderTop="1px solid #24282D"

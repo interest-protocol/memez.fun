@@ -4,3 +4,5 @@ export interface TokenCardIconProps {
   showCardDetails?: boolean;
   isMiniDetailsCard?: boolean;
 }
+
+export type MiniTokenCardIconProps = Pick<TokenCardIconProps, 'imgSrc'>;

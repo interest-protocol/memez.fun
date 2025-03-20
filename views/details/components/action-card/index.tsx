@@ -138,17 +138,20 @@ const ActionCard = () => {
           </Div>
         </Div>
         <Div py="3rem" display="flex" justifyContent="center" width="100%">
-          <AnimatePresence mode="wait">
+          {/* <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
-            >
-              <CardButton onClick={() => {}} />
-            </motion.div>
-          </AnimatePresence>
+              style={{
+                zIndex: '2',
+              }}
+            > */}
+          <CardButton onClick={() => {}} />
+          {/* </motion.div>
+          </AnimatePresence> */}
         </Div>
       </Div>
     </motion.div>

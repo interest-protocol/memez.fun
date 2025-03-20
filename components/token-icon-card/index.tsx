@@ -25,7 +25,7 @@ const TokenCardIcon: FC<TokenCardIconProps> = ({
   }, [imgSrc]);
 
   return (
-    <Div p="0.5rem">
+    <Div p={!isMiniDetailsCard ? '0.5rem' : ''}>
       <Div
         px="1rem"
         p="0.7rem"

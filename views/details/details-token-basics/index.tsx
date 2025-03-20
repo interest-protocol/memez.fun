@@ -25,7 +25,9 @@ const DetailsTokenBasics = () => {
       borderRadius="1.5rem"
       max-height="53.438rem"
       border="1px solid #24282D"
-      display={['none', 'none', 'none', 'block', 'block']}
+      display={['none', 'none', 'none', 'flex', 'flex']}
+      flexDirection="column"
+      justifyContent="space-between"
     >
       <Div
         px="1rem"
@@ -59,8 +61,7 @@ const DetailsTokenBasics = () => {
         </Div>
       </Div>
       <Div
-        pt="0.4rem"
-        pb="0.75rem"
+        py="2rem"
         gap="0.5rem"
         display="flex"
         color="#FBFBFB"
@@ -69,7 +70,7 @@ const DetailsTokenBasics = () => {
         <P fontSize="1rem">Created by • @lhcelli</P>
       </Div>
       <DetailsTokenBasicsSocials />
-      <Div py="1rem" display="flex" justifyContent="center">
+      <Div pt="5rem" pb="1.2rem" display="flex" justifyContent="center">
         <Div
           px="1rem"
           borderRadius="1rem"
