@@ -7,8 +7,10 @@ const ActionCardDumpButton: FC<ActionCardButtonProps> = ({ onClick }) => {
   return (
     <Button
       all="unset"
+      zIndex="2"
+      bg="#FF8341"
+      color="#fff"
       height="2rem"
-      bg="#8BF3C5"
       cursor="pointer"
       transition="0.3s"
       width="11.063rem"
@@ -17,7 +19,7 @@ const ActionCardDumpButton: FC<ActionCardButtonProps> = ({ onClick }) => {
       fontSize="0.875rem"
       borderRadius="0.875rem"
       nHover={{
-        background: '#D1FAE8',
+        opacity: 0.8,
       }}
     >
       Dump

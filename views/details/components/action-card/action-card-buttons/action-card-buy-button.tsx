@@ -17,6 +17,7 @@ const ActionCardBuyButton: FC<ActionCardButtonProps> = ({ onClick }) => {
         repeatType: 'mirror',
       }}
       style={{
+        zIndex: 2,
         borderRadius: '0.875rem',
         backgroundColor: '#8BF3C5',
         display: 'inline-block',
@@ -24,8 +25,8 @@ const ActionCardBuyButton: FC<ActionCardButtonProps> = ({ onClick }) => {
     >
       <Button
         all="unset"
-        height="2rem"
         bg="inherit"
+        height="2rem"
         cursor="pointer"
         transition="0.3s"
         width="11.063rem"
@@ -33,7 +34,7 @@ const ActionCardBuyButton: FC<ActionCardButtonProps> = ({ onClick }) => {
         textAlign="center"
         borderRadius="0.875rem"
       >
-        <P fontSize="0.875rem">Dump</P>
+        <P fontSize="0.875rem">Pump</P>
       </Button>
     </motion.div>
   );
