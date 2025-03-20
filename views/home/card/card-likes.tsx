@@ -1,4 +1,3 @@
-import { Div, P } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
 
@@ -13,12 +12,11 @@ const CardLikes: FC = () => {
     setLikeCounter((likeCounter) => likeCounter + 1);
   };
   return (
-    <Div gap="0.4rem" display="flex" alignItems="center" color="#F6C853">
-      <P fontSize="0.8rem">{likeCounter}</P>
-      <Div onClick={handleLike}>
-        <LikeComponent disabled={isLiked} />
-      </Div>
-    </Div>
+    <LikeComponent
+      likeCounter={likeCounter}
+      handleLikes={handleLike}
+      disabled={isLiked}
+    />
   );
 };
 

@@ -1,5 +1,5 @@
 import { Div } from '@stylin.js/elements';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import { CardProps } from './card.types';
 import CardBody from './card-body';
@@ -8,7 +8,6 @@ import CardIcon from './card-icon';
 
 const Card: FC<CardProps> = ({
   imgSrc,
-  isCardHovered,
   user,
   cardNumber,
   isVerified,
@@ -16,6 +15,15 @@ const Card: FC<CardProps> = ({
   marketCap,
   lastPurchase,
 }) => {
+  const [isCardHovered, setIsCardHovered] = useState(false);
+
+  const handleOnMouseEnter = () => {
+    setIsCardHovered(true);
+  };
+
+  const handleOnMouseLeave = () => {
+    setIsCardHovered(false);
+  };
   return (
     <Div
       width="100%"
@@ -23,6 +31,8 @@ const Card: FC<CardProps> = ({
       cursor="pointer"
       transition="0.3s"
       borderRadius="1.5rem"
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
       border="1px solid #24282D"
       nHover={{
         borderColor: isCardHovered ? '#F8D375' : 'none',

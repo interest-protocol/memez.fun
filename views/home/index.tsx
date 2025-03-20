@@ -53,25 +53,23 @@ const Home: FC = () => {
             ({
               imgSrc,
               user,
-              number,
+              cardNumber,
               isVerified,
-              isCardHovered,
               tokenName,
               marketCap,
               lastPurchase,
-            }) => (
-              <Card
-                key={v4()}
-                user={user}
-                imgSrc={imgSrc}
-                cardNumber={number}
-                isVerified={isVerified}
-                tokenName={tokenName}
-                marketCap={marketCap}
-                lastPurchase={lastPurchase}
-                isCardHovered={isCardHovered}
-              />
-            )
+            }) => {
+              const cardData = {
+                user,
+                imgSrc,
+                cardNumber,
+                isVerified,
+                tokenName,
+                marketCap,
+                lastPurchase,
+              };
+              return <Card key={v4()} {...cardData} />;
+            }
           )}
         </Div>
       </Div>

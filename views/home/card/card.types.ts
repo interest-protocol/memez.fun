@@ -3,7 +3,7 @@ export interface CardIconProps {
   cardNumber: number;
   imgSrc: string;
   isVerified: boolean;
-  isCardHovered: boolean;
+  isCardHovered?: boolean;
 }
 
 export interface CardBodyProps {
