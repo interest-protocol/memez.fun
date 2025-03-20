@@ -1,7 +1,7 @@
 export interface CardIconProps {
   user: string;
-  cardNumber: number;
   imgSrc: string;
+  cardNumber: number;
   isVerified: boolean;
   isCardHovered?: boolean;
 }

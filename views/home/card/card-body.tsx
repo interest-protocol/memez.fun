@@ -1,8 +1,9 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
+import RangeBar from '@/components/range';
+
 import { CardBodyProps } from './card.types';
-import CardRange from './card-range';
 
 const CardBody: FC<CardBodyProps> = ({
   tokenName,
@@ -37,7 +38,10 @@ const CardBody: FC<CardBodyProps> = ({
           {lastPurchase}K
         </Span>
       </Div>
-      <CardRange />
+      <RangeBar />
+      <Div display="flex" justifyContent="space-between">
+        Bonding
+      </Div>
     </Div>
   );
 };

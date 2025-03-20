@@ -44,7 +44,7 @@ const Home: FC = () => {
           gridTemplateColumns={[
             '100%',
             '25rem',
-            'repeat(2, 21rem)',
+            'repeat(2, 50%)',
             'repeat(3, 20rem)',
             'repeat(4, 24.5%)',
           ]}

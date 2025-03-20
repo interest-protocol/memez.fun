@@ -5,14 +5,13 @@ import { FC, useEffect, useState } from 'react';
 import { DottedArrowSVG, VerifiedSVG } from '@/components/svg';
 import { getImageColor } from '@/utils';
 
-import { CardIconProps } from './card.types';
+import { TokenCardIconProps } from './token-icon-card.types';
 
-const CardIcon: FC<CardIconProps> = ({
-  user,
+const TokenCardIcon: FC<TokenCardIconProps> = ({
   imgSrc,
-  isVerified,
-  cardNumber,
   isCardHovered,
+  showCardDetails,
+  isMiniDetailsCard,
 }) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
 
@@ -26,35 +25,39 @@ const CardIcon: FC<CardIconProps> = ({
   }, [imgSrc]);
 
   return (
-    <Div p="0.5rem">
+    <Div p={!isMiniDetailsCard ? '0.5rem' : ''}>
       <Div
+        px="1rem"
         p="0.7rem"
         display="flex"
-        height="15.524rem"
         position="relative"
         alignItems="center"
-        borderRadius="1.3rem"
         justifyContent="center"
-        background={dominantColor ?? 'red'}
+        background={dominantColor ?? '#24282D'}
+        width={isMiniDetailsCard ? '3.875rem' : 'auto'}
+        height={isMiniDetailsCard ? '100%' : '15.524rem'}
+        borderRadius={isMiniDetailsCard ? '1rem' : '1.3rem'}
       >
-        <Div
-          py="0.2rem"
-          px="0.8rem"
-          color="#fff"
-          top="0.7rem"
-          width="4rem"
-          left="0.7rem"
-          display="flex"
-          fontFamily="NDot"
-          fontSize="1.8rem"
-          borderRadius="2rem"
-          alignItems="center"
-          position="absolute"
-          justifyContent="center"
-          backgroundColor="#0000001A"
-        >
-          {cardNumber}
-        </Div>
+        {showCardDetails && (
+          <Div
+            py="0.2rem"
+            px="0.8rem"
+            color="#fff"
+            top="0.7rem"
+            width="4rem"
+            left="0.7rem"
+            display="flex"
+            fontFamily="NDot"
+            fontSize="1.8rem"
+            borderRadius="2rem"
+            alignItems="center"
+            position="absolute"
+            justifyContent="center"
+            backgroundColor="#0000001A"
+          >
+            02
+          </Div>
+        )}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{
@@ -86,8 +89,18 @@ const CardIcon: FC<CardIconProps> = ({
             <DottedArrowSVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
           </Div>
         </motion.div>
-        <Div width="6.25rem" height="6.25rem">
-          <Img src={imgSrc} alt="SuiMan" width="100%" />
+        <Div
+          display="flex"
+          width="6.25rem"
+          alignItems="center"
+          justifyContent="center"
+          height={isMiniDetailsCard ? 'auto' : '6.25rem'}
+        >
+          <Img
+            src={imgSrc}
+            alt="SuiMan"
+            width={isMiniDetailsCard ? '2rem' : '100%'}
+          />
         </Div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,20 +124,14 @@ const CardIcon: FC<CardIconProps> = ({
             borderBottomRightRadius: '1.3rem',
           }}
         >
-          Created by • {user}
+          Created by • username
           <Div
             ml="0.3rem"
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            {isVerified && (
-              <VerifiedSVG
-                maxHeight="0.7rem"
-                maxWidth="0.7rem"
-                width="0.7rem"
-              />
-            )}
+            <VerifiedSVG maxHeight="0.7rem" maxWidth="0.7rem" width="0.7rem" />
           </Div>
         </motion.div>
       </Div>
@@ -132,4 +139,4 @@ const CardIcon: FC<CardIconProps> = ({
   );
 };
 
-export default CardIcon;
+export default TokenCardIcon;
