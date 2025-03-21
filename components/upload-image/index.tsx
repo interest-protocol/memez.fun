@@ -8,11 +8,11 @@ import { ImageCardSVG } from '@/components/svg';
 
 import {
   CreateCoinForm,
-  CreateCoinFormImageProps,
-} from '../../create-coin.types';
-import { getBase64 } from '../../create-coin.utils';
+  UploadImageProps,
+} from '../../views/create-coin/create-coin.types';
+import { getBase64 } from '../../views/create-coin/create-coin.utils';
 
-const CreateCoinFormImage: FC<CreateCoinFormImageProps> = ({ isReview }) => {
+const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
   const { setValue, control } = useFormContext<CreateCoinForm>();
   const currentImageUrl = useWatch({ control, name: 'imageUrl' });
   const [dragging, setDragging] = useState(false);
@@ -143,4 +143,4 @@ const CreateCoinFormImage: FC<CreateCoinFormImageProps> = ({ isReview }) => {
   );
 };
 
-export default CreateCoinFormImage;
+export default UploadImage;

@@ -13,7 +13,7 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({ noFooter, children }) => (
     flexDirection="column"
   >
     <Header />
-    <Main flex="1" minHeight={noFooter ? '90vh' : '100vh'}>
+    <Main flex="1" minHeight={noFooter ? '90vh' : '100vh'} ml="-3rem">
       {children}
     </Main>
     {!noFooter && (
