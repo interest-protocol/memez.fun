@@ -2,16 +2,28 @@ import { Div } from '@stylin.js/elements';
 import { FC } from 'react';
 import { v4 } from 'uuid';
 
+import { useModal } from '@/hooks/use-modal';
+
+import UsersLikesModal from '../users-like';
 import Avatar from './avatar';
 
 const AvatarGroup: FC = () => {
   const MAX_ITEMS = 5;
   const ITEMS = [1, 2, 3];
+  const { setContent, onClose } = useModal();
+
+  const handleClick = () => setContent(<UsersLikesModal />, { onClose });
 
   return (
-    <Div color="#F6C853" gap="0.1rem" display="flex">
+    <Div
+      gap="0.5rem"
+      display="flex"
+      cursor="pointer"
+      color="#F6C853"
+      onClick={handleClick}
+    >
       {ITEMS.map(() => (
-        <Avatar key={v4()} />
+        <Avatar isVerified key={v4()} />
       ))}
       {ITEMS.length > MAX_ITEMS && (
         <Div

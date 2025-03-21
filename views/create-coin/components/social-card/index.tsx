@@ -1,7 +1,7 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
-import { TimesSVG } from '@/components/svg';
+import { CircleTimesSVG } from '@/components/svg';
 
 import { SocialCardProps } from '../../create-coin.types';
 
@@ -37,7 +37,7 @@ const SocialCard: FC<SocialCardProps> = ({ title, onClose }) => (
         color: '#fff',
       }}
     >
-      <TimesSVG maxHeight="100%" maxWidth="100%" width="100%" />
+      <CircleTimesSVG maxHeight="100%" maxWidth="100%" width="100%" />
     </Div>
   </Div>
 );

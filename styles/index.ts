@@ -138,4 +138,15 @@ export const GlobalStyles = css`
     visibility: visible;
     opacity: 1;
   }
+
+  /* .users-like-modal &::-webkit-scrollbar {
+    width: '8px';
+  }
+  .users-like-modal &::-webkit-scrollbar-thumb {
+    background: '#F6C853';
+    border-radius: '4px';
+  }
+  .users-like-modal &::-webkit-scrollbar-track {
+    background: 'transparent';
+  } */
 `;

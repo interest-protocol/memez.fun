@@ -1,6 +1,7 @@
 export { default as ArrowDownSVG } from './arrow-down';
 export { default as ArrowDownCircleSVG } from './arrow-down-circle';
 export { default as ArrowUpCircleSVG } from './arrow-up-circle';
+export { default as ArrowUpRightFromSquareSVG } from './arrow-up-right-from-square';
 export { default as Ball1SVG } from './ball1';
 export { default as Ball2SVG } from './ball2';
 export { default as BannerProfileSVG } from './banner-profile';
@@ -12,6 +13,7 @@ export { default as ChevronDownSVG } from './chevron-down';
 export { default as ChevronUpSVG } from './chevron-up';
 export { default as CircleDollarSignSVG } from './circle-follar-sign';
 export { default as CircleQuarterSVG } from './circle-quarter';
+export { default as CircleTimesSVG } from './circle-times';
 export { default as CircleCompletedSVG } from './cirlce-completed';
 export { default as CircleHalfSVG } from './cirlce-half';
 export { default as ClipBoardSVG } from './clipboard';
