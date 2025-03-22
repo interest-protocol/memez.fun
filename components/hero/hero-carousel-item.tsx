@@ -81,7 +81,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             alignItems="flex-start"
             display={['none', 'none', 'none', 'flex', 'flex']}
           >
-            <Div mt="6rem" ml="-3rem">
+            <Div mt="6rem">
               <HoverFloatItem value={allTimeVolume} labelKey="allTimeVolume" />
             </Div>
           </Div>
