@@ -5,6 +5,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { ImageCardSVG } from '@/components/svg';
+import { SignInForm } from '@/views/sign-in/sign-in.types';
 
 import {
   CreateCoinForm,
@@ -13,7 +14,7 @@ import {
 import { getBase64 } from '../../views/create-coin/create-coin.utils';
 
 const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
-  const { setValue, control } = useFormContext<CreateCoinForm>();
+  const { setValue, control } = useFormContext<CreateCoinForm | SignInForm>();
   const currentImageUrl = useWatch({ control, name: 'imageUrl' });
   const [dragging, setDragging] = useState(false);
 

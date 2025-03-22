@@ -20,7 +20,7 @@ const SignInHeader: FC = () => {
           textTransform="capitalize"
           fontSize={['1.5rem', '1.5rem', '1.5rem', '2rem']}
         >
-          {SignInHeaderData[currentStep].title}
+          {SignInHeaderData[currentStep]?.title}
         </H1>
         {SignInHeaderData[currentStep].description && (
           <P

@@ -28,9 +28,7 @@ const SignInButtons: FC = () => {
     });
   };
 
-  const handleSignIn = () => {
-    console.log("You're log in");
-  };
+  const handleSignIn = () => {};
 
   const handleAuth = async () => {
     await dialog.promise(handleCreateProfile(), {
@@ -87,9 +85,7 @@ const SignInButtons: FC = () => {
         }}
       >
         <Span>
-          {currentStep == SignInStepEnum.CreateProfileProps
-            ? 'Next'
-            : 'Sign in'}
+          {currentStep == SignInStepEnum.SignInProps ? 'Next' : 'Sign in'}
         </Span>
       </Button>
     </Div>

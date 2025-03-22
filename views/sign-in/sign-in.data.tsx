@@ -7,17 +7,17 @@ import SignInStep from './steps/sign-in-step';
 
 export const SignInHeaderData: ReadonlyArray<SignInHeaderProps> = [
   {
-    title: 'Create profile',
-    step: SignInStepEnum.CreateProfileProps,
-  },
-  {
     title: 'Sign in',
     description: 'Welcome back. Select method to log in',
     step: SignInStepEnum.SignInProps,
   },
+  {
+    title: 'Create profile',
+    step: SignInStepEnum.CreateProfileProps,
+  },
 ];
 
 export const SignViewStep: ReadonlyArray<ReactNode> = [
-  <CreateProfiileStep key={unikey()} />,
   <SignInStep key={unikey()} />,
+  <CreateProfiileStep key={unikey()} />,
 ];

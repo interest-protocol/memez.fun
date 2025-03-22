@@ -22,7 +22,7 @@ const SignIn: FC = () => {
           {SignViewStep[currentStep]}
           <SignInButtons />
 
-          {currentStep === 1 && (
+          {currentStep === 0 && (
             <Div
               mt="3rem"
               gap="0.5rem"
@@ -38,7 +38,7 @@ const SignIn: FC = () => {
                 fontSize="1rem"
                 cursor="pointer"
                 lineHeight="1.375rem"
-                onClick={() => setValue('step', currentStep - 1)}
+                onClick={() => setValue('step', currentStep + 1)}
               >
                 Create a Profile
               </P>

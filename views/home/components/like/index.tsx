@@ -22,26 +22,28 @@ export const LikeComponent: FC<LikeComponentProps> = ({
 
   return (
     <Div
-      px="0.5rem"
-      bg="#24282D"
+      p="0.5rem"
+      gap=".5rem"
       display="flex"
       color="#F6C853"
       alignItems="center"
       borderRadius="1rem"
       justifyItems="center"
       nHover={{
-        background: 'none',
+        background: '#24282D',
       }}
     >
       <P fontSize="0.8rem">{likeCounter}</P>
       <Motion
-        p="0.6rem"
-        width="2.5rem"
-        height="2.5rem"
-        onClick={handleLikes}
+        width="1rem"
+        display="flex"
+        height="1rem"
         borderRadius="50%"
+        alignItems="center"
         variants={variants}
+        onClick={handleLikes}
         initial="withoutHover"
+        justifyContent="center"
         aria-label="likeComponent"
         transition={{ duration: 0.5 }}
         cursor={disabled ? 'not-allowed' : 'pointer'}
