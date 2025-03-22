@@ -2,8 +2,8 @@ import { Div, P } from '@stylin.js/elements';
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import InputField from '../components/input-field';
-import SelectField from '../components/select-field';
+import InputField from '../../../components/input-field';
+import SelectField from '../../../components/select-field';
 import { CreateCoinForm } from '../create-coin.types';
 
 const CreateCoinRaiseVestingStep: FC = () => {

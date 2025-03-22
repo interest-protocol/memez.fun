@@ -80,7 +80,7 @@ export interface CreateCoinForm {
   };
 }
 
-export interface CreateCoinFormImageProps {
+export interface UploadImageProps {
   isReview?: boolean;
 }
 
