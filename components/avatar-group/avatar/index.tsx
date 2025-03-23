@@ -21,8 +21,8 @@ const Avatar: FC<AvatarProps> = ({ isVerified, imgSrc, size = 'small' }) => {
     <Div width={avatarSize} position="relative">
       <Div
         display="flex"
-        width="100%"
-        height="100%"
+        width="1.5rem"
+        height="1.5rem"
         borderRadius="50%"
         overflow="hidden"
         alignItems="center"

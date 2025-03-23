@@ -11,8 +11,8 @@ const CardBody: FC<CardBodyProps> = ({
   lastPurchase,
 }) => {
   return (
-    <Div px="1rem">
-      <Div py="0.2rem" color="#fff">
+    <Div px="1rem" color="#fff">
+      <Div py="0.2rem">
         <Span fontSize="1rem" fontWeight="500" fontFamily="Satoshi">
           {tokenName}
         </Span>
@@ -38,8 +38,14 @@ const CardBody: FC<CardBodyProps> = ({
           {lastPurchase}K
         </Span>
       </Div>
-      <RangeBar value={50} />
-      <Div display="flex" justifyContent="space-between">
+      <Div
+        my="1rem"
+        gap="1rem"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <RangeBar value={50} />
         Bonding
       </Div>
     </Div>
