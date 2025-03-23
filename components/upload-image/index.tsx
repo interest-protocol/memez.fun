@@ -5,17 +5,13 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { ImageCardSVG } from '@/components/svg';
-import { SignInForm } from '@/views/sign-in/sign-in.types';
 
-import {
-  CreateCoinForm,
-  UploadImageProps,
-} from '../../views/create-coin/create-coin.types';
 import { getBase64 } from '../../views/create-coin/create-coin.utils';
+import { UploadImageProps } from './upload-image.types';
 
-const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
-  const { setValue, control } = useFormContext<CreateCoinForm | SignInForm>();
-  const currentImageUrl = useWatch({ control, name: 'imageUrl' });
+const UploadImage: FC<UploadImageProps> = ({ isReview, name = 'imageUrl' }) => {
+  const { setValue, control } = useFormContext();
+  const currentImageUrl = useWatch({ control, name });
   const [dragging, setDragging] = useState(false);
 
   const handleChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -31,8 +27,7 @@ const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
     const imageBase64 = await getBase64(file).catch(() =>
       toast.error('Something went wrong')
     );
-
-    setValue('imageUrl', imageBase64);
+    setValue(name, imageBase64);
   };
 
   const handleDropFile: DragEventHandler<HTMLDivElement> = async (e) => {
@@ -53,7 +48,7 @@ const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
         toast.error(propOr('Something went wrong', 'message', e))
       );
 
-      setValue('imageUrl', imageBase64);
+      setValue(name, imageBase64);
 
       return;
     }
@@ -69,46 +64,46 @@ const UploadImage: FC<UploadImageProps> = ({ isReview }) => {
       toast.error('Something went wrong')
     );
 
-    setValue('imageUrl', imageBase64);
+    setValue(name, imageBase64);
   };
 
   return (
     <Div>
       <Div
         p="l"
-        mx="auto"
         gap="m"
+        mx="auto"
         bg="#24282D"
+        color="#fff"
+        display="flex"
         width="6.25rem"
-        backgroundImage={`url('${currentImageUrl}')`}
+        height="6.25rem"
+        borderWidth="1px"
+        borderRadius="100px"
+        flexDirection="column"
+        backgroundSize="cover"
+        onDrop={handleDropFile}
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
-        backgroundSize="cover"
-        height="6.25rem"
-        display="flex"
-        flexDirection="column"
-        borderRadius="100px"
-        borderWidth="1px"
-        onDrop={handleDropFile}
         onDragEnter={() => setDragging(true)}
         onDragLeave={() => setDragging(false)}
         onDragOver={(e) => e.preventDefault()}
         borderStyle={dragging ? 'solid' : 'dashed'}
+        backgroundImage={`url('${currentImageUrl}')`}
         borderColor={dragging ? '#F6C853' : '#90939D'}
-        color="#fff"
       >
         {!isReview && (
           <Label
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            htmlFor="file"
-            cursor="pointer"
-            height="100%"
             width="100%"
-            borderRadius="100px"
+            height="100%"
+            htmlFor="file"
             display="flex"
-            flexDirection="column"
+            cursor="pointer"
             alignItems="center"
+            borderRadius="100px"
+            flexDirection="column"
             justifyContent="center"
           >
             <Div

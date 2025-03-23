@@ -4,13 +4,13 @@ export const GlobalStyles = css`
   @font-face {
     font-family: 'Satoshi';
     src:
-      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Medium.woff2')
+      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Regular.woff2')
         format('woff2'),
-      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Medium.woff')
+      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Regular.woff')
         format('woff'),
-      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Medium.ttf')
+      url('https://interest-protocol.github.io/fonts/satoshi/Satoshi-Regular.ttf')
         format('truetype');
-    font-weight: 500;
+    font-weight: 300;
     font-display: swap;
     font-style: normal;
   }
@@ -67,20 +67,20 @@ export const GlobalStyles = css`
   }
   /* width */
   ::-webkit-scrollbar {
-    width: 10px;
-    padding: 2rem;
+    width: 3px;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
+    background: #0007;
+    padding-left: 2px;
     border-radius: 0.5rem;
-    background: transparent;
     transition: all 300ms ease-in-out;
   }
 
   /* Track on hover */
   ::-webkit-scrollbar-track:hover {
-    background: #fff1;
+    background: #0003;
   }
 
   /* Handle */

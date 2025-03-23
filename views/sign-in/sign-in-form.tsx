@@ -5,9 +5,10 @@ import { useFormContext } from 'react-hook-form';
 import InputField from '@/components/input-field';
 import { XSVG } from '@/components/svg';
 
-import { SignInForm } from '../sign-in.types';
-const SignInStep: FC = () => {
-  const { register } = useFormContext<SignInForm>();
+import { SignInFormProps } from './sign-in.types';
+
+const SignInForm: FC = () => {
+  const { register } = useFormContext<SignInFormProps>();
   return (
     <Div maxWidth={['90vw', '90vw', '90vw', '33rem']} mx="auto" mt="3rem">
       <Div
@@ -77,4 +78,4 @@ const SignInStep: FC = () => {
   );
 };
 
-export default SignInStep;
+export default SignInForm;

@@ -3,18 +3,16 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { SEO } from '@/components';
 import SignIn from '@/views/sign-in';
-import { SignInForm, SignInStepEnum } from '@/views/sign-in/sign-in.types';
+import { SignInFormProps } from '@/views/sign-in/sign-in.types';
 
 const SignInPage: NextPage = () => {
-  const form = useForm<SignInForm>({
+  const form = useForm<SignInFormProps>({
     defaultValues: {
-      avatar: '',
-      step: SignInStepEnum.CreateProfileProps,
       username: '',
       password: '',
-      description: '',
     },
   });
+
   return (
     <FormProvider {...form}>
       <SEO />

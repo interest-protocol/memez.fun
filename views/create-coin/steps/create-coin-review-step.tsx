@@ -4,7 +4,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import unikey from 'unikey';
 
 import InputField from '../../../components/input-field';
-import CreateCoinFormImage from '../../../components/upload-image';
+import UploadImage from '../../../components/upload-image';
 import DexCard from '../components/dex-card';
 import SocialCard from '../components/social-card';
 import { CreateCoinDexData } from '../create-coin.data';
@@ -33,7 +33,7 @@ const CreateCoinReviewStep: FC = () => {
         <P fontSize="0.875rem" fontWeight="500" textAlign="center">
           Avatar
         </P>
-        <CreateCoinFormImage isReview />
+        <UploadImage name="imageUrl" isReview />
 
         <P fontSize="0.875rem" fontWeight="500" color="#E4E7EB">
           Details
