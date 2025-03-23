@@ -1,16 +1,22 @@
 import { Div, H1, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { CheckedSVG } from '@/components/svg';
+import { useDialog } from '@/hooks/use-dialog';
 
 import Illustration from './illustration';
 
 const CreateCoinSuccess: FC = () => {
   const { push } = useRouter();
+  const { handleClose } = useDialog();
 
   const gotoHome = () => push('/');
+
+  useEffect(() => {
+    handleClose();
+  }, []);
 
   return (
     <>

@@ -1,15 +1,16 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Button, Div } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import { WalletSVG } from '@/components/svg';
+import { Routes, RoutesEnum } from '@/constants';
 
 import ConnectedModal from './connected-modal';
-import { useConnectModal } from './wallet-button.hook';
 
 const WalletButton: FC = () => {
   const currentAccount = useCurrentAccount();
-  const handleOpenConnectModal = useConnectModal();
+  const { push } = useRouter();
 
   if (currentAccount) return <ConnectedModal />;
 
@@ -35,7 +36,7 @@ const WalletButton: FC = () => {
         color: '#0a090d',
         backgroundColor: '#F6C853',
       }}
-      onClick={handleOpenConnectModal}
+      onClick={() => push(Routes[RoutesEnum.SignIn])}
     >
       <Div width="1.5rem" height="1.5rem">
         <WalletSVG maxWidth="100%" maxHeight="100%" width="100%" />

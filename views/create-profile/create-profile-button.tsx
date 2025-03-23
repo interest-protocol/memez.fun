@@ -1,47 +1,73 @@
 import { Button, Div, Span } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { useFormContext, useWatch } from 'react-hook-form';
 
+import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
+import { Routes, RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
 
-import { SignInForm, SignInStepEnum } from './sign-in.types';
-
-const SignInButtons: FC = () => {
-  const { control, setValue } = useFormContext<SignInForm>();
+const CreateProfileButton: FC = () => {
   const { dialog, handleClose } = useDialog();
-
-  const currentStep = useWatch({ control, name: 'step' });
-
+  const { push } = useRouter();
   const handleCreateProfile = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const isSuccess = Math.random() > 0.5;
         if (isSuccess) {
           handleClose();
-          setValue('success', true);
-          setValue('step', currentStep + 1);
+          resolve('success');
           return;
         }
-        reject('Errp');
+        reject('Error');
       }, 1000);
     });
   };
-
-  const handleSignIn = () => {};
 
   const handleAuth = async () => {
     await dialog.promise(handleCreateProfile(), {
       success: () => ({
         title: 'Account created',
-        button: {
-          label: 'See on explorer',
-        },
         message: 'Account successfully created',
-        ghostButton: {
-          label: 'Continue browsing',
-          onClick: handleCreateProfile,
-        },
+        button: (
+          <Button
+            all="unset"
+            py="1rem"
+            px="1.5rem"
+            flex="2"
+            bg="#F5B722"
+            color="#000000"
+            cursor="pointer"
+            textAlign="center"
+            borderRadius="1rem"
+          >
+            You will&apos;be redirect to sign-in page in{' '}
+            <DialogCountdown
+              timeout={5000}
+              onComplete={() => {
+                handleClose();
+                push(Routes[RoutesEnum.SignIn]);
+              }}
+            />{' '}
+            sec
+          </Button>
+        ),
+        ghostButton: (
+          <Button
+            all="unset"
+            color="#F5B722"
+            cursor="pointer"
+            textAlign="center"
+            fontSize="0.825rem"
+            onClick={() => {
+              handleClose();
+              push(Routes[RoutesEnum.Home]);
+            }}
+            nHover={{ textDecoration: 'underline' }}
+          >
+            Go to home page
+          </Button>
+        ),
       }),
       loading: () => ({
         Icon: <LoaderSVG />,
@@ -75,21 +101,15 @@ const SignInButtons: FC = () => {
         transition="all .3s"
         justifyContent="center"
         border="1px solid #F6C853"
-        onClick={async () =>
-          currentStep == SignInStepEnum.CreateProfileProps
-            ? await handleAuth()
-            : handleSignIn()
-        }
+        onClick={async () => await handleAuth()}
         nHover={{
           transform: 'scale(1.05)',
         }}
       >
-        <Span>
-          {currentStep == SignInStepEnum.SignInProps ? 'Next' : 'Sign in'}
-        </Span>
+        <Span>Next</Span>
       </Button>
     </Div>
   );
 };
 
-export default SignInButtons;
+export default CreateProfileButton;

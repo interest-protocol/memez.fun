@@ -20,9 +20,10 @@ const CreateCoinButtons: FC = () => {
         if (isSuccess) {
           handleClose();
           setValue('success', true);
+          resolve('success');
           return;
         }
-        reject('Errp');
+        reject('Error');
       }, 1000);
     });
   };

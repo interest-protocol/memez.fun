@@ -1,9 +1,11 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
 import { Div, Img, Span } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import toast from 'react-hot-toast';
 
+import { Routes, RoutesEnum } from '@/constants';
 import { useCoinBalance } from '@/hooks/use-coin-balance';
 import { FixedPointMath } from '@/lib/entities/fixed-point-math';
 
@@ -11,6 +13,7 @@ import { BannerProfileSVG, CopySVG } from '../svg';
 
 const ProfileInfo: FC = () => {
   const currentAccount = useCurrentAccount();
+  const { push } = useRouter();
 
   const { balance } = useCoinBalance('0x2::sui::SUI', currentAccount?.address);
 
@@ -37,8 +40,14 @@ const ProfileInfo: FC = () => {
         <Div
           width="3.25rem"
           height="3.25rem"
+          cursor="pointer"
           borderRadius="100%"
           border="4px solid #131419"
+          onClick={() => push(Routes[RoutesEnum.Profile])}
+          transition="all .3s"
+          nHover={{
+            transform: 'scale(1.15)',
+          }}
         >
           <Img
             width="100%"

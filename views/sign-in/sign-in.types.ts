@@ -20,11 +20,8 @@ export interface SignInHeaderProps {
   step: SignInStepEnum;
 }
 
-export interface SignInForm {
-  avatar: string;
-  step: number;
+export interface SignInFormProps {
   username: string;
   password: string;
-  description: string;
   success: boolean;
 }
