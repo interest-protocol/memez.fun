@@ -12,30 +12,69 @@ const TextareaElement = stylin<TextAreaElementProps & RefAttributes<unknown>>(
 )();
 
 const InputField = forwardRef<InputElementProps, InputFieldProps>(
-  ({ Suffix, tooltipDescription, isTextArea, ...props }, ref) => (
-    <Div
-      width="100%"
-      height={!isTextArea ? '2.5rem' : 'unset'}
-      position="relative"
-      className="tooltip"
-      display="flex"
-      gap="0.5rem"
-      bg="#24282D"
-      borderRadius="0.75rem"
-      px={!isTextArea ? '1rem' : 'unset'}
-      pr={Suffix ? '0.25rem' : '1rem'}
-    >
-      {!isTextArea ? (
-        <>
-          <Input
+  (
+    {
+      status,
+      Suffix,
+      isTextArea,
+      supportingText,
+      tooltipDescription,
+      ...props
+    },
+    ref
+  ) => (
+    <Div>
+      <Div
+        width="100%"
+        gap="0.5rem"
+        display="flex"
+        bg="#24282D"
+        position="relative"
+        className="tooltip"
+        alignItems="center"
+        borderRadius="0.75rem"
+        justifyContent="space-between"
+        pr={Suffix ? '0.25rem' : '1rem'}
+        px={!isTextArea ? '1rem' : 'unset'}
+        height={!isTextArea ? '2.5rem' : 'unset'}
+      >
+        {!isTextArea ? (
+          <>
+            <Input
+              width="100%"
+              border="none"
+              height="100%"
+              outline="none"
+              bg="transparent"
+              color="#E4E7EB"
+              fontSize="0.75rem"
+              caretColor="#F6C853"
+              textTransform="capitalize"
+              nPlaceholder={{
+                color: '#90939D',
+              }}
+              {...props}
+              ref={ref}
+            />
+            <Div mr="-0.5rem" display="flex" alignItems="center">
+              {Suffix}
+            </Div>
+          </>
+        ) : (
+          <TextareaElement
+            p="1rem"
+            rows={5}
             width="100%"
             border="none"
             height="100%"
             outline="none"
-            bg="transparent"
+            bg="#24282D"
+            minHeight="5rem"
+            resize="vertical"
             color="#E4E7EB"
             fontSize="0.75rem"
             caretColor="#F6C853"
+            borderRadius="0.75rem"
             textTransform="capitalize"
             nPlaceholder={{
               color: '#90939D',
@@ -43,37 +82,21 @@ const InputField = forwardRef<InputElementProps, InputFieldProps>(
             {...props}
             ref={ref}
           />
-          <Div display="flex" alignItems="center">
-            {Suffix}
-          </Div>
-        </>
-      ) : (
-        <TextareaElement
-          p="1rem"
-          rows={5}
-          width="100%"
-          minHeight="5rem"
-          resize="vertical"
-          bg="#24282D"
-          border="none"
-          height="100%"
-          outline="none"
-          color="#E4E7EB"
+        )}
+        {tooltipDescription && (
+          <Span className={`tooltiptext ${isTextArea && 'textArea'}`}>
+            {tooltipDescription}
+          </Span>
+        )}
+      </Div>
+      {supportingText && (
+        <Div
+          mt="0.5rem"
           fontSize="0.75rem"
-          caretColor="#F6C853"
-          borderRadius="0.75rem"
-          textTransform="capitalize"
-          nPlaceholder={{
-            color: '#90939D',
-          }}
-          {...props}
-          ref={ref}
-        />
-      )}
-      {tooltipDescription && (
-        <Span className={`tooltiptext ${isTextArea && 'textArea'}`}>
-          {tooltipDescription}
-        </Span>
+          color={status === 'error' ? '#9B2C2C' : ''}
+        >
+          {supportingText}
+        </Div>
       )}
     </Div>
   )

@@ -10,7 +10,12 @@ import { CreateCoinDexData } from '../create-coin.data';
 import { CreateCoinForm } from '../create-coin.types';
 
 const CreateCoinDetailsStep: FC = () => {
-  const { setValue, register, control } = useFormContext<CreateCoinForm>();
+  const {
+    setValue,
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<CreateCoinForm>();
   const currentDex = useWatch({ control, name: 'dex' });
 
   return (
@@ -28,15 +33,19 @@ const CreateCoinDetailsStep: FC = () => {
         </P>
         <CreateCoinFormImage />
         <InputField
-          tooltipDescription="Memecoin name"
           placeholder="Coin name"
+          status={errors.name && 'error'}
+          tooltipDescription="Memecoin name"
+          supportingText={errors.name?.message}
           {...register('name')}
         />
         <InputField
-          tooltipDescription="Description to this memecoin"
-          placeholder="Description"
-          {...register('description')}
           isTextArea
+          placeholder="Description"
+          status={errors.description && 'error'}
+          supportingText={errors.description?.message}
+          tooltipDescription="Description to this memecoin"
+          {...register('description')}
         />
         <Div>
           <P fontSize="1rem" fontWeight="500">
@@ -59,6 +68,11 @@ const CreateCoinDetailsStep: FC = () => {
                 isSelected={dex.dexId == currentDex}
               />
             ))}
+            {errors.dex && (
+              <Div color="#9B2C2C" fontSize="0.75rem">
+                {errors.dex?.message}
+              </Div>
+            )}
           </Div>
         </Div>
       </Div>

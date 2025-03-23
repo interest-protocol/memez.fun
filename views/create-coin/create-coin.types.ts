@@ -10,7 +10,9 @@ export interface CreateCoinFormProps {
 export type InputFieldProps = InputProps & {
   Suffix?: ReactNode;
   isTextArea?: boolean;
+  supportingText?: string;
   tooltipDescription?: string;
+  status?: 'error' | 'default';
 };
 
 export type TextAreaElementProps = Omit<
