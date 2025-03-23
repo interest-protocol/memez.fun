@@ -80,10 +80,6 @@ export interface CreateCoinForm {
   };
 }
 
-export interface UploadImageProps {
-  isReview?: boolean;
-}
-
 export interface SocialCardProps {
   title: 'website' | 'twitter' | 'telegram';
   onClose: (socialMedia: 'website' | 'twitter' | 'telegram') => void;

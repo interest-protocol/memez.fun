@@ -8,11 +8,7 @@ import { LayoutProps } from './layout.types';
 const Layout: FC<PropsWithChildren<LayoutProps>> = ({ noFooter, children }) => (
   <Div display="flex" minHeight="100vh" flexDirection="column">
     <Header />
-    <Main
-      flex="1" /* position="relative" minHeight={noFooter ? '90vh' : '100vh'}*/
-    >
-      {children}
-    </Main>
+    <Main flex="1">{children}</Main>
     {!noFooter && (
       <Div flex="1">
         <Footer />
