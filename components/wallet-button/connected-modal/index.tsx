@@ -17,8 +17,7 @@ const ConnectedModal: FC = () => {
   const menuRef = useClickOutsideListenerRef<DivElementProps>(() =>
     setShow(false)
   );
-
-  return (
+  return currentAccount ? (
     <Div
       ref={menuRef}
       display="flex"
@@ -53,6 +52,8 @@ const ConnectedModal: FC = () => {
       </Button>
       <AnimatePresence>{show && <Profile />}</AnimatePresence>
     </Div>
+  ) : (
+    <Div>Sign in</Div>
   );
 };
 

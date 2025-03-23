@@ -2,7 +2,10 @@ import { Div, Input, InputElementProps, Span } from '@stylin.js/elements';
 import stylin from '@stylin.js/react';
 import { forwardRef, RefAttributes } from 'react';
 
-import { InputFieldProps, TextAreaElementProps } from '../../create-coin.types';
+import {
+  InputFieldProps,
+  TextAreaElementProps,
+} from '../../views/create-coin/create-coin.types';
 
 const TextareaElement = stylin<TextAreaElementProps & RefAttributes<unknown>>(
   'textarea'

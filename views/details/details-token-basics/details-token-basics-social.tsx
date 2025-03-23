@@ -11,8 +11,8 @@ const DetailsTokenBasicsSocials: FC<DetailsTokenBasicsSocialsProps> = ({
 }) => {
   return (
     <Div gap="0.5rem" display="flex" color="#FBFBFB" justifyContent="center">
-      {SOCIAL.map(({ Icon, title }) => (
-        <Link href="" key={title}>
+      {SOCIAL.map(({ Icon, title, link }) => (
+        <Link href={link} key={title}>
           <Div
             mr="0.5rem"
             color="#FFF"

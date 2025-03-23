@@ -1,4 +1,5 @@
 export interface AvatarProps {
-  imgSrc: string;
+  imgSrc?: string;
   isVerified?: boolean;
+  size?: 'small' | 'medium';
 }

@@ -5,7 +5,7 @@ import { SuiLogoSVG } from '@/components/svg';
 
 import { TokenFieldProps } from './token-field.types';
 
-const TokenField: FC<TokenFieldProps> = ({ type, percentage }) => {
+const TokenField: FC<TokenFieldProps> = ({ label, percentage }) => {
   return (
     <Div gap="1rem" width="100%" display="flex" flexDirection="column">
       <Div
@@ -46,11 +46,11 @@ const TokenField: FC<TokenFieldProps> = ({ type, percentage }) => {
         display="flex"
         color="#90939D"
         fontSize="0.875rem"
-        justifyContent={type === 'percentage' ? 'space-between' : 'flex-start'}
+        justifyContent={label === 'from' ? 'space-between' : 'flex-start'}
       >
-        {type === 'percentage' && <P>Percentage</P>}
-        {type === 'slippage' && <P>Max slippage: {percentage}%</P>}
-        {type === 'percentage' && <P>{percentage}%</P>}
+        {label === 'from' && <P>Percentage</P>}
+        {label === 'to' && <P>Max slippage: {percentage}%</P>}
+        {label === 'from' && <P>{percentage}%</P>}
       </Div>
     </Div>
   );

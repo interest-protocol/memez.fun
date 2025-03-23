@@ -1,4 +1,5 @@
 import { Div, P, Span } from '@stylin.js/elements';
+import { useWatch } from 'react-hook-form';
 
 import Like from '@/components/like';
 import {
@@ -11,11 +12,14 @@ import {
 import TokenCardIcon from '@/components/token-icon-card';
 import { copyToClipboard } from '@/utils';
 
+import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsFooter from './details-token-basics-footer';
 import DetailsTokenBasicsSocials from './details-token-basics-social';
 
 const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
+
+  const formValues = useWatch<DetailsForm>();
 
   return (
     <Div
@@ -23,7 +27,7 @@ const DetailsTokenBasics = () => {
       bg="#131419"
       transition="0.3s"
       borderRadius="1.5rem"
-      max-height="53.438rem"
+      maxHeight="53.438rem"
       border="1px solid #24282D"
       display={['none', 'none', 'none', 'flex', 'flex']}
       flexDirection="column"
@@ -37,11 +41,11 @@ const DetailsTokenBasics = () => {
         justifyContent="space-between"
       >
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
-          Ocean Token
+          {formValues.name}
         </Span>
         <Like invertOrder isLiked />
       </Div>
-      <TokenCardIcon imgSrc="/suiMan.png" />
+      <TokenCardIcon imgSrc={formValues.tokenIcon as string} />
       <Div
         py="0.75rem"
         gap="0.5rem"
@@ -50,11 +54,11 @@ const DetailsTokenBasics = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <P fontSize="0.75rem">0x2::sui..SUI</P>
+        <P fontSize="0.75rem">{formValues.type}</P>
         <Div
           cursor="pointer"
           onClick={() =>
-            copyToClipboard('0x2::sui..SUI', clipBoardSuccessMessage)
+            copyToClipboard(formValues.type as string, clipBoardSuccessMessage)
           }
         >
           <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
@@ -67,7 +71,7 @@ const DetailsTokenBasics = () => {
         color="#FBFBFB"
         justifyContent="center"
       >
-        <P fontSize="1rem">Created by • @lhcelli</P>
+        <P fontSize="1rem">Created by • {formValues.createdBy}</P>
       </Div>
       <DetailsTokenBasicsSocials />
       <Div pt="5rem" pb="1.2rem" display="flex" justifyContent="center">
@@ -105,7 +109,7 @@ const DetailsTokenBasics = () => {
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
               <CetusSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-              <Span fontSize="1.25rem">Cetus</Span>
+              <Span fontSize="1.25rem">{formValues.dex}</Span>{' '}
             </Div>
           </Div>
           <Div
@@ -133,7 +137,7 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Total supply:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">1K</Span>
+              <Span fontSize="1.25rem">{formValues.volume}</Span>
             </Div>
           </Div>
           <Div
@@ -161,7 +165,7 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Quote coin:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">SUI</Span>
+              <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>{' '}
             </Div>
           </Div>
         </Div>

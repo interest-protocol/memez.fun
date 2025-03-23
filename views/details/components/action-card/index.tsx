@@ -133,8 +133,8 @@ const ActionCard = () => {
             position="relative"
             flexDirection="column"
           >
-            <TokenField type="slippage" />
-            <TokenField type="slippage" />
+            <TokenField label="to" />
+            <TokenField label="from" />
           </Div>
         </Div>
         <Div py="3rem" display="flex" justifyContent="center" width="100%">
