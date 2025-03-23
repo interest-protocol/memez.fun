@@ -13,6 +13,7 @@ const FooterBar = () => {
       mx="auto"
       display="flex"
       maxWidth="1400px"
+      width="100%"
       alignItems="center"
       justifyContent="space-between"
     >

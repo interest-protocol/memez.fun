@@ -1,7 +1,8 @@
 import { Div } from '@stylin.js/elements';
-import { FC, useCallback, useState } from 'react';
-import { useEventListener } from 'usehooks-ts';
+import { FC } from 'react';
 import { v4 } from 'uuid';
+
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 import { DATA } from './hero.data';
 import HeroBackground from './hero-background';
@@ -10,18 +11,7 @@ import HeroCarouselItem from './hero-carousel-item';
 import MiniHeroCarouselItem from './mini-hero-carousel-item';
 
 const Hero: FC = () => {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined'
-      ? !window.matchMedia('(min-width: 64em)').matches
-      : false
-  );
-
-  const handleSetDesktop = useCallback(() => {
-    const mediaIsMobile = !window.matchMedia('(min-width: 64em)').matches;
-    setIsMobile(mediaIsMobile);
-  }, []);
-
-  useEventListener('resize', handleSetDesktop);
+  const { isMobile } = useIsMobile();
 
   return (
     <Div flex="1" height="27.688rem" position="relative">
