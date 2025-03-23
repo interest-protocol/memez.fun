@@ -22,6 +22,7 @@ const Profile: FC = () => (
     style={{ originY: 0 }}
     borderRadius="0.75rem"
     animate={{ scaleY: [0, 1] }}
+    border="2px solid #24282D"
     onClick={(e) => e.stopPropagation()}
   >
     <ProfileInfo />

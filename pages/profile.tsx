@@ -1,11 +1,15 @@
-import { SEO } from '@/components';
-import Profile from '@/components/profile';
+import { NextPage } from 'next';
 
-const ProfilePage = () => (
-  <>
-    <SEO />
-    <Profile />
-  </>
-);
+import { SEO } from '@/components';
+import Profile from '@/views/profile';
+
+const ProfilePage: NextPage = () => {
+  return (
+    <>
+      <SEO />
+      <Profile />
+    </>
+  );
+};
 
 export default ProfilePage;
