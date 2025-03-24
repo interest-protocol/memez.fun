@@ -1,5 +1,6 @@
 import { Div, Img } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 
 import { DottedArrowSVG, VerifiedSVG } from '@/components/svg';
@@ -15,6 +16,11 @@ const CardIcon: FC<CardIconProps> = ({
   isCardHovered,
 }) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
+  const { push } = useRouter();
+
+  const handleOnCardClick = () => {
+    push('/details');
+  };
 
   useEffect(() => {
     const fetchImageColor = async () => {
@@ -57,6 +63,7 @@ const CardIcon: FC<CardIconProps> = ({
         </Div>
         <motion.div
           initial={{ opacity: 0, x: 20 }}
+          onClick={handleOnCardClick}
           animate={{
             opacity: isCardHovered ? 1 : 0,
             x: isCardHovered ? 0 : 20,

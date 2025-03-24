@@ -4,7 +4,8 @@ import { v4 } from 'uuid';
 
 import { useModal } from '@/hooks/use-modal';
 
-import UsersLikesModal from '../users-like';
+import UserModal from '../user-modal';
+import { DATA } from '../user-modal/user-modal.data';
 import Avatar from './avatar';
 
 const AvatarGroup: FC = () => {
@@ -12,7 +13,11 @@ const AvatarGroup: FC = () => {
   const ITEMS = [1, 2, 3];
   const { setContent, onClose } = useModal();
 
-  const handleClick = () => setContent(<UsersLikesModal />, { onClose });
+  const handleModalLike = () =>
+    setContent(
+      <UserModal title="Likes" allUser={DATA.length} userData={DATA} />,
+      { onClose }
+    );
 
   return (
     <Div
@@ -20,7 +25,7 @@ const AvatarGroup: FC = () => {
       display="flex"
       cursor="pointer"
       color="#F6C853"
-      onClick={handleClick}
+      onClick={handleModalLike}
     >
       {ITEMS.map(() => (
         <Avatar isVerified key={v4()} />

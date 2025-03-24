@@ -1,13 +1,14 @@
 import { Div, Span } from '@stylin.js/elements';
+import { FC } from 'react';
 import { v4 } from 'uuid';
 
 import { useModal } from '@/hooks/use-modal';
 
 import { TimesSVG } from '../svg';
-import { DATA } from './users-like.data';
-import UserLikeItem from './users-like-item';
+import { UserModalProps } from './user-modal.types';
+import UserLikeItem from './user-modal-item';
 
-const UsersLikesModal = () => {
+const UserModal: FC<UserModalProps> = ({ title, allUser, userData }) => {
   const { handleClose } = useModal();
 
   return (
@@ -33,10 +34,10 @@ const UsersLikesModal = () => {
         >
           <Div gap="0.1rem" display="flex" flexDirection="column">
             <Span fontSize="1.25rem" color="#E4E7EB">
-              Likes
+              {title}
             </Span>
             <Span fontSize="0.875rem" fontWeight="300" color="#90939D">
-              All(14)
+              All {allUser}
             </Span>
           </Div>
           <Div
@@ -59,7 +60,7 @@ const UsersLikesModal = () => {
           </Div>
         </Div>
         <Div gap="1rem" pt="1rem" display="flex" flexDirection="column">
-          {DATA.map(({ userName, userAvatar }) => (
+          {userData?.map(({ userName, userAvatar }) => (
             <UserLikeItem
               key={v4()}
               userName={userName}
@@ -72,4 +73,4 @@ const UsersLikesModal = () => {
   );
 };
 
-export default UsersLikesModal;
+export default UserModal;

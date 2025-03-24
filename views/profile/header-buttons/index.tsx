@@ -1,11 +1,18 @@
 import { Button, Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
+import EditProfileModal from '@/components/edit-profile-modal';
 import { PencilSVG, XSVG } from '@/components/svg';
+import { useModal } from '@/hooks/use-modal';
 
 import { HeaderButtonsProps } from './header-button.types';
 
 const HeaderButtons: FC<HeaderButtonsProps> = ({ isMyProfile }) => {
+  const { setContent, onClose } = useModal();
+
+  const handleModalProfile = () =>
+    setContent(<EditProfileModal />, { onClose });
+
   return (
     <Div
       display="flex"
@@ -31,6 +38,7 @@ const HeaderButtons: FC<HeaderButtonsProps> = ({ isMyProfile }) => {
           justifyContent="center"
           zIndex={9999999}
           border="1px solid #F6C853"
+          onClick={handleModalProfile}
           nHover={{
             transform: 'scale(1.05)',
           }}
