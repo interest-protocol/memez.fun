@@ -6,7 +6,7 @@ import { useModal } from '@/hooks/use-modal';
 
 import { TimesSVG } from '../svg';
 import { UserModalProps } from './user-modal.types';
-import UserLikeItem from './user-modal-item';
+import UserModalItem from './user-modal-item';
 
 const UserModal: FC<UserModalProps> = ({ title, allUser, userData }) => {
   const { handleClose } = useModal();
@@ -61,7 +61,7 @@ const UserModal: FC<UserModalProps> = ({ title, allUser, userData }) => {
         </Div>
         <Div gap="1rem" pt="1rem" display="flex" flexDirection="column">
           {userData?.map(({ userName, userAvatar }) => (
-            <UserLikeItem
+            <UserModalItem
               key={v4()}
               userName={userName}
               userAvatar={userAvatar}

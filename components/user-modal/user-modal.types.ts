@@ -1,5 +1,4 @@
 export interface UserItemProps {
-  id: string;
   userName: string;
   userAvatar: string;
 }
