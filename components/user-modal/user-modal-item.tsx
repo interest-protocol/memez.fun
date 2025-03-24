@@ -4,9 +4,9 @@ import { v4 } from 'uuid';
 
 import Avatar from '../avatar-group/avatar';
 import { ArrowUpRightFromSquareSVG } from '../svg';
-import { UsersLikesItemProps } from './user-modal.types';
+import { UserItemProps } from './user-modal.types';
 
-const UserModalItem: FC<UsersLikesItemProps> = ({ userName, userAvatar }) => {
+const UserModalItem: FC<UserItemProps> = ({ userName, userAvatar }) => {
   return (
     <Div
       p="0.8rem"

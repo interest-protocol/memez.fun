@@ -1,4 +1,4 @@
-export interface UsersItemProps {
+export interface UserItemProps {
   id: string;
   userName: string;
   userAvatar: string;
@@ -7,5 +7,5 @@ export interface UsersItemProps {
 export interface UserModalProps {
   title: string;
   allUser: number;
-  userData: ReadonlyArray<UsersItemProps>;
+  userData: ReadonlyArray<UserItemProps>;
 }
