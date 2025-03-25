@@ -4,9 +4,12 @@ import { v4 } from 'uuid';
 
 import Avatar from '../avatar-group/avatar';
 import { ArrowUpRightFromSquareSVG } from '../svg';
-import { UsersLikesItemProps } from './users-like.types';
+import { EngagementCounterModalItemProps } from './engagement-counter.types';
 
-const UserLikeItem: FC<UsersLikesItemProps> = ({ userName, userAvatar }) => {
+const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
+  userName,
+  userAvatar,
+}) => {
   return (
     <Div
       p="0.8rem"
@@ -37,4 +40,4 @@ const UserLikeItem: FC<UsersLikesItemProps> = ({ userName, userAvatar }) => {
   );
 };
 
-export default UserLikeItem;
+export default EngagementCounterModalItem;
