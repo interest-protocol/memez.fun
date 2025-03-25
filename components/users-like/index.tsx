@@ -14,7 +14,6 @@ const UsersLikesModal = () => {
     <Div display="flex" flexDirection="column">
       <Div
         p="1.5rem"
-        width="28rem"
         bg="#0A090D"
         display="flex"
         overflowY="scroll"
@@ -22,8 +21,9 @@ const UsersLikesModal = () => {
         borderRadius="1rem"
         flexDirection="column"
         border="1px solid #24282D"
-        onClick={(e) => e.stopPropagation()}
         className="users-like-modal"
+        onClick={(e) => e.stopPropagation()}
+        width={['23rem', '28rem', '28rem', '28rem', '28rem']}
       >
         <Div
           pb="0.5rem"
