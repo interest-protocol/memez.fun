@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 import { useModal } from '@/hooks/use-modal';
 
-import UsersLikesModal from '../users-like';
+import EngagementCounterModal from '../engagement-counter';
 import Avatar from './avatar';
 
 const AvatarGroup: FC = () => {
@@ -12,7 +12,8 @@ const AvatarGroup: FC = () => {
   const ITEMS = [1, 2, 3];
   const { setContent, onClose } = useModal();
 
-  const handleClick = () => setContent(<UsersLikesModal />, { onClose });
+  const handleClick = () =>
+    setContent(<EngagementCounterModal title="Likes" />, { onClose });
 
   return (
     <Div
