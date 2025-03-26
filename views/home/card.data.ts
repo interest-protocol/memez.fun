@@ -10,7 +10,7 @@ export const CARDS = [
     tokenName: 'FUD the Pug',
   },
   {
-    cardNumber: 2,
+    cardNumber: 2222,
     user: 'McBattle',
     isVerified: true,
     marketCap: 143.38,
@@ -19,7 +19,7 @@ export const CARDS = [
     tokenName: 'USDT',
   },
   {
-    cardNumber: 3,
+    cardNumber: 33,
     user: 'UnKnown',
     isVerified: true,
     marketCap: 2.16,

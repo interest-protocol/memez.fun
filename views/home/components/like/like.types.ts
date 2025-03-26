@@ -1,5 +1,5 @@
 export interface LikeComponentProps {
   disabled?: boolean;
   likeCounter: number;
-  handleLikes: () => void;
+  handleLikes: (e: Event) => void;
 }

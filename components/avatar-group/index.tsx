@@ -6,27 +6,33 @@ import { useModal } from '@/hooks/use-modal';
 
 import EngagementCounterModal from '../engagement-counter';
 import Avatar from './avatar';
+import { DATA } from './avatar-group.data';
 
 const AvatarGroup: FC = () => {
   const MAX_ITEMS = 5;
-  const ITEMS = [1, 2, 3];
   const { setContent, onClose } = useModal();
 
-  const handleClick = () =>
+  const handleClick = (e: Event) => {
+    e.stopPropagation();
     setContent(<EngagementCounterModal title="Likes" />, { onClose });
+  };
+
+  const handleAvatarClick = (e: Event) => {
+    e.stopPropagation();
+  };
 
   return (
-    <Div
-      gap="0.5rem"
-      display="flex"
-      cursor="pointer"
-      color="#F6C853"
-      onClick={handleClick}
-    >
-      {ITEMS.map(() => (
-        <Avatar isVerified key={v4()} />
+    <Div gap="0.5rem" display="flex" cursor="pointer" color="#F6C853">
+      {DATA.slice(0, MAX_ITEMS).map(({ userName, userAvatar }) => (
+        <Avatar
+          title={userName}
+          imgSrc={userAvatar}
+          onClick={(e) => handleAvatarClick(e as unknown as MouseEvent)}
+          isVerified
+          key={v4()}
+        />
       ))}
-      {ITEMS.length > MAX_ITEMS && (
+      {DATA.length > MAX_ITEMS && (
         <Div
           color="#fff"
           display="flex"
@@ -35,10 +41,11 @@ const AvatarGroup: FC = () => {
           fontSize="0.7rem"
           borderRadius="50%"
           alignItems="center"
+          onClick={(e) => handleClick(e as unknown as MouseEvent)}
           justifyContent="center"
           border="1px solid #494C54"
         >
-          +1
+          +{DATA.length - MAX_ITEMS}
         </Div>
       )}
     </Div>
