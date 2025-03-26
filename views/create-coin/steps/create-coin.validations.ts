@@ -1,53 +1,53 @@
 import * as yup from 'yup';
 
 export const validationSchema = yup.object().shape({
-  dex: yup.string().required('Dex é obrigatório'),
-  step: yup.number().required('Step é obrigatório'),
-  name: yup.string().required('Nome é obrigatório'),
+  dex: yup.string().required('Dex is required'),
+  step: yup.number().required('Step is required'),
+  name: yup.string().required('Name is required'),
   imageUrl: yup
     .string()
-    .url('Deve ser uma URL válida')
-    .required('Imagem é obrigatória'),
-  description: yup.string().required('Descrição é obrigatória'),
-  quoteCoin: yup.string().required('Moeda de cotação é obrigatória'),
+    .url('Must be a valid URL')
+    .required('Image is required'),
+  description: yup.string().required('Description is required'),
+  quoteCoin: yup.string().required('Quote coin is required'),
   supply: yup
     .string()
-    .matches(/^\d+$/, 'Deve ser um número')
-    .required('Supply é obrigatório'),
+    .matches(/^\d+$/, 'Must be a number')
+    .required('Supply is required'),
   website: yup
     .string()
-    .url('Deve ser uma URL válida')
-    .required('Website é obrigatório'),
+    .url('Must be a valid URL')
+    .required('Website is required'),
   twitter: yup
     .string()
-    .url('Deve ser uma URL válida')
-    .required('Twitter é obrigatório'),
+    .url('Must be a valid URL')
+    .required('Twitter is required'),
   telegram: yup
     .string()
-    .url('Deve ser uma URL válida')
-    .required('Telegram é obrigatório'),
-  success: yup.boolean().required('Campo obrigatório'),
+    .url('Must be a valid URL')
+    .required('Telegram is required'),
+  success: yup.boolean().required('This field is required'),
 
   raise: yup.object().shape({
     value: yup
       .string()
-      .matches(/^\d+$/, 'Deve ser um número')
-      .required('Valor é obrigatório'),
+      .matches(/^\d+$/, 'Must be a number')
+      .required('Value is required'),
     percentage: yup
       .string()
-      .matches(/^\d+$/, 'Deve ser um número')
-      .required('Percentual é obrigatório'),
+      .matches(/^\d+$/, 'Must be a number')
+      .required('Percentage is required'),
   }),
 
   vesting: yup.object().shape({
-    period: yup.string().required('Período é obrigatório'),
+    period: yup.string().required('Period is required'),
     quantity: yup
       .string()
-      .matches(/^\d+$/, 'Deve ser um número')
-      .required('Quantidade é obrigatória'),
+      .matches(/^\d+$/, 'Must be a number')
+      .required('Quantity is required'),
     coinAmount: yup
       .string()
-      .matches(/^\d+$/, 'Deve ser um número')
-      .required('Montante de moedas é obrigatório'),
+      .matches(/^\d+$/, 'Must be a number')
+      .required('Coin amount is required'),
   }),
 });
