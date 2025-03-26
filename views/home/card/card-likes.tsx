@@ -7,9 +7,8 @@ const CardLikes: FC = () => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likeCounter, setLikeCounter] = useState<number>(5);
 
-  const handleLike = (e: Event) => {
+  const handleLike = () => {
     setIsLiked(not);
-    e.stopPropagation();
     setLikeCounter((likeCounter) => likeCounter + 1);
   };
   return (

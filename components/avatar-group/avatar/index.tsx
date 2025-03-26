@@ -4,13 +4,7 @@ import { FC } from 'react';
 import { VerifiedSVG } from '../../svg';
 import { AvatarProps } from './avatar.types';
 
-const Avatar: FC<AvatarProps> = ({
-  title,
-  imgSrc,
-  onClick,
-  isVerified,
-  size = 'small',
-}) => {
+const Avatar: FC<AvatarProps> = ({ isVerified, imgSrc, size = 'small' }) => {
   const sizeMap = {
     small: '1.5rem',
     medium: '2rem',
@@ -24,11 +18,7 @@ const Avatar: FC<AvatarProps> = ({
   const avatarSize = (size && sizeMap[size]) || sizeMap.small;
 
   return (
-    <Div
-      onClick={(e) => onClick(e as unknown as MouseEvent)}
-      width={avatarSize}
-      position="relative"
-    >
+    <Div width={avatarSize} position="relative">
       <Div
         display="flex"
         width="1.5rem"
@@ -38,7 +28,7 @@ const Avatar: FC<AvatarProps> = ({
         alignItems="center"
         justifyContent="center"
       >
-        <Img src={imgSrc} width="100%" height="100%" />
+        <Img src={imgSrc ?? '/avatar.png'} width="100%" height="100%" />
       </Div>
       {isVerified && (
         <Div

@@ -38,7 +38,9 @@ const Metric: FC<MetricProps> = ({
         }}
         fontSize={['1rem', '1rem', '1rem', '1.25rem']}
       >
-        <Span lineHeight="1.75rem">{followers}</Span>
+        <Span lineHeight="1.75rem" fontWeight="700">
+          {followers}
+        </Span>
         <Span
           lineHeight="1.375rem"
           fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
