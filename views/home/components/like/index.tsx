@@ -41,7 +41,7 @@ export const LikeComponent: FC<LikeComponentProps> = ({
         borderRadius="50%"
         alignItems="center"
         variants={variants}
-        onClick={handleLikes}
+        onClick={(e) => handleLikes(e as unknown as Event)}
         initial="withoutHover"
         justifyContent="center"
         aria-label="likeComponent"
