@@ -8,7 +8,7 @@ import { useDialog } from '@/hooks/use-dialog';
 import { CreateCoinForm, CreateCoinStepEnum } from './create-coin.types';
 
 const CreateCoinButtons: FC = () => {
-  const { control, setValue } = useFormContext<CreateCoinForm>();
+  const { control, setValue, trigger } = useFormContext<CreateCoinForm>();
   const { dialog, handleClose } = useDialog();
 
   const currentStep = useWatch({ control, name: 'step' });
@@ -63,9 +63,41 @@ const CreateCoinButtons: FC = () => {
     });
   };
 
+  const handleNext = async () => {
+    let fieldsToValidate: (keyof CreateCoinForm)[] = [];
+
+    if (currentStep === CreateCoinStepEnum.CoinDetails) {
+      fieldsToValidate = ['name', 'description', 'dex'];
+    } else if (currentStep === CreateCoinStepEnum.DexSocialMedia) {
+      fieldsToValidate = [
+        'quoteCoin',
+        'supply',
+        'website',
+        'telegram',
+        'twitter',
+      ];
+    } else if (currentStep === CreateCoinStepEnum.RaiseVesting) {
+      fieldsToValidate = [
+        'raise.value' as keyof CreateCoinForm,
+        'raise.percentage' as keyof CreateCoinForm,
+        'vesting.period' as keyof CreateCoinForm,
+        'vesting.quantity' as keyof CreateCoinForm,
+      ];
+    }
+
+    const isValid = await trigger(fieldsToValidate);
+    if (!isValid) return;
+
+    if (currentStep === CreateCoinStepEnum.Review) {
+      await handleCreateCoin();
+    } else {
+      setValue('step', currentStep + 1);
+    }
+  };
+
   return (
     <Div mt="2.5rem" display="flex" gap="0.5rem" justifyContent="center">
-      {currentStep != CreateCoinStepEnum.CoinDetails && (
+      {currentStep !== CreateCoinStepEnum.CoinDetails && (
         <Button
           all="unset"
           py="0.4rem"
@@ -96,17 +128,13 @@ const CreateCoinButtons: FC = () => {
         transition="all .3s"
         justifyContent="center"
         border="1px solid #F6C853"
-        onClick={async () =>
-          currentStep == CreateCoinStepEnum.Review
-            ? await handleCreateCoin()
-            : setValue('step', currentStep + 1)
-        }
+        onClick={handleNext}
         nHover={{
           transform: 'scale(1.05)',
         }}
       >
         <Span>
-          {currentStep == CreateCoinStepEnum.Review ? 'Confirm' : 'Next'}
+          {currentStep === CreateCoinStepEnum.Review ? 'Confirm' : 'Next'}
         </Span>
       </Button>
     </Div>

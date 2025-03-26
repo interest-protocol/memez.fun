@@ -11,9 +11,11 @@ import { SelectFieldProps } from './select-fields.types';
 const SelectField: FC<SelectFieldProps> = ({
   onSelect,
   menuList,
+  status,
   isSpecial,
   placeholder,
   currentValue,
+  supportingText,
   tooltipDescription,
 }) => {
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
@@ -148,6 +150,11 @@ const SelectField: FC<SelectFieldProps> = ({
       )}
       {tooltipDescription && (
         <Span className={`tooltiptext`}>{tooltipDescription}</Span>
+      )}
+      {supportingText && (
+        <Div color={status === 'error' ? '#9B2C2C' : ''} fontSize="0.75rem">
+          {supportingText}
+        </Div>
       )}
     </Div>
   );
