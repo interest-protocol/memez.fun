@@ -1,20 +1,21 @@
 import { Div, Span } from '@stylin.js/elements';
+import { FC } from 'react';
 import { v4 } from 'uuid';
 
 import { useModal } from '@/hooks/use-modal';
 
 import { TimesSVG } from '../svg';
-import { DATA } from './users-like.data';
-import UserLikeItem from './users-like-item';
+import { DATA } from './engagement-counter.data';
+import { EngagementCounterModalProps } from './engagement-counter.types';
+import UserLikeItem from './engagement-counter-item';
 
-const UsersLikesModal = () => {
+const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
   const { handleClose } = useModal();
 
   return (
     <Div display="flex" flexDirection="column">
       <Div
         p="1.5rem"
-        width="28rem"
         bg="#0A090D"
         display="flex"
         overflowY="scroll"
@@ -22,8 +23,9 @@ const UsersLikesModal = () => {
         borderRadius="1rem"
         flexDirection="column"
         border="1px solid #24282D"
-        onClick={(e) => e.stopPropagation()}
         className="users-like-modal"
+        onClick={(e) => e.stopPropagation()}
+        width={['23rem', '28rem', '28rem', '28rem', '28rem']}
       >
         <Div
           pb="0.5rem"
@@ -33,7 +35,7 @@ const UsersLikesModal = () => {
         >
           <Div gap="0.1rem" display="flex" flexDirection="column">
             <Span fontSize="1.25rem" color="#E4E7EB">
-              Likes
+              {title}
             </Span>
             <Span fontSize="0.875rem" fontWeight="300" color="#90939D">
               All(14)
@@ -72,4 +74,4 @@ const UsersLikesModal = () => {
   );
 };
 
-export default UsersLikesModal;
+export default EngagementCounterModal;
