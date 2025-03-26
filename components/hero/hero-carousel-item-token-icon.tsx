@@ -1,5 +1,5 @@
 import { Div, Img, Span } from '@stylin.js/elements';
-import { motion } from 'framer-motion'; // Importe o motion
+import { motion } from 'framer-motion';
 import { FC } from 'react';
 
 import { YellowFireSVG } from '../svg';

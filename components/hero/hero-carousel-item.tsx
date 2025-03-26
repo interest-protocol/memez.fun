@@ -20,7 +20,6 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
       width="100%"
       height="100%"
       objectFit="cover"
-      //   backgroundImage="url('/hero-bg.png')"
       backgroundSize="cover"
       backgroundPosition="center"
     >

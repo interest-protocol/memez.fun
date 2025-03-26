@@ -35,7 +35,7 @@ const CardIcon: FC<CardIconProps> = ({
         alignItems="center"
         borderRadius="1.3rem"
         justifyContent="center"
-        background={dominantColor ?? 'red'}
+        background={dominantColor ?? 'transparent'}
       >
         <Div
           py="0.2rem"

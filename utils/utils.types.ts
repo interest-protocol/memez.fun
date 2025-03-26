@@ -27,7 +27,7 @@ export interface GetCoinsArgs {
   type: string;
   account: string;
   client: SuiClient;
-  cursor?: string | null; // for internal recursive fn
+  cursor?: string | null;
 }
 
 export interface FetchCoinMetadataMultipleTypeArg {}

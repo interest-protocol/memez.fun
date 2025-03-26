@@ -4,7 +4,6 @@ import { FC } from 'react';
 import { CoinInfoProps } from './activity-card.types';
 
 const CoinInfo: FC<CoinInfoProps> = ({ type, supportingText }) => {
-  console.log(type); // TODO: Use this type to take de coin info dinamiclly
   return (
     <Div display="flex" gap="0.5rem">
       <Div width="2.375rem" height="2.375rem">

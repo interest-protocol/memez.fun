@@ -45,7 +45,7 @@ const CardBody: FC<CardBodyProps> = ({
         justifyContent="space-between"
         alignItems="center"
       >
-        <RangeBar value={50} />
+        <RangeBar value={90} />
         Bonding
       </Div>
     </Div>
