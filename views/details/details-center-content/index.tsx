@@ -37,7 +37,13 @@ const DetailsCenterContent = () => {
             {formValues.bonding}
           </Span>
         </Div>
-        <Div borderRadius="0.75rem" p="1rem" width="100%" bg="#24282D">
+        <Div
+          borderRadius="0.75rem"
+          p="1rem"
+          pb="2rem"
+          width="100%"
+          bg="#24282D"
+        >
           <RangeBar value={formValues.range as number} />
           <P mt="0.9rem" fontWeight="300" fontSize="0.75rem" color="#FFFFFF">
             Bonding progress • {formValues.range}%{' '}

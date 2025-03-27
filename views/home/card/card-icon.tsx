@@ -79,10 +79,10 @@ const CardIcon: FC<CardIconProps> = ({
             backgroundColor: '#0000001A',
           }}
         >
-          <Div position="absolute" top="-0.2rem" right="0.8rem">
+          <Div position="absolute" top="-0.1rem" right="0.8rem">
             <DottedArrowSVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
           </Div>
-          <Div position="absolute" top="0.4rem" right="1.4rem">
+          <Div position="absolute" top="0.4rem" right="1.3rem">
             <DottedArrowSVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
           </Div>
         </motion.div>

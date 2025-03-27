@@ -29,8 +29,8 @@ const Avatar: FC<AvatarProps> = ({
         display="flex"
         width="1.5rem"
         height="1.5rem"
-        borderRadius="50%"
         overflow="hidden"
+        borderRadius="50%"
         alignItems="center"
         justifyContent="center"
       >

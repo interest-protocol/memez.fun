@@ -42,7 +42,9 @@ const DetailsCard: FC<DetailsCardProps> = ({
       </Div>
       <Div color="#90939D" display="flex" justifyContent="flex-end">
         <Div display="flex" flexDirection="column" justifyContent="flex-end">
-          <Span fontSize="1.5rem">{description}</Span>
+          <Span textAlign="right" fontSize="1.5rem">
+            {description}
+          </Span>
           {isVestingPeriod && (
             <Div
               ml="auto"

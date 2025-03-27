@@ -5,7 +5,7 @@ export const CARDS = [
     isVerified: false,
     marketCap: 3.71,
     imgSrc:
-      'https://coin-images.coingecko.com/coins/images/33610/large/pug-head.png?1702513072',
+      'https://coin-images.coingecko.com/coins/images/33610/large/pug-head.png',
     lastPurchase: 500.0,
     tokenName: 'FUD the Pug',
   },

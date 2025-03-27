@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 
 import AvatarGroup from '@/components/avatar-group';
+import { DATA } from '@/components/avatar-group/avatar-group.data';
 import RangeBar from '@/components/range';
 import {
   ChevronUpSVG,
@@ -231,7 +232,7 @@ const MiniDetailsTokenBasics: FC = () => {
             </Div>
           </Div>
           <Div display="flex" justifyContent="center" mt="1rem">
-            <AvatarGroup />
+            <AvatarGroup items={DATA} />
           </Div>
         </Div>
       </Div>

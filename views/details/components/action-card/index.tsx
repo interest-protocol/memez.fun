@@ -8,6 +8,7 @@ import {
   CircleQuarterSVG,
   GreenActionCardBackgroundSVG,
 } from '@/components/svg';
+import { TooltipWrapper } from '@/components/tooltip';
 
 import TokenField from '../token-field';
 import { ACTIVE_COLORS, BACKGROUND_SVGS, BUTTONS } from './action.data';
@@ -105,27 +106,27 @@ const ActionCard = () => {
             position="relative"
             justifyContent="flex-end"
           >
-            <Div cursor="pointer">
+            <TooltipWrapper tooltipContent="25%">
               <CircleQuarterSVG
                 width="0.875rem"
                 maxWidth="0.875rem"
                 maxHeight="0.875rem"
               />
-            </Div>
-            <Div cursor="pointer">
+            </TooltipWrapper>
+            <TooltipWrapper tooltipContent="50%">
               <CircleHalfSVG
                 width="0.875rem"
                 maxWidth="0.875rem"
                 maxHeight="0.875rem"
               />
-            </Div>
-            <Div cursor="pointer">
+            </TooltipWrapper>
+            <TooltipWrapper tooltipContent="100%">
               <CircleCompletedSVG
                 width="0.875rem"
                 maxWidth="0.875rem"
                 maxHeight="0.875rem"
               />
-            </Div>
+            </TooltipWrapper>
           </Div>
           <Div
             gap="3rem"
@@ -138,7 +139,7 @@ const ActionCard = () => {
           </Div>
         </Div>
         <Div py="3rem" display="flex" justifyContent="center" width="100%">
-          {/* <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, y: 10 }}
@@ -148,10 +149,10 @@ const ActionCard = () => {
               style={{
                 zIndex: '2',
               }}
-            > */}
-          <CardButton onClick={() => {}} />
-          {/* </motion.div>
-          </AnimatePresence> */}
+            >
+              <CardButton onClick={() => {}} />
+            </motion.div>
+          </AnimatePresence>
         </Div>
       </Div>
     </motion.div>

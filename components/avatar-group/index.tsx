@@ -5,10 +5,11 @@ import { v4 } from 'uuid';
 import { useModal } from '@/hooks/use-modal';
 
 import EngagementCounterModal from '../engagement-counter';
+import { TooltipWrapper } from '../tooltip';
 import Avatar from './avatar';
-import { DATA } from './avatar-group.data';
+import { AvatarGroupProps } from './avatar-group.types';
 
-const AvatarGroup: FC = () => {
+const AvatarGroup: FC<AvatarGroupProps> = ({ items }) => {
   const MAX_ITEMS = 5;
   const { setContent, onClose } = useModal();
 
@@ -18,21 +19,23 @@ const AvatarGroup: FC = () => {
   };
 
   const handleAvatarClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (items.length > MAX_ITEMS) return;
     e.stopPropagation();
   };
 
   return (
     <Div gap="0.5rem" display="flex" cursor="pointer" color="#F6C853">
-      {DATA.slice(0, MAX_ITEMS).map(({ userName, userAvatar }) => (
-        <Avatar
-          title={userName}
-          imgSrc={userAvatar}
-          onClick={(e) => handleAvatarClick(e)}
-          isVerified
-          key={v4()}
-        />
+      {items.slice(0, MAX_ITEMS).map(({ title, imgSrc }) => (
+        <TooltipWrapper key={v4()} tooltipContent={title}>
+          <Avatar
+            isVerified
+            title={title}
+            imgSrc={imgSrc}
+            onClick={handleAvatarClick}
+          />
+        </TooltipWrapper>
       ))}
-      {DATA.length > MAX_ITEMS && (
+      {items.length > MAX_ITEMS && (
         <Div
           color="#fff"
           display="flex"
@@ -41,11 +44,11 @@ const AvatarGroup: FC = () => {
           fontSize="0.7rem"
           borderRadius="50%"
           alignItems="center"
-          onClick={(e) => handleClick(e)}
           justifyContent="center"
           border="1px solid #494C54"
+          onClick={(e) => handleClick(e)}
         >
-          +{DATA.length - MAX_ITEMS}
+          +{items.length - MAX_ITEMS}
         </Div>
       )}
     </Div>

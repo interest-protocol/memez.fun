@@ -3,18 +3,20 @@ import ColorThief from 'colorthief';
 export const getImageColor = (imgSrc: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.src = imgSrc;
     img.crossOrigin = 'Anonymous';
+    img.src = imgSrc;
 
     img.onload = () => {
-      const colorThief = new ColorThief();
-      const color = colorThief.getColor(img);
-      resolve(`rgb(${color.join(',')})`);
+      try {
+        const colorThief = new ColorThief();
+        const color = colorThief.getColor(img);
+        resolve(`rgb(${color.join(',')})`);
+      } catch (error) {
+        reject('Error');
+      }
     };
 
-    img.onerror = (error) => {
-      reject(error);
-    };
+    img.onerror = (error) => reject(error);
   });
 };
 
