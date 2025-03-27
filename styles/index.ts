@@ -139,14 +139,24 @@ export const GlobalStyles = css`
     opacity: 1;
   }
 
-  /* .users-like-modal &::-webkit-scrollbar {
-    width: '8px';
+  .engagement-scroll {
+    overflow-y: scroll;
   }
-  .users-like-modal &::-webkit-scrollbar-thumb {
-    background: '#F6C853';
-    border-radius: '4px';
+
+  .engagement-scroll::-webkit-scrollbar {
+    width: 8px;
   }
-  .users-like-modal &::-webkit-scrollbar-track {
-    background: 'transparent';
-  } */
+
+  .engagement-scroll::-webkit-scrollbar-track {
+    background: #24282d;
+  }
+
+  .engagement-scroll::-webkit-scrollbar-thumb {
+    background: #f6c853;
+    border-radius: 4px;
+  }
+
+  .engagement-scroll::-webkit-scrollbar-thumb:hover {
+    background: darkred;
+  }
 `;

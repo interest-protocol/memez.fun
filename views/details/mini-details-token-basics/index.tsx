@@ -95,7 +95,7 @@ const MiniDetailsTokenBasics: FC = () => {
           <LikeComponent
             revertOrder
             likeCounter={50}
-            disabled={isliked}
+            isLiked={isliked}
             handleLikes={handleLikes}
           />
         </Div>

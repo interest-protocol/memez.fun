@@ -3,7 +3,11 @@ import { FC } from 'react';
 
 import { FilterButtonItemProps } from './filter-button.types';
 
-const FilterButtonItem: FC<FilterButtonItemProps> = ({ title }) => {
+const FilterButtonItem: FC<FilterButtonItemProps> = ({ title, onClick }) => {
+  const handleClick = () => {
+    onClick(title);
+  };
+
   return (
     <Div
       p="0.5rem"
@@ -12,6 +16,7 @@ const FilterButtonItem: FC<FilterButtonItemProps> = ({ title }) => {
       cursor="pointer"
       transition="0.3s"
       borderRadius="0.8rem"
+      onClick={handleClick}
       nHover={{ backgroundColor: '#2f343bce' }}
     >
       {title}

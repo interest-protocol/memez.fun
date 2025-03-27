@@ -1,13 +1,16 @@
 import { Button, Div } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
 import { FC, useId, useState } from 'react';
+import { v4 } from 'uuid';
 
 import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
 import { ArrowDownSVG, FiltersSVG } from '../svg';
+import { SORT_OPTIONS } from './filter-button.data';
 import FilterButtonItem from './filter-button-item';
 
 const FilterButton: FC = () => {
+  const [currentFilter, setCurrentFilter] = useState('Relevance');
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
   const boxId = useId();
 
@@ -29,6 +32,13 @@ const FilterButton: FC = () => {
   const handleOnClick = () => {
     setIsDropDownOpen(!isDropdownOpen);
   };
+
+  const handleFilterSelect = (value: string) => {
+    setCurrentFilter(value);
+    setIsDropDownOpen(false);
+  };
+
+  const filteredItems = SORT_OPTIONS.filter((el) => el.label !== currentFilter);
 
   const dropdownRef = useClickOutsideListenerRef<HTMLDivElement>(closeDropdown);
 
@@ -55,7 +65,7 @@ const FilterButton: FC = () => {
           justifyContent="center"
           display={['none', 'none', 'none', 'flex', 'flex']}
         >
-          Relevance
+          {currentFilter}
           <ArrowDownSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
         </Div>
         <Div display={['flex', 'flex', 'flex', 'none', 'none']}>
@@ -80,11 +90,13 @@ const FilterButton: FC = () => {
               position="absolute"
               flexDirection="column"
             >
-              <FilterButtonItem title="item" />
-              <FilterButtonItem title="item" />
-              <FilterButtonItem title="item" />
-              <FilterButtonItem title="item" />
-              <FilterButtonItem title="item" />
+              {filteredItems.map((el) => (
+                <FilterButtonItem
+                  key={v4()}
+                  title={el.label}
+                  onClick={handleFilterSelect}
+                />
+              ))}
             </Div>
           </motion.div>
         </div>

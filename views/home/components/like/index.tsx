@@ -1,5 +1,5 @@
 import { Div, P } from '@stylin.js/elements';
-import { color, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FC, MouseEvent } from 'react';
 
 import { HeartSVG } from '@/components/svg';
@@ -7,20 +7,11 @@ import { HeartSVG } from '@/components/svg';
 import { LikeComponentProps } from './like.types';
 
 export const LikeComponent: FC<LikeComponentProps> = ({
-  disabled,
+  isLiked,
   likeCounter,
   handleLikes,
   revertOrder,
 }) => {
-  const Motion = motion.create(Div);
-
-  const variants = {
-    hover: {
-      boxShadow: `${disabled ? 'disabled' : `${color}14`} 0px 0px 0px 0.625rem`,
-    },
-    withoutHover: { boxShadow: 'unset' },
-  };
-
   return (
     <Div
       p="0.5rem"
@@ -32,33 +23,35 @@ export const LikeComponent: FC<LikeComponentProps> = ({
       justifyItems="center"
       flexDirection={revertOrder ? 'row-reverse' : 'row'}
     >
-      <P fontSize="0.8rem">{likeCounter}</P>
-      <Motion
-        p="0.5rem"
-        width="2rem"
-        display="flex"
-        bg="#24282D"
-        height="2rem"
-        alignItems="center"
-        borderRadius="50%"
-        variants={variants}
-        justifyContent="center"
-        onClick={(e: MouseEvent<HTMLDivElement>) => handleLikes(e)}
-        initial="withoutHover"
-        aria-label="likeComponent"
-        transition={{ duration: 0.5 }}
-        cursor={disabled ? 'not-allowed' : 'pointer'}
-        nHover={{
+      <P fontSize="0.8rem" minWidth="1.5rem" textAlign="center">
+        {likeCounter}
+      </P>
+      <motion.div
+        style={{
+          width: '2rem',
+          height: '2rem',
+          display: 'flex',
+          padding: '0.5rem',
+          cursor: 'pointer',
+          borderRadius: '50%',
+          alignItems: 'center',
+          background: '#24282D',
+          justifyContent: 'center',
+        }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        whileTap={{ scale: 2.2 }}
+        whileHover={{
           background: '#131419',
         }}
+        onClick={(e: MouseEvent<HTMLDivElement>) => handleLikes(e)}
       >
         <HeartSVG
           width="100%"
           maxWidth="100%"
           maxHeight="100%"
-          isChecked={disabled}
+          isChecked={isLiked}
         />
-      </Motion>
+      </motion.div>
     </Div>
   );
 };

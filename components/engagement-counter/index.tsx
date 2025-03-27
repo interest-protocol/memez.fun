@@ -18,7 +18,6 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
         p="1.5rem"
         bg="#0A090D"
         display="flex"
-        overflowY="scroll"
         height="26.375rem"
         borderRadius="1rem"
         flexDirection="column"
@@ -60,7 +59,14 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
             <TimesSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
           </Div>
         </Div>
-        <Div gap="1rem" pt="1rem" display="flex" flexDirection="column">
+        <Div
+          gap="1rem"
+          pt="1rem"
+          display="flex"
+          overflowY="scroll"
+          flexDirection="column"
+          className="engagement-scroll"
+        >
           {DATA.map(({ userName, userAvatar }) => (
             <UserLikeItem
               key={v4()}

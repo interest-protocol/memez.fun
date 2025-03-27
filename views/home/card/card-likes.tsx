@@ -10,13 +10,15 @@ const CardLikes: FC = () => {
   const handleLike = (e: MouseEvent<HTMLDivElement>) => {
     setIsLiked(not);
     e.stopPropagation();
-    setLikeCounter((likeCounter) => likeCounter + 1);
+    setLikeCounter((likeCounter) =>
+      isLiked ? likeCounter - 1 : likeCounter + 1
+    );
   };
   return (
     <LikeComponent
       likeCounter={likeCounter}
       handleLikes={handleLike}
-      disabled={isLiked}
+      isLiked={isLiked}
     />
   );
 };

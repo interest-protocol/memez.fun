@@ -1,4 +1,6 @@
 import { Div, P, Span } from '@stylin.js/elements';
+import { not } from 'ramda';
+import { useState } from 'react';
 import { useWatch } from 'react-hook-form';
 
 import {
@@ -20,6 +22,16 @@ const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
 
   const formValues = useWatch<DetailsForm>();
+
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [likeCounter, setLikeCounter] = useState<number>(100);
+
+  const handleLike = () => {
+    setIsLiked(not);
+    setLikeCounter((likeCounter) =>
+      isLiked ? likeCounter - 1 : likeCounter + 1
+    );
+  };
 
   return (
     <Div
@@ -43,7 +55,12 @@ const DetailsTokenBasics = () => {
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
           {formValues.name}
         </Span>
-        <LikeComponent revertOrder likeCounter={100} handleLikes={() => {}} />
+        <LikeComponent
+          revertOrder
+          isLiked={isLiked}
+          likeCounter={likeCounter}
+          handleLikes={handleLike}
+        />
       </Div>
       <TokenCardIcon imgSrc={formValues.tokenIcon as string} />
       <Div
