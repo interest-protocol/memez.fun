@@ -19,7 +19,6 @@ const AvatarGroup: FC<AvatarGroupProps> = ({ items }) => {
   };
 
   const handleAvatarClick = (e: MouseEvent<HTMLDivElement>) => {
-    if (items.length > MAX_ITEMS) return;
     e.stopPropagation();
   };
 
