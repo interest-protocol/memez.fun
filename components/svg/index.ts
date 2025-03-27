@@ -32,6 +32,7 @@ export { default as FilledBarChartSVG } from './filled-bar-chart';
 export { default as FilledHeartSVG } from './filled-heart';
 export { default as FiltersSVG } from './filters';
 export { default as FireSVG } from './fire';
+export { default as GlobeSVG } from './globe';
 export { default as GreenActionCardBackgroundSVG } from './green-action-card-background';
 export { default as HeartSVG } from './heart';
 export { default as HeroVectorSVG } from './hero-vector';

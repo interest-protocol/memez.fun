@@ -1,4 +1,4 @@
-import { DiscordSVG, Telegram, XSVG } from '@/components/svg';
+import { GlobeSVG, Telegram, XSVG } from '@/components/svg';
 
 export const SOCIAL = [
   {
@@ -7,8 +7,8 @@ export const SOCIAL = [
     link: '',
   },
   {
-    title: 'Discord',
-    Icon: DiscordSVG,
+    title: 'Website',
+    Icon: GlobeSVG,
     link: '',
   },
   {

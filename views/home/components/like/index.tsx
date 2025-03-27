@@ -10,6 +10,7 @@ export const LikeComponent: FC<LikeComponentProps> = ({
   disabled,
   likeCounter,
   handleLikes,
+  revertOrder,
 }) => {
   const Motion = motion.create(Div);
 
@@ -26,27 +27,29 @@ export const LikeComponent: FC<LikeComponentProps> = ({
       gap=".5rem"
       display="flex"
       color="#F6C853"
-      alignItems="center"
       borderRadius="1rem"
+      alignItems="center"
       justifyItems="center"
-      nHover={{
-        background: '#24282D',
-      }}
+      flexDirection={revertOrder ? 'row-reverse' : 'row'}
     >
       <P fontSize="0.8rem">{likeCounter}</P>
       <Motion
-        width="1rem"
+        p="0.5rem"
+        width="2rem"
         display="flex"
-        height="1rem"
+        bg="#24282D"
+        height="2rem"
+        placeItem="center"
         borderRadius="50%"
-        alignItems="center"
         variants={variants}
-        onClick={(e) => handleLikes(e as unknown as Event)}
+        onClick={(e: Event) => handleLikes(e)}
         initial="withoutHover"
-        justifyContent="center"
         aria-label="likeComponent"
         transition={{ duration: 0.5 }}
         cursor={disabled ? 'not-allowed' : 'pointer'}
+        nHover={{
+          background: '#131419',
+        }}
       >
         <HeartSVG
           width="100%"

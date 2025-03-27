@@ -2,8 +2,11 @@ import { Div, Img, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
 import { CopySVG, VerifiedSVG } from '@/components/svg';
+import { copyToClipboard } from '@/utils';
 
 const UserInfo: FC = () => {
+  const clipBoardSuccessMessage = 'Address copied to the clipboard';
+
   return (
     <Div
       display="flex"
@@ -69,7 +72,12 @@ const UserInfo: FC = () => {
           nHover={{ transform: 'scale(1.05)', color: '#F5B722' }}
         >
           <Span fontWeight="500">0x2::sui::SUI</Span>
-          <Div maxWidth="1rem" maxHeight="1rem" cursor="pointer">
+          <Div
+            maxWidth="1rem"
+            maxHeight="1rem"
+            cursor="pointer"
+            onClick={() => copyToClipboard(clipBoardSuccessMessage)}
+          >
             <CopySVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
           </Div>
         </Div>
