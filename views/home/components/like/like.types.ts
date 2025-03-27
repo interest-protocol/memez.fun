@@ -1,6 +1,7 @@
+import { MouseEvent } from 'react';
 export interface LikeComponentProps {
   disabled?: boolean;
   likeCounter: number;
-  handleLikes: (e: Event) => void;
+  handleLikes: (e: MouseEvent<HTMLDivElement>) => void;
   revertOrder?: boolean;
 }

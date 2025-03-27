@@ -1,6 +1,6 @@
 import { Div, P } from '@stylin.js/elements';
 import { color, motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 
 import { HeartSVG } from '@/components/svg';
 
@@ -39,10 +39,11 @@ export const LikeComponent: FC<LikeComponentProps> = ({
         display="flex"
         bg="#24282D"
         height="2rem"
-        placeItem="center"
+        alignItems="center"
         borderRadius="50%"
         variants={variants}
-        onClick={(e: Event) => handleLikes(e)}
+        justifyContent="center"
+        onClick={(e: MouseEvent<HTMLDivElement>) => handleLikes(e)}
         initial="withoutHover"
         aria-label="likeComponent"
         transition={{ duration: 0.5 }}
