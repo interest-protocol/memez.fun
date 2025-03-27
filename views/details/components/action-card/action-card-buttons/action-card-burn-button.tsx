@@ -18,11 +18,11 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
   };
 
   const fireIcons = [
-    { top: '-2rem', left: '0.5rem', size: '1.688rem' },
-    { top: '-1.6rem', left: '2.6rem', size: '1.313rem' },
-    { top: '-2rem', left: '3.8rem', size: '1.688rem' },
-    { top: '-2.5rem', left: '5.7rem', size: '2.25rem' },
-    { top: '-2.5rem', right: '0.8rem', size: '2.25rem' },
+    { top: '-1.6rem', left: '0.5rem', size: '1.688rem' },
+    { top: '-1.2rem', left: '2.6rem', size: '1.313rem' },
+    { top: '-1.6rem', left: '3.8rem', size: '1.688rem' },
+    { top: '-2.1rem', left: '5.7rem', size: '2.25rem' },
+    { top: '-2.1rem', right: '0.8rem', size: '2.25rem' },
   ];
 
   return (
@@ -49,10 +49,10 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
               style={{
-                position: 'absolute',
                 top,
                 left,
                 right,
+                position: 'absolute',
               }}
             >
               <FireSVG maxHeight={size} maxWidth={size} width={size} />
@@ -60,6 +60,7 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
           ))}
       </AnimatePresence>
       <Button
+        zIndex="2"
         px="1rem"
         width="100%"
         gap="0.5rem"
@@ -74,7 +75,7 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
         background="#E85965"
         borderRadius="1.5rem"
         justifyContent="center"
-        nHover={{ marginTop: '-0.5rem' }}
+        nHover={{ transform: 'translateY(-0.5rem)' }}
       >
         Burn
       </Button>
