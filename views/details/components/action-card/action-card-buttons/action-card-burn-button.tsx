@@ -75,7 +75,7 @@ const ActionCardBurButton: FC<ActionCardButtonProps> = ({ onClick }) => {
         background="#E85965"
         borderRadius="1.5rem"
         justifyContent="center"
-        nHover={{ transform: 'translateY(-0.5rem)' }}
+        transform={isButtonHover ? 'translateY(-0.5rem)' : ''}
       >
         Burn
       </Button>
