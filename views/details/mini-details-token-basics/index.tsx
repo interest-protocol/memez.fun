@@ -1,20 +1,21 @@
 import { Div, P, Span } from '@stylin.js/elements';
+import { not } from 'ramda';
 import { FC, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 
 import AvatarGroup from '@/components/avatar-group';
-import Like from '@/components/like';
 import RangeBar from '@/components/range';
 import {
-  CetusSVG,
   ChevronUpSVG,
   ClipBoardPaperSVG,
   CubeSVG,
   DollarSignSVG,
+  SuiLogoSVG,
   VerticalCoinSVG,
 } from '@/components/svg';
 import TokenCardIcon from '@/components/token-icon-card';
 import { copyToClipboard } from '@/utils';
+import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
@@ -22,11 +23,16 @@ import DetailsTokenBasicsSocials from '../details-token-basics/details-token-bas
 const MiniDetailsTokenBasics: FC = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
   const [showMoreDetails, setShowMoreDetails] = useState(false);
+  const [isliked, setIsLiked] = useState<boolean>(false);
 
   const formValues = useWatch<DetailsForm>();
 
   const handleClick = () => {
     setShowMoreDetails(!showMoreDetails);
+  };
+
+  const handleLikes = () => {
+    setIsLiked(not);
   };
 
   return (
@@ -85,7 +91,12 @@ const MiniDetailsTokenBasics: FC = () => {
               </Div>
             </Div>
           </Div>
-          <Like invertOrder isLiked />
+          <LikeComponent
+            revertOrder
+            likeCounter={50}
+            disabled={isliked}
+            handleLikes={handleLikes}
+          />
         </Div>
         <Div
           p="1rem"
@@ -136,6 +147,7 @@ const MiniDetailsTokenBasics: FC = () => {
               py="0.8rem"
               display="flex"
               color="#fff"
+              bg="red"
               justifyContent="space-between"
             >
               <Div display="flex" alignItems="center" gap="0.3rem">
@@ -157,7 +169,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Dex:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <CetusSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
+                <SuiLogoSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
                 <Span fontSize="1.25rem">{formValues.dex}</Span>
               </Div>
             </Div>
@@ -206,9 +218,9 @@ const MiniDetailsTokenBasics: FC = () => {
                   justifyContent="center"
                 >
                   <VerticalCoinSVG
-                    width="0.8rem"
-                    maxWidth="0.8rem"
-                    maxHeight="0.8rem"
+                    width="0.625rem"
+                    maxWidth="0.625rem"
+                    maxHeight="0.625rem"
                   />
                 </Div>
                 <P fontSize="0.875rem">Quote coin:</P>

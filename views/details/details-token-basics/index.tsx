@@ -1,7 +1,6 @@
 import { Div, P, Span } from '@stylin.js/elements';
 import { useWatch } from 'react-hook-form';
 
-import Like from '@/components/like';
 import {
   CetusSVG,
   ClipBoardSVG,
@@ -11,6 +10,7 @@ import {
 } from '@/components/svg';
 import TokenCardIcon from '@/components/token-icon-card';
 import { copyToClipboard } from '@/utils';
+import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsFooter from './details-token-basics-footer';
@@ -43,7 +43,7 @@ const DetailsTokenBasics = () => {
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
           {formValues.name}
         </Span>
-        <Like invertOrder isLiked />
+        <LikeComponent revertOrder likeCounter={100} handleLikes={() => {}} />
       </Div>
       <TokenCardIcon imgSrc={formValues.tokenIcon as string} />
       <Div
@@ -71,7 +71,7 @@ const DetailsTokenBasics = () => {
         color="#FBFBFB"
         justifyContent="center"
       >
-        <P fontSize="1rem">Created by • {formValues.createdBy}</P>
+        <P fontSize="1rem">Created by• {formValues.createdBy}</P>
       </Div>
       <DetailsTokenBasicsSocials />
       <Div pt="5rem" pb="1.2rem" display="flex" justifyContent="center">

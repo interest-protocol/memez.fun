@@ -1,5 +1,5 @@
 import { Div } from '@stylin.js/elements';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import { v4 } from 'uuid';
 
 import { useModal } from '@/hooks/use-modal';
@@ -12,12 +12,12 @@ const AvatarGroup: FC = () => {
   const MAX_ITEMS = 5;
   const { setContent, onClose } = useModal();
 
-  const handleClick = (e: Event) => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setContent(<EngagementCounterModal title="Likes" />, { onClose });
   };
 
-  const handleAvatarClick = (e: Event) => {
+  const handleAvatarClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
@@ -27,7 +27,7 @@ const AvatarGroup: FC = () => {
         <Avatar
           title={userName}
           imgSrc={userAvatar}
-          onClick={(e) => handleAvatarClick(e as unknown as MouseEvent)}
+          onClick={(e) => handleAvatarClick(e)}
           isVerified
           key={v4()}
         />
@@ -41,7 +41,7 @@ const AvatarGroup: FC = () => {
           fontSize="0.7rem"
           borderRadius="50%"
           alignItems="center"
-          onClick={(e) => handleClick(e as unknown as MouseEvent)}
+          onClick={(e) => handleClick(e)}
           justifyContent="center"
           border="1px solid #494C54"
         >

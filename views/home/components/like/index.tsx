@@ -1,6 +1,6 @@
 import { Div, P } from '@stylin.js/elements';
 import { color, motion } from 'framer-motion';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 
 import { HeartSVG } from '@/components/svg';
 
@@ -10,6 +10,7 @@ export const LikeComponent: FC<LikeComponentProps> = ({
   disabled,
   likeCounter,
   handleLikes,
+  revertOrder,
 }) => {
   const Motion = motion.create(Div);
 
@@ -26,27 +27,30 @@ export const LikeComponent: FC<LikeComponentProps> = ({
       gap=".5rem"
       display="flex"
       color="#F6C853"
-      alignItems="center"
       borderRadius="1rem"
+      alignItems="center"
       justifyItems="center"
-      nHover={{
-        background: '#24282D',
-      }}
+      flexDirection={revertOrder ? 'row-reverse' : 'row'}
     >
       <P fontSize="0.8rem">{likeCounter}</P>
       <Motion
-        width="1rem"
+        p="0.5rem"
+        width="2rem"
         display="flex"
-        height="1rem"
-        borderRadius="50%"
+        bg="#24282D"
+        height="2rem"
         alignItems="center"
+        borderRadius="50%"
         variants={variants}
-        onClick={(e) => handleLikes(e as unknown as Event)}
-        initial="withoutHover"
         justifyContent="center"
+        onClick={(e: MouseEvent<HTMLDivElement>) => handleLikes(e)}
+        initial="withoutHover"
         aria-label="likeComponent"
         transition={{ duration: 0.5 }}
         cursor={disabled ? 'not-allowed' : 'pointer'}
+        nHover={{
+          background: '#131419',
+        }}
       >
         <HeartSVG
           width="100%"

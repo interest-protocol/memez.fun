@@ -24,7 +24,7 @@ const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
       }}
     >
       <Div gap="1rem" display="flex" alignItems="center">
-        <Avatar imgSrc={userAvatar} size="medium" isVerified />
+        <Avatar imgSrc={userAvatar} title={userName} size="medium" isVerified />
         <Span color="#E4E7EB" fontSize="1rem">
           {userName}
         </Span>

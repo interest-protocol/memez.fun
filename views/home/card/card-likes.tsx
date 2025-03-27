@@ -1,5 +1,5 @@
 import { not } from 'ramda';
-import { FC, useState } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 
 import LikeComponent from '../components/like';
 
@@ -7,7 +7,7 @@ const CardLikes: FC = () => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likeCounter, setLikeCounter] = useState<number>(5);
 
-  const handleLike = (e: Event) => {
+  const handleLike = (e: MouseEvent<HTMLDivElement>) => {
     setIsLiked(not);
     e.stopPropagation();
     setLikeCounter((likeCounter) => likeCounter + 1);

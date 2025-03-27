@@ -28,6 +28,9 @@ const SocialLink: FC<SocialLinkProps> = ({
         justifyContent="center"
         color={isDisabled ? '#90939D66' : '#fff'}
         borderColor={isDisabled ? '#90939D66' : '#494C54'}
+        nHover={{
+          borderColor: '#202b37',
+        }}
       >
         <Icon maxHeight="1.5rem" maxWidth="1.5rem" width="1.5rem" />
       </Div>
