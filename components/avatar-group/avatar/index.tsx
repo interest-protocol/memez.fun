@@ -24,11 +24,7 @@ const Avatar: FC<AvatarProps> = ({
   const avatarSize = (size && sizeMap[size]) || sizeMap.small;
 
   return (
-    <Div
-      onClick={(e) => onClick(e as unknown as MouseEvent)}
-      width={avatarSize}
-      position="relative"
-    >
+    <Div onClick={onClick} width={avatarSize} position="relative">
       <Div
         display="flex"
         width="1.5rem"
@@ -38,7 +34,7 @@ const Avatar: FC<AvatarProps> = ({
         alignItems="center"
         justifyContent="center"
       >
-        <Img src={imgSrc} width="100%" height="100%" />
+        <Img src={imgSrc} alt={title} width="100%" height="100%" />
       </Div>
       {isVerified && (
         <Div
