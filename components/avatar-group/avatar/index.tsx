@@ -24,7 +24,7 @@ const Avatar: FC<AvatarProps> = ({
   const avatarSize = (size && sizeMap[size]) || sizeMap.small;
 
   return (
-    <Div onClick={onClick} width={avatarSize} position="relative">
+    <Div onClick={() => onClick} width={avatarSize} position="relative">
       <Div
         display="flex"
         width="1.5rem"

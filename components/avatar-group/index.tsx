@@ -27,7 +27,7 @@ const AvatarGroup: FC = () => {
         <Avatar
           title={userName}
           imgSrc={userAvatar}
-          onClick={(e) => handleAvatarClick(e as unknown as MouseEvent)}
+          onClick={(e: Event) => handleAvatarClick(e)}
           isVerified
           key={v4()}
         />

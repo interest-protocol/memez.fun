@@ -1,7 +1,7 @@
 export interface AvatarProps {
   title: string;
   imgSrc?: string;
-  onClick?: () => void;
+  onClick?: (e: Event) => void;
   isVerified?: boolean;
   size?: 'small' | 'medium';
 }
