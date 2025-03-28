@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 
-export const validationSchema = yup.object().shape({
+export const validationSchema = yup.object({
   dex: yup.string().required('Dex is required'),
-  step: yup.number().required('Step is required'),
   name: yup.string().required('Name is required'),
   imageUrl: yup
     .string()
@@ -14,21 +13,11 @@ export const validationSchema = yup.object().shape({
     .string()
     .matches(/^\d+$/, 'Must be a number')
     .required('Supply is required'),
-  website: yup
-    .string()
-    .url('Must be a valid URL')
-    .required('Website is required'),
-  twitter: yup
-    .string()
-    .url('Must be a valid URL')
-    .required('Twitter is required'),
-  telegram: yup
-    .string()
-    .url('Must be a valid URL')
-    .required('Telegram is required'),
-  success: yup.boolean().required('This field is required'),
+  website: yup.string().url('Must be a valid URL'),
+  twitter: yup.string().url('Must be a valid URL'),
+  telegram: yup.string().url('Must be a valid URL'),
 
-  raise: yup.object().shape({
+  raise: yup.object({
     value: yup
       .string()
       .matches(/^\d+$/, 'Must be a number')
@@ -39,15 +28,12 @@ export const validationSchema = yup.object().shape({
       .required('Percentage is required'),
   }),
 
-  vesting: yup.object().shape({
+  vesting: yup.object({
     period: yup.string().required('Period is required'),
     quantity: yup
       .string()
       .matches(/^\d+$/, 'Must be a number')
       .required('Quantity is required'),
-    coinAmount: yup
-      .string()
-      .matches(/^\d+$/, 'Must be a number')
-      .required('Coin amount is required'),
+    coinAmount: yup.string().matches(/^\d+$/, 'Must be a number'),
   }),
 });

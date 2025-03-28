@@ -8,7 +8,10 @@ import { XSVG } from '@/components/svg';
 import { SignInFormProps } from './sign-in.types';
 
 const SignInForm: FC = () => {
-  const { register } = useFormContext<SignInFormProps>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<SignInFormProps>();
   return (
     <Div maxWidth={['90vw', '90vw', '90vw', '33rem']} mx="auto" mt="3rem">
       <Div
@@ -63,14 +66,18 @@ const SignInForm: FC = () => {
           flexDirection="column"
         >
           <InputField
-            tooltipDescription="Fill username"
             placeholder="username"
             {...register('username')}
+            tooltipDescription="Fill username"
+            status={errors.username && 'error'}
+            supportingText={errors.username?.message}
           />
           <InputField
-            tooltipDescription="Fill password"
             placeholder="password"
             {...register('password')}
+            tooltipDescription="Fill password"
+            status={errors.password && 'error'}
+            supportingText={errors.password?.message}
           />
         </Div>
       </Div>

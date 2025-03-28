@@ -2,9 +2,9 @@ import { InputProps } from '@stylin.js/elements';
 import { ReactNode, TextareaHTMLAttributes } from 'react';
 
 export interface CreateCoinFormProps {
+  name: string;
   label: string;
   placeholder: string;
-  name: string;
 }
 
 export type InputFieldProps = InputProps & {
@@ -61,16 +61,16 @@ export interface CreateCoinHeaderProps {
 
 export interface CreateCoinForm {
   dex: string;
-  step: number;
+  step?: number;
+  success?: boolean;
   name: string;
   imageUrl: string;
   description: string;
   quoteCoin: string;
   supply: string;
-  website: string;
-  twitter: string;
-  telegram: string;
-  success: boolean;
+  website?: string;
+  twitter?: string;
+  telegram?: string;
   raise: {
     value: string;
     percentage: string;
@@ -78,7 +78,7 @@ export interface CreateCoinForm {
   vesting: {
     period: string;
     quantity: string;
-    coinAmount: string;
+    coinAmount?: string;
   };
 }
 
