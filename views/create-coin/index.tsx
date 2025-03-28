@@ -5,7 +5,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { Layout } from '@/components';
 
 import { CreateCoinViewStep } from './create-coin.data';
-import { CreateCoinForm } from './create-coin.types';
+import { CreateCoinForm, CreateCoinStepEnum } from './create-coin.types';
 import CreateCoinButtons from './create-coin-buttons';
 import CreateCoinSuccess from './create-coin-success';
 import CreateCoinHeader from './header';
@@ -23,7 +23,7 @@ const CreateCoin: FC = () => {
         <Div maxWidth={['90vw', '90vw', '90vw', '33rem']} mx="auto">
           <CreateCoinHeader />
           <Div>
-            {CreateCoinViewStep[currentStep]}
+            {CreateCoinViewStep[currentStep ?? CreateCoinStepEnum.CoinDetails]}
             <CreateCoinButtons />
           </Div>
         </Div>

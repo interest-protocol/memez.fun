@@ -3,12 +3,14 @@ import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { CreateCoinHeaderData } from './create-coin.data';
-import { CreateCoinForm } from './create-coin.types';
+import { CreateCoinForm, CreateCoinStepEnum } from './create-coin.types';
 
 const CreateCoinHeader: FC = () => {
   const { control } = useFormContext<CreateCoinForm>();
 
   const currentStep = useWatch({ control, name: 'step' });
+
+  const hasCurrentStep = currentStep || CreateCoinStepEnum.CoinDetails;
 
   return (
     <>
@@ -27,7 +29,9 @@ const CreateCoinHeader: FC = () => {
             borderRadius="100px"
             nLastChild={{ marginRight: 0 }}
             bg={currentStep == index ? '#F6C853' : '#303238'}
-            borderColor={currentStep - 1 !== index ? '#F6C853' : 'transparent'}
+            borderColor={
+              hasCurrentStep - 1 !== index ? '#F6C853' : 'transparent'
+            }
           />
         ))}
       </Div>
@@ -40,16 +44,16 @@ const CreateCoinHeader: FC = () => {
           textAlign="center"
           textTransform="capitalize"
         >
-          {CreateCoinHeaderData[currentStep].title}
+          {CreateCoinHeaderData[hasCurrentStep].title}
         </H1>
-        {CreateCoinHeaderData[currentStep].description && (
+        {CreateCoinHeaderData[hasCurrentStep].description && (
           <P
             fontSize="1rem"
             color="#90939D"
             textAlign="center"
             lineHeight="1.5rem"
           >
-            {CreateCoinHeaderData[currentStep].description}
+            {CreateCoinHeaderData[hasCurrentStep].description}
           </P>
         )}
       </Div>

@@ -10,7 +10,7 @@ import { useDialog } from '@/hooks/use-dialog';
 import { SignInFormProps } from './sign-in.types';
 
 const SignInButton: FC = () => {
-  const { setValue } = useFormContext<SignInFormProps>();
+  const { setValue, trigger } = useFormContext<SignInFormProps>();
   const { dialog, handleClose } = useDialog();
   const handleOpenConnectModal = useConnectModal();
 
@@ -29,61 +29,70 @@ const SignInButton: FC = () => {
   };
 
   const handleSignIn = async () => {
-    await dialog.promise(handleCreateProfile(), {
-      success: () => ({
-        title: 'Sign-in successful',
-        button: (
-          <Button
-            all="unset"
-            py="1rem"
-            px="1.5rem"
-            flex="2"
-            bg="#F5B722"
-            color="#000000"
-            cursor="pointer"
-            textAlign="center"
-            borderRadius="1rem"
-          >
-            You will&apos;be redirect to connect your wallet in{' '}
-            <DialogCountdown
-              timeout={5000}
-              onComplete={handleOpenConnectModal}
-            />{' '}
-            sec
-          </Button>
-        ),
-        ghostButton: (
-          <Button
-            all="unset"
-            color="#F5B722"
-            cursor="pointer"
-            textAlign="center"
-            fontSize="0.825rem"
-            onClick={handleOpenConnectModal}
-            nHover={{ textDecoration: 'underline' }}
-          >
-            Connect your wallet now
-          </Button>
-        ),
-        message: 'Now connect your wallet do see all the function',
-      }),
-      loading: () => ({
-        Icon: <LoaderSVG />,
-        title: 'Signing...',
-        message: 'Please wait...',
-      }),
-      error: (e) => ({
-        title: 'Oops! You can not sign in!',
-        button: { label: 'Try again', onClick: handleClose },
-        message: (
-          e.message || 'Make sure you fill every field correctly and try again.'
-        ).replace('Invariant failed: ', ''),
-        ghostButton: {
-          label: 'Do not want to try again!',
-          onClick: handleClose,
-        },
-      }),
-    });
+    let fieldsToValidate: (keyof SignInFormProps)[] = [];
+
+    fieldsToValidate = ['username', 'password'];
+    const isValid = await trigger(fieldsToValidate);
+
+    if (isValid) {
+      await dialog.promise(handleCreateProfile(), {
+        success: () => ({
+          title: 'Sign-in successful',
+          button: (
+            <Button
+              all="unset"
+              py="1rem"
+              px="1.5rem"
+              flex="2"
+              bg="#F5B722"
+              color="#000000"
+              cursor="pointer"
+              textAlign="center"
+              borderRadius="1rem"
+            >
+              You will&apos;be redirect to connect your wallet in{' '}
+              <DialogCountdown
+                timeout={5000}
+                onComplete={handleOpenConnectModal}
+              />{' '}
+              sec
+            </Button>
+          ),
+          ghostButton: (
+            <Button
+              all="unset"
+              color="#F5B722"
+              cursor="pointer"
+              textAlign="center"
+              fontSize="0.825rem"
+              onClick={handleOpenConnectModal}
+              nHover={{ textDecoration: 'underline' }}
+            >
+              Connect your wallet now
+            </Button>
+          ),
+          message: 'Now connect your wallet do see all the function',
+        }),
+        loading: () => ({
+          Icon: <LoaderSVG />,
+          title: 'Signing...',
+          message: 'Please wait...',
+        }),
+        error: (e) => ({
+          title: 'Oops! You can not sign in!',
+          button: { label: 'Try again', onClick: handleClose },
+          message: (
+            e.message ||
+            'Make sure you fill every field correctly and try again.'
+          ).replace('Invariant failed: ', ''),
+          ghostButton: {
+            label: 'Do not want to try again!',
+            onClick: handleClose,
+          },
+        }),
+      });
+    }
+    if (!isValid) return;
   };
 
   return (
