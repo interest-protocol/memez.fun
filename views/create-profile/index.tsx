@@ -58,14 +58,14 @@ const CreateProfile: FC = () => {
                 description={errors.imageUrl?.message}
               />
               <InputField
-                placeholder="username"
+                placeholder="Username"
                 {...register('username')}
                 tooltipDescription="username"
                 status={errors.username && 'error'}
                 supportingText={errors.username?.message}
               />
               <InputField
-                placeholder="password"
+                placeholder="Password"
                 {...register('password')}
                 tooltipDescription="username"
                 status={errors.password && 'error'}

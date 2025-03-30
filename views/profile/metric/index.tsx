@@ -38,7 +38,9 @@ const Metric: FC<MetricProps> = ({
         }}
         fontSize={['1rem', '1rem', '1rem', '1.25rem']}
       >
-        <Span lineHeight="1.75rem">{followers}</Span>
+        <Span fontWeight="700" lineHeight="1.75rem">
+          {followers}
+        </Span>
         <Span
           lineHeight="1.375rem"
           fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
@@ -47,49 +49,49 @@ const Metric: FC<MetricProps> = ({
         </Span>
       </Div>
       <Div
-        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
         display="flex"
-        flexDirection="column"
         alignItems="center"
+        flexDirection="column"
+        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
       >
         <Span lineHeight="1.75rem" fontWeight="700">
           {following}
         </Span>
         <Span
-          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
           lineHeight="1.375rem"
+          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
         >
           Following
         </Span>
       </Div>
       <Div
-        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
         display="flex"
-        flexDirection="column"
         alignItems="center"
+        flexDirection="column"
+        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
       >
         <Span lineHeight="1.75rem" fontWeight="700">
           {coinsOwned}
         </Span>
         <Span
-          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
           lineHeight="1.375rem"
+          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
         >
           Coins Owned
         </Span>
       </Div>
       <Div
-        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
         display="flex"
-        flexDirection="column"
         alignItems="center"
+        flexDirection="column"
+        fontSize={['1rem', '1rem', '1rem', '1.25rem']}
       >
         <Span lineHeight="1.75rem" fontWeight="700">
           {totalValueCoin}
         </Span>
         <Span
-          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
           lineHeight="1.375rem"
+          fontSize={['0.75rem', '0.75rem', '0.75rem', '0.875rem']}
         >
           Total Value Coin
         </Span>
