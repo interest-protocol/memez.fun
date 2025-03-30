@@ -14,24 +14,33 @@ const Avatar: FC<AvatarProps> = ({
   const sizeMap = {
     small: '1.5rem',
     medium: '2rem',
+    large: '2.75rem',
+  };
+
+  const verifiedSizeMap = {
+    small: '1rem',
+    medium: '1rem',
+    large: '1rem',
   };
 
   const verifiedPosition = {
-    small: '-0.4rem',
+    small: '-0.3rem',
     medium: '0rem',
+    large: '-0.3rem',
   };
 
-  const avatarSize = (size && sizeMap[size]) || sizeMap.small;
+  const avatarSize = sizeMap[size] || sizeMap.small;
+  const verifiedSize = verifiedSizeMap[size] || verifiedSizeMap.small;
 
   return (
-    <Div onClick={() => onClick} width={avatarSize} position="relative">
+    <Div onClick={onClick} width={avatarSize} position="relative">
       <Div
         display="flex"
-        width="1.5rem"
-        height="1.5rem"
         overflow="hidden"
+        width={avatarSize}
         borderRadius="50%"
         alignItems="center"
+        height={avatarSize}
         justifyContent="center"
       >
         <Img src={imgSrc} alt={title} width="100%" height="100%" />
@@ -41,9 +50,13 @@ const Avatar: FC<AvatarProps> = ({
           top="-0.2rem"
           color="#F6C853"
           position="absolute"
-          right={(size && verifiedPosition[size]) || '0rem'}
+          right={verifiedPosition[size] || '0rem'}
         >
-          <VerifiedSVG maxHeight="1rem" maxWidth="1rem" width="1rem" />
+          <VerifiedSVG
+            width={verifiedSize}
+            maxWidth={verifiedSize}
+            maxHeight={verifiedSize}
+          />
         </Div>
       )}
     </Div>

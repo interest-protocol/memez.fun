@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export const createCoinValidationSchema = yup.object({
   dex: yup.string().required('Dex is required'),
   name: yup.string().required('Name is required'),
-  imageUrl: yup.string().required('Image is required'),
+  imageUrl: yup.string().required('Avatar is required'),
   description: yup.string().required('Description is required'),
   quoteCoin: yup.string().required('Quote coin is required'),
   supply: yup
