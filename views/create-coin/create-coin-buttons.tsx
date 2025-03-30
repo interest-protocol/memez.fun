@@ -69,7 +69,7 @@ const CreateCoinButtons: FC = () => {
     let fieldsToValidate: (keyof CreateCoinForm)[] = [];
 
     if (currentStep === CreateCoinStepEnum.CoinDetails) {
-      fieldsToValidate = ['name', 'description', 'dex'];
+      fieldsToValidate = ['name', 'description', 'dex', 'imageUrl'];
     } else if (currentStep === CreateCoinStepEnum.DexSocialMedia) {
       fieldsToValidate = [
         'quoteCoin',

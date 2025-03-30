@@ -34,7 +34,7 @@ const CreateCoinDetailsStep: FC = () => {
         <UploadImage
           name="imageUrl"
           status={errors.imageUrl && 'error'}
-          description={errors.name?.message}
+          description={errors.imageUrl?.message}
         />
         <InputField
           placeholder="Coin name"

@@ -1,13 +1,17 @@
 import { Button, Div, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
 import { Routes, RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
+import { CreateProfileFormProps } from '@/views/create-profile/create-profile.types';
 
 const EditProfileModalButton: FC = () => {
+  const { trigger } = useFormContext<CreateProfileFormProps>();
+
   const { dialog, handleClose } = useDialog();
   const { push } = useRouter();
   const handleCreateProfile = () => {
@@ -25,6 +29,10 @@ const EditProfileModalButton: FC = () => {
   };
 
   const handleEditProfiel = async () => {
+    const isValid = await trigger();
+
+    if (!isValid) return;
+
     await dialog.promise(handleCreateProfile(), {
       success: () => ({
         title: 'Profile Edited',

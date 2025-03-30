@@ -8,13 +8,13 @@ import {
   CreateCoinForm,
   CreateCoinStepEnum,
 } from '@/views/create-coin/create-coin.types';
-import { validationSchema } from '@/views/create-coin/steps/create-coin.validations';
+import { createCoinValidationSchema } from '@/views/create-coin/steps/create-coin.validations';
 
 const CreateCoinPage: NextPage = () => {
   const form = useForm<CreateCoinForm>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(createCoinValidationSchema),
     defaultValues: {
       step: CreateCoinStepEnum.CoinDetails,
       vesting: {

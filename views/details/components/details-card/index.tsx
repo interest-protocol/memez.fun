@@ -22,7 +22,7 @@ const DetailsCard: FC<DetailsCardProps> = ({
       border="1px solid #24282D"
       justifyContent="space-between"
     >
-      <Div display="flex" justifyContent="space-between">
+      <Div gap="0.5rem" display="flex">
         {Icon && (
           <Div
             width="2rem"

@@ -20,13 +20,13 @@ const CreateProfile: FC = () => {
       <Div
         mx="auto"
         minHeight="70vh"
-        maxWidth={['90vw', '90vw', '90vw', '33rem']}
+        maxWidth={['90vw', '90vw', '90vw', '28rem', '28rem']}
       >
         <Div my={['1.25rem', '1.25rem', '1.25rem', '5rem']}>
           <H1
             my="0.5rem"
-            color="#E4E7EB"
             fontWeight="500"
+            color="#E4E7EB"
             textAlign="center"
             textTransform="capitalize"
             fontSize={['1.5rem', '1.5rem', '1.5rem', '2rem']}
