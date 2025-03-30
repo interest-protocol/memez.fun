@@ -1,16 +1,21 @@
 import { Button, Div, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
 import { Routes, RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
 
+import { CreateProfileFormProps } from './create-profile.types';
+
 const CreateProfileButton: FC = () => {
+  const { trigger } = useFormContext<CreateProfileFormProps>();
+
   const { dialog, handleClose } = useDialog();
   const { push } = useRouter();
-  const handleCreateProfile = () => {
+  const handleCreateProfile = async () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const isSuccess = Math.random() > 0.5;
@@ -25,6 +30,10 @@ const CreateProfileButton: FC = () => {
   };
 
   const handleAuth = async () => {
+    const isValid = await trigger();
+
+    if (!isValid) return;
+
     await dialog.promise(handleCreateProfile(), {
       success: () => ({
         title: 'Account created',

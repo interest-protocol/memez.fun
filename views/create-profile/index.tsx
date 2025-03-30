@@ -10,7 +10,10 @@ import { CreateProfileFormProps } from './create-profile.types';
 import CreateProfileButton from './create-profile-button';
 
 const CreateProfile: FC = () => {
-  const { register } = useFormContext<CreateProfileFormProps>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<CreateProfileFormProps>();
 
   return (
     <Layout>
@@ -49,17 +52,32 @@ const CreateProfile: FC = () => {
               <P fontSize="1rem" fontWeight="500" textAlign="center">
                 Basic Details
               </P>
-              <UploadImage name="imageUrl" />
-              <InputField
-                tooltipDescription="username"
-                placeholder="username"
-                {...register('username')}
+              <UploadImage
+                name="imageUrl"
+                status={errors.imageUrl && 'error'}
+                description={errors.imageUrl?.message}
               />
               <InputField
-                tooltipDescription="Profile description"
+                placeholder="username"
+                {...register('username')}
+                tooltipDescription="username"
+                status={errors.username && 'error'}
+                supportingText={errors.username?.message}
+              />
+              <InputField
+                placeholder="password"
+                {...register('password')}
+                tooltipDescription="username"
+                status={errors.password && 'error'}
+                supportingText={errors.password?.message}
+              />
+              <InputField
+                isTextArea
                 placeholder="Description"
                 {...register('description')}
-                isTextArea
+                status={errors.description && 'error'}
+                tooltipDescription="Profile description"
+                supportingText={errors.description?.message}
               />
             </Div>
           </Div>

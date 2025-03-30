@@ -24,7 +24,7 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
         border="1px solid #24282D"
         className="users-like-modal"
         onClick={(e) => e.stopPropagation()}
-        width={['23rem', '28rem', '28rem', '28rem', '28rem']}
+        width={['22rem', '28rem', '28rem', '28rem', '28rem']}
       >
         <Div
           pb="0.5rem"

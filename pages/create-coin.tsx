@@ -22,6 +22,7 @@ const CreateCoinPage: NextPage = () => {
       },
     },
   });
+
   return (
     <FormProvider {...form}>
       <SEO />

@@ -31,7 +31,11 @@ const CreateCoinDetailsStep: FC = () => {
         <P fontSize="1rem" fontWeight="500" textAlign="center">
           Basic Details
         </P>
-        <UploadImage name="imageUrl" />
+        <UploadImage
+          name="imageUrl"
+          status={errors.imageUrl && 'error'}
+          description={errors.name?.message}
+        />
         <InputField
           placeholder="Coin name"
           status={errors.name && 'error'}

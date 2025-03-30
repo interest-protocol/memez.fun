@@ -9,7 +9,12 @@ import { ImageCardSVG } from '@/components/svg';
 import { getBase64 } from '../../views/create-coin/create-coin.utils';
 import { UploadImageProps } from './upload-image.types';
 
-const UploadImage: FC<UploadImageProps> = ({ isReview, name = 'imageUrl' }) => {
+const UploadImage: FC<UploadImageProps> = ({
+  status,
+  isReview,
+  description,
+  name = 'imageUrl',
+}) => {
   const { setValue, control } = useFormContext();
   const currentImageUrl = useWatch({ control, name });
   const [dragging, setDragging] = useState(false);
@@ -133,6 +138,16 @@ const UploadImage: FC<UploadImageProps> = ({ isReview, name = 'imageUrl' }) => {
       {!isReview && (
         <P mt="0.5rem" color="#90939D" textAlign="center" fontSize="0.75rem">
           Avatar • Max size 5MB
+        </P>
+      )}
+      {status === 'error' && (
+        <P
+          mt="0.5rem"
+          textAlign="center"
+          fontSize="0.75rem"
+          color={status === 'error' ? '#9B2C2C' : '#90939D'}
+        >
+          {description}
         </P>
       )}
     </Div>
