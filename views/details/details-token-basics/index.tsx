@@ -88,12 +88,12 @@ const DetailsTokenBasics = () => {
         color="#FBFBFB"
         justifyContent="center"
       >
-        <P fontSize="1rem">Created by• {formValues.createdBy}</P>
+        <P fontSize="1rem">Created by • {formValues.createdBy}</P>
       </Div>
       <DetailsTokenBasicsSocials />
-      <Div pt="5rem" pb="1.2rem" display="flex" justifyContent="center">
+      <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
         <Div
-          px="1rem"
+          p="1rem"
           borderRadius="1rem"
           border="1px solid #24282D"
           width={[

@@ -13,6 +13,8 @@ const CreateCoinButtons: FC = () => {
 
   const currentStep = useWatch({ control, name: 'step' });
 
+  const hasCurrentStep = currentStep || CreateCoinStepEnum.CoinDetails;
+
   const CreateCoin = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -91,7 +93,7 @@ const CreateCoinButtons: FC = () => {
     if (currentStep === CreateCoinStepEnum.Review) {
       await handleCreateCoin();
     } else {
-      setValue('step', currentStep + 1);
+      setValue('step', hasCurrentStep + 1);
     }
   };
 
@@ -108,7 +110,7 @@ const CreateCoinButtons: FC = () => {
           transition="all .3s"
           borderRadius="100px"
           justifyContent="center"
-          onClick={() => setValue('step', currentStep - 1)}
+          onClick={() => setValue('step', hasCurrentStep - 1)}
           border="1px solid #F6C853"
           nHover={{
             transform: 'scale(1.05)',

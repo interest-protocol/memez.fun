@@ -49,7 +49,6 @@ const InputField = forwardRef<InputElementProps, InputFieldProps>(
               color="#E4E7EB"
               fontSize="0.75rem"
               caretColor="#F6C853"
-              textTransform="capitalize"
               nPlaceholder={{
                 color: '#90939D',
               }}
@@ -75,7 +74,6 @@ const InputField = forwardRef<InputElementProps, InputFieldProps>(
             fontSize="0.75rem"
             caretColor="#F6C853"
             borderRadius="0.75rem"
-            textTransform="capitalize"
             nPlaceholder={{
               color: '#90939D',
             }}

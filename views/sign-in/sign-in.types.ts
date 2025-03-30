@@ -23,5 +23,5 @@ export interface SignInHeaderProps {
 export interface SignInFormProps {
   username: string;
   password: string;
-  success: boolean;
+  success?: boolean;
 }

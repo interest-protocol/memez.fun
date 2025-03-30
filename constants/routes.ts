@@ -7,7 +7,7 @@ export enum RoutesEnum {
 }
 
 export const Routes: Record<RoutesEnum, string> = {
-  [RoutesEnum.CreateProfile]: '/profile/create',
+  [RoutesEnum.CreateProfile]: '/create-profile',
   [RoutesEnum.Profile]: '/profile',
   [RoutesEnum.CreateCoin]: '/create-coin',
   [RoutesEnum.SignIn]: '/sign-in',

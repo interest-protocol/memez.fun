@@ -1,5 +1,5 @@
 export interface CreateProfileFormProps {
-  imageUrl: string;
+  imageUrl?: string;
   username: string;
   password: string;
   description: string;
