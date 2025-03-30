@@ -13,9 +13,13 @@ const CreateProfilePage: NextPage = () => {
     reValidateMode: 'onBlur',
     resolver: yupResolver(CreateProfileValidationSchema),
     defaultValues: {
+      email: '',
+      firstName: '',
+      lastName: '',
       username: '',
-      description: '',
+      password: '',
       imageUrl: '',
+      description: '',
     },
   });
 
