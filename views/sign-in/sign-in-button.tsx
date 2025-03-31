@@ -43,7 +43,6 @@ const SignInButton: FC = () => {
           },
           body: JSON.stringify(requestBody),
         }).then((res) => {
-          console.log('Res _> ', res);
           if (res.ok) {
             push(RoutesEnum.Profile);
           }
