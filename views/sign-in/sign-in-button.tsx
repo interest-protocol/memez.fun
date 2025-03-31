@@ -27,8 +27,6 @@ const SignInButton: FC = () => {
     const username = getValues('username');
     const password = getValues('password');
 
-    console.log('Base URL _>', BASE_URL);
-
     try {
       const requestBody = {
         username,
