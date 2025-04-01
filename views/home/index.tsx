@@ -51,8 +51,9 @@ const Home: FC = () => {
         >
           {CARDS.map(
             ({
-              imgSrc,
+              id,
               user,
+              imgSrc,
               cardNumber,
               isVerified,
               tokenName,
@@ -62,6 +63,7 @@ const Home: FC = () => {
               return (
                 <Card
                   key={v4()}
+                  id={id}
                   user={user}
                   imgSrc={imgSrc}
                   tokenName={tokenName}
