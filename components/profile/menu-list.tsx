@@ -1,11 +1,7 @@
 import { useDisconnectWallet } from '@mysten/dapp-kit';
 import { Div } from '@stylin.js/elements';
-import { useRouter } from 'next/router';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
-
-import { RoutesEnum } from '@/constants';
-import { BASE_URL } from '@/constants/global';
 
 import {
   DocIDSVG,
@@ -27,12 +23,11 @@ const MenuList: FC = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isExplorerMenuOpen, setIsExplorerMenuOpen] = useState(false);
   const { mutate: disconnectWallet } = useDisconnectWallet();
-  const { push } = useRouter();
 
-  const handleDisconnectWallet = () => {
-    disconnectWallet();
-    fetch(`${BASE_URL}/sign-out`).then((res) => res.json());
-    push(RoutesEnum.Home);
+  const handleDisconnectWallet = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/sign-out`).then(
+      (res) => res.ok && disconnectWallet()
+    );
   };
 
   return (

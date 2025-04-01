@@ -1,59 +1,46 @@
-import { Button, Div, P } from '@stylin.js/elements';
-import { useRouter } from 'next/router';
-import { FC, useState } from 'react';
+import { Button, Div } from '@stylin.js/elements';
+import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
 import { useConnectModal } from '@/components/wallet-button/wallet-button.hook';
-import { RoutesEnum } from '@/constants';
-import { BASE_URL } from '@/constants/global';
+import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import { useCookie } from '@/hooks/use-cookie';
 import { useDialog } from '@/hooks/use-dialog';
 
 import { SignInFormProps } from './sign-in.types';
 
 const SignInButton: FC = () => {
-  const [isError, setIsError] = useState({ status: false, message: '' });
-  const { trigger, getValues } = useFormContext<SignInFormProps>();
+  const { set: setCookie } = useCookie(MEMEZ_FUN_TOKEN_AUTH);
+  const { getValues, handleSubmit } = useFormContext<SignInFormProps>();
   const { dialog, handleClose } = useDialog();
   const handleOpenConnectModal = useConnectModal();
-  const { push } = useRouter();
 
   const handleCreateProfile = async () => {
-    let fieldsToValidate: (keyof SignInFormProps)[] = [];
-
-    fieldsToValidate = ['username', 'password'];
-    const isValid = await trigger(fieldsToValidate);
-    const username = getValues('username');
-    const password = getValues('password');
-
-    try {
-      const requestBody = {
-        username,
-        password,
-      };
-      if (isValid) {
-        fetch(`${BASE_URL}/sign-in`, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        }).then((res) => {
-          if (res.ok) {
-            push(RoutesEnum.Profile);
-          }
-        });
+    const { username, password } = getValues();
+    const body = JSON.stringify({
+      username,
+      password,
+    });
+    return await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/sign-in`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    }).then(async (res) => {
+      const response = await res.json();
+      if (!res.ok) {
+        throw new Error(`${response.error}: ${response.message}`);
       }
-      if (!isValid) return;
-    } catch (error) {
-      setIsError({ status: true, message: 'User does not exist' });
-      console.log('Error _> ', error);
-    }
+      setCookie(response.accessToken);
+      return;
+    });
   };
 
-  const handleSignIn = async () => {
+  const handleSignIn = () => {
     dialog.promise(handleCreateProfile(), {
       success: () => ({
         title: 'Sign-in successful',
@@ -120,11 +107,6 @@ const SignInButton: FC = () => {
       flexDirection="column"
       justifyContent="center"
     >
-      {isError.status && (
-        <P width="100%" color="#9B2C2C" textAlign="center">
-          {isError.message}
-        </P>
-      )}
       <Button
         all="unset"
         py="0.4rem"
@@ -132,11 +114,12 @@ const SignInButton: FC = () => {
         display="flex"
         width="7.5rem"
         cursor="pointer"
+        type="submit"
         borderRadius="100px"
         transition="all .3s"
         justifyContent="center"
         border="1px solid #F6C853"
-        onClick={async () => await handleSignIn()}
+        onClick={handleSubmit(handleSignIn)}
         nHover={{
           transform: 'scale(1.05)',
         }}

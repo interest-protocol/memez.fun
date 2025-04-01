@@ -43,8 +43,10 @@ const SignIn: FC = () => {
           </P>
         </Div>
         <Div>
-          <SignInForm />
-          <SignInButtons />
+          <form>
+            <SignInForm />
+            <SignInButtons />
+          </form>
           <Div
             mt="3rem"
             gap="0.5rem"
