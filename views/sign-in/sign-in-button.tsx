@@ -17,7 +17,7 @@ const SignInButton: FC = () => {
   const { dialog, handleClose } = useDialog();
   const handleOpenConnectModal = useConnectModal();
 
-  const handleCreateProfile = async () => {
+  const onSignIn = async () => {
     const { username, password } = getValues();
     const body = JSON.stringify({
       username,
@@ -41,7 +41,7 @@ const SignInButton: FC = () => {
   };
 
   const handleSignIn = () => {
-    dialog.promise(handleCreateProfile(), {
+    dialog.promise(onSignIn(), {
       success: () => ({
         title: 'Sign-in successful',
         button: (
