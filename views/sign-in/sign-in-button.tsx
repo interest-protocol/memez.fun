@@ -1,21 +1,35 @@
+import { useDisconnectWallet } from '@mysten/dapp-kit';
 import { Button, Div } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
 import { useConnectModal } from '@/components/wallet-button/wallet-button.hook';
-import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import { MEMEZ_FUN_TOKEN_AUTH, RoutesEnum } from '@/constants';
 import { useCookie } from '@/hooks/use-cookie';
 import { useDialog } from '@/hooks/use-dialog';
 
 import { SignInFormProps } from './sign-in.types';
 
 const SignInButton: FC = () => {
-  const { set: setCookie } = useCookie(MEMEZ_FUN_TOKEN_AUTH);
-  const { getValues, handleSubmit } = useFormContext<SignInFormProps>();
   const { dialog, handleClose } = useDialog();
   const handleOpenConnectModal = useConnectModal();
+  const { mutate: disconnectWallet } = useDisconnectWallet();
+  const { set: setCookie } = useCookie(MEMEZ_FUN_TOKEN_AUTH);
+  const { getValues, handleSubmit } = useFormContext<SignInFormProps>();
+  const { push } = useRouter();
+
+  const scheduleTimeToDisconnect = () => {
+    const oneHour = 60 * 60 * 1000;
+    const disconnectTimer = setTimeout(() => {
+      disconnectWallet();
+      push(RoutesEnum.SignIn);
+    }, oneHour);
+
+    return disconnectTimer;
+  };
 
   const onSignIn = async () => {
     const { username, password } = getValues();
@@ -32,6 +46,7 @@ const SignInButton: FC = () => {
       body,
     }).then(async (res) => {
       const response = await res.json();
+      scheduleTimeToDisconnect();
       if (!res.ok) {
         throw new Error(`${response.error}: ${response.message}`);
       }

@@ -23,10 +23,10 @@ import RPCCollapseMenuInfo from './rpc-collapse-info';
 const MenuList: FC = () => {
   const [isActiveNSFE, setIsActiveNSFE] = useState(false);
   const [isRPCMenuOpen, setIsRPCMenuOpen] = useState(false);
+  const { mutate: disconnectWallet } = useDisconnectWallet();
   const { cookie: bearerToken } = useCookie(MEMEZ_FUN_TOKEN_AUTH);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isExplorerMenuOpen, setIsExplorerMenuOpen] = useState(false);
-  const { mutate: disconnectWallet } = useDisconnectWallet();
 
   const handleDisconnectWallet = () => {
     fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/sign-out`, {
