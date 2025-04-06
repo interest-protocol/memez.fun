@@ -1,19 +1,38 @@
-import { useCurrentAccount } from '@mysten/dapp-kit';
+import { useCurrentAccount, useSignPersonalMessage } from '@mysten/dapp-kit';
 import { Button, Div } from '@stylin.js/elements';
-import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { WalletSVG } from '@/components/svg';
-import { Routes, RoutesEnum } from '@/constants';
 
 import ConnectedModal from './connected-modal';
+import { useConnectModal } from './wallet-button.hook';
 
 const WalletButton: FC = () => {
+  const handleOpenConnectModal = useConnectModal();
+  const signMessage = useSignPersonalMessage();
+  const [signedMessage, setSignedMessage] = useLocalStorage<{
+    signature: string;
+    bytes: string;
+  } | null>('ww-signed-messages', null);
   const currentAccount = useCurrentAccount();
-  const { push } = useRouter();
+
+  const handleConnectWallet = () => {
+    handleOpenConnectModal();
+  };
+
+  useEffect(() => {
+    if (signedMessage || !currentAccount) return;
+    signMessage
+      .mutateAsync({
+        message: new TextEncoder().encode(
+          'Please sign this to make sure verify your identity in our services.'
+        ),
+      })
+      .then((response) => setSignedMessage(response));
+  }, [currentAccount]);
 
   if (currentAccount) return <ConnectedModal />;
-
   return (
     <Button
       all="unset"
@@ -36,7 +55,7 @@ const WalletButton: FC = () => {
         color: '#0a090d',
         backgroundColor: '#F6C853',
       }}
-      onClick={() => push(Routes[RoutesEnum.SignIn])}
+      onClick={handleConnectWallet}
     >
       <Div width="1.5rem" height="1.5rem">
         <WalletSVG maxWidth="100%" maxHeight="100%" width="100%" />

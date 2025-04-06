@@ -1,27 +1,19 @@
 import { useConnectWallet, useWallets } from '@mysten/dapp-kit';
 import { WalletWithRequiredFeatures } from '@mysten/wallet-standard';
 import { Div, H2, Img, Li, P, Ul } from '@stylin.js/elements';
-import { useRouter } from 'next/router';
 import { FC } from 'react';
 import unikey from 'unikey';
 
 import { LoaderSVG, MemeZLogoSVG } from '@/components/svg';
-import { RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
 
 const ConnectModal: FC = () => {
   const wallets = useWallets();
-  const { push } = useRouter();
   const { mutateAsync } = useConnectWallet();
   const { dialog, handleClose } = useDialog();
 
   const connectWallet = async (wallet: WalletWithRequiredFeatures) => {
     await mutateAsync({ wallet });
-  };
-
-  const handleSignInNavigation = () => {
-    push(RoutesEnum.SignIn);
-    handleClose();
   };
 
   const handleConnect = (wallet: WalletWithRequiredFeatures) => {
@@ -83,60 +75,15 @@ const ConnectModal: FC = () => {
       width={['100vw', '33.25rem']}
       borderRadius={['1rem 1rem 0 0', '1rem']}
     >
-      <H2 textAlign="center">
-        {wallets ? 'Select Your Wallet' : 'Go to sign in'}
-      </H2>
-      {wallets ? (
-        <Ul
-          all="unset"
-          gap="0.5rem"
-          display="flex"
-          overflowY="auto"
-          flexDirection="column"
-        >
-          {wallets.map((wallet) => (
-            <Li
-              p="0.75rem"
-              bg="#393838"
-              gap="0.75rem"
-              key={unikey()}
-              display="flex"
-              cursor="pointer"
-              alignItems="center"
-              borderRadius="0.5rem"
-              border="1px solid transparent"
-              justifyContent="space-between"
-              nHover={{ borderColor: '#F5B72280' }}
-              onClick={() => handleConnect(wallet)}
-            >
-              <Div
-                key={unikey()}
-                gap="0.75rem"
-                display="flex"
-                cursor="pointer"
-                alignItems="center"
-              >
-                <Img
-                  alt={wallet.name}
-                  src={wallet.icon}
-                  width="2rem"
-                  height="2rem"
-                  borderRadius="0.5rem"
-                />
-                <P>{wallet.name}</P>
-              </Div>
-              <P color="#BAF6CF">Installed</P>
-            </Li>
-          ))}
-        </Ul>
-      ) : (
-        <Ul
-          all="unset"
-          gap="0.5rem"
-          display="flex"
-          overflowY="auto"
-          flexDirection="column"
-        >
+      <H2 textAlign="center">Select Your Wallet</H2>
+      <Ul
+        all="unset"
+        gap="0.5rem"
+        display="flex"
+        overflowY="auto"
+        flexDirection="column"
+      >
+        {wallets.map((wallet) => (
           <Li
             p="0.75rem"
             bg="#393838"
@@ -149,12 +96,28 @@ const ConnectModal: FC = () => {
             border="1px solid transparent"
             justifyContent="space-between"
             nHover={{ borderColor: '#F5B72280' }}
-            onClick={handleSignInNavigation}
+            onClick={() => handleConnect(wallet)}
           >
-            Sign in
+            <Div
+              key={unikey()}
+              gap="0.75rem"
+              display="flex"
+              cursor="pointer"
+              alignItems="center"
+            >
+              <Img
+                alt={wallet.name}
+                src={wallet.icon}
+                width="2rem"
+                height="2rem"
+                borderRadius="0.5rem"
+              />
+              <P>{wallet.name}</P>
+            </Div>
+            <P color="#BAF6CF">Installed</P>
           </Li>
-        </Ul>
-      )}
+        ))}
+      </Ul>
     </Div>
   );
 };

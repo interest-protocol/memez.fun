@@ -16,7 +16,7 @@ import { CARDS } from './card.data';
 const Home: FC = () => {
   const { push } = useRouter();
 
-  const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
+  const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.Home]);
 
   return (
     <Layout>
