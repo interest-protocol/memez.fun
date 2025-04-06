@@ -58,11 +58,32 @@ const CreateProfile: FC = () => {
                 description={errors.imageUrl?.message}
               />
               <InputField
+                placeholder="First name"
+                {...register('firstName')}
+                tooltipDescription="firstName"
+                status={errors.password && 'error'}
+                supportingText={errors.firstName?.message}
+              />
+              <InputField
+                placeholder="Last name"
+                {...register('lastName')}
+                tooltipDescription="lastName"
+                status={errors.lastName && 'error'}
+                supportingText={errors.lastName?.message}
+              />
+              <InputField
                 placeholder="Username"
                 {...register('username')}
                 tooltipDescription="username"
                 status={errors.username && 'error'}
                 supportingText={errors.username?.message}
+              />
+              <InputField
+                placeholder="Email"
+                {...register('email')}
+                tooltipDescription="email"
+                status={errors.email && 'error'}
+                supportingText={errors.email?.message}
               />
               <InputField
                 placeholder="Password"
@@ -73,7 +94,7 @@ const CreateProfile: FC = () => {
               />
               <InputField
                 isTextArea
-                placeholder="Description"
+                placeholder="Bio"
                 {...register('description')}
                 status={errors.description && 'error'}
                 tooltipDescription="Profile description"
