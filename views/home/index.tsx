@@ -9,12 +9,13 @@ import FilterButton from '@/components/filter-button';
 import Hero from '@/components/hero';
 import SearchButton from '@/components/search-button';
 import { Routes, RoutesEnum } from '@/constants';
+import { usePools } from '@/hooks/use-pools';
 
 import Card from './card';
-import { CARDS } from './card.data';
 
 const Home: FC = () => {
   const { push } = useRouter();
+  const { pools } = usePools();
 
   const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
 
@@ -49,30 +50,19 @@ const Home: FC = () => {
             'repeat(4, 24.5%)',
           ]}
         >
-          {CARDS.map(
-            ({
-              imgSrc,
-              user,
-              cardNumber,
-              isVerified,
-              tokenName,
-              marketCap,
-              lastPurchase,
-            }) => {
-              return (
-                <Card
-                  key={v4()}
-                  user={user}
-                  imgSrc={imgSrc}
-                  tokenName={tokenName}
-                  marketCap={marketCap}
-                  isVerified={isVerified}
-                  cardNumber={cardNumber}
-                  lastPurchase={lastPurchase}
-                />
-              );
-            }
-          )}
+          {pools.map(() => {
+            return (
+              <Card
+                key={v4()}
+                user={'teste'}
+                imgSrc={'/suiMan.png'}
+                tokenName={'ytest'}
+                marketCap={2}
+                isVerified
+                cardNumber={2}
+              />
+            );
+          })}
         </Div>
       </Div>
     </Layout>

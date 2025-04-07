@@ -9,7 +9,7 @@ export interface CardIconProps {
 export interface CardBodyProps {
   tokenName: string;
   marketCap: number;
-  lastPurchase: number;
+  lastPurchase?: number;
 }
 
 export interface CardProps extends CardIconProps, CardBodyProps {
