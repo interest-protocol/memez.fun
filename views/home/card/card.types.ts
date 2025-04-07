@@ -1,15 +1,16 @@
 export interface CardIconProps {
-  user: string;
   imgSrc: string;
   cardNumber: number;
   isVerified: boolean;
+  creatorAddress: string;
   isCardHovered?: boolean;
 }
 
 export interface CardBodyProps {
-  tokenName: string;
-  marketCap: number;
+  name: string;
+  quoteBalance: number;
   lastPurchase: number;
+  bondingCurve: number;
 }
 
 export interface CardProps extends CardIconProps, CardBodyProps {

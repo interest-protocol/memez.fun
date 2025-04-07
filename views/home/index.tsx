@@ -54,20 +54,31 @@ const Home: FC = () => {
             'repeat(4, 24.5%)',
           ]}
         >
-          {pools.map(({ __typename }) => {
-            return (
-              <Card
-                key={v4()}
-                user={__typename}
-                // imgSrc={imgSrc}
-                // tokenName={tokenName}
-                // marketCap={marketCap}
-                // isVerified={isVerified}
-                // cardNumber={cardNumber}
-                // lastPurchase={lastPurchase}
-              />
-            );
-          })}
+          {pools.map(
+            ({
+              creatorAddress,
+              name,
+              iconUrl,
+              bondingCurve,
+              quoteBalance,
+              decimals,
+            }) => {
+              return (
+                <Card
+                  key={v4()}
+                  name={name}
+                  decimals={decimals}
+                  quoteBalance={quoteBalance}
+                  imgSrc={iconUrl as string}
+                  creatorAddress={creatorAddress}
+                  bondingCurve={Number(bondingCurve)}
+                  // isVerified={isVerified}
+                  // cardNumber={cardNumber}
+                  // lastPurchase={lastPurchase}
+                />
+              );
+            }
+          )}
         </Div>
       </Div>
     </Layout>

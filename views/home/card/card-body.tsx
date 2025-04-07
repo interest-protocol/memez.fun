@@ -2,19 +2,23 @@ import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 
 import RangeBar from '@/components/range';
+import { formatNumber } from '@/utils';
 
 import { CardBodyProps } from './card.types';
 
 const CardBody: FC<CardBodyProps> = ({
-  tokenName,
-  marketCap,
+  name,
+  quoteBalance,
   lastPurchase,
+  bondingCurve,
 }) => {
+  const marketCap = formatNumber(quoteBalance);
+
   return (
     <Div px="1rem" color="#fff">
       <Div py="0.2rem">
         <Span fontSize="1rem" fontWeight="500" fontFamily="Satoshi">
-          {tokenName}
+          {name}
         </Span>
       </Div>
       <Div
@@ -45,7 +49,7 @@ const CardBody: FC<CardBodyProps> = ({
         justifyContent="space-between"
         alignItems="center"
       >
-        <RangeBar value={90} />
+        <RangeBar value={bondingCurve} />
         Bonding
       </Div>
     </Div>

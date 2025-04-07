@@ -8,13 +8,14 @@ import CardFooter from './card-footer';
 import CardIcon from './card-icon';
 
 const Card: FC<CardProps> = ({
+  name,
   imgSrc,
-  user,
   cardNumber,
   isVerified,
-  tokenName,
-  marketCap,
+  quoteBalance,
   lastPurchase,
+  bondingCurve,
+  creatorAddress,
 }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { push } = useRouter();
@@ -46,15 +47,16 @@ const Card: FC<CardProps> = ({
       }}
     >
       <CardIcon
-        user={user}
         imgSrc={imgSrc}
         isVerified={isVerified}
         cardNumber={cardNumber}
         isCardHovered={isCardHovered}
+        creatorAddress={creatorAddress}
       />
       <CardBody
-        tokenName={tokenName}
-        marketCap={marketCap}
+        name={name}
+        quoteBalance={quoteBalance}
+        bondingCurve={bondingCurve}
         lastPurchase={lastPurchase}
       />
       <CardFooter />
