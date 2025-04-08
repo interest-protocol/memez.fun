@@ -1,0 +1,66 @@
+import { gql, useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+
+import { Pool } from '@/interface';
+import { fetchCoinHistory, fetchMetadata } from '@/utils/pools';
+
+const GET_POOL = gql`
+  query GetPool($poolId: String!) {
+    pool(poolId: $poolId) {
+      poolId
+      coinType
+      metadata
+      updatedAt
+      migrated
+      createdAt
+      canonical
+      lastTradeAt
+      quoteBalance
+      coinBalance
+      canMigrate
+      bondingCurve
+      creatorAddress
+      virtualLiquidity
+    }
+  }
+`;
+
+export const usePool = (poolId: string) => {
+  const { data, loading, error } = useQuery(GET_POOL, {
+    variables: { poolId },
+    skip: !poolId,
+  });
+
+  const [poolWithRemainingData, setPoolWithRemainingData] =
+    useState<Pool | null>(null);
+
+  useEffect(() => {
+    const fetchPoolData = async () => {
+      const pool = data?.pool?.pool?.[0];
+      if (!pool) return;
+
+      const [metadata] = await fetchMetadata([pool.coinType]);
+
+      const [history1D, history12M] = await Promise.all([
+        fetchCoinHistory(pool.coinType, '1D'),
+        fetchCoinHistory(pool.coinType, '12M'),
+      ]);
+
+      setPoolWithRemainingData({
+        ...pool,
+        ...metadata,
+        iconUrl: 'suiMan.png',
+        volume24H: history1D[0].volume,
+        allTimeVolume: history12M[0].volume,
+      });
+    };
+
+    if (data) fetchPoolData();
+  }, [data]);
+
+  return {
+    pool: poolWithRemainingData,
+    loading,
+    error,
+  };
+};

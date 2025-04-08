@@ -33,10 +33,10 @@ const Hero: FC = () => {
                 key={v4()}
                 iconSize="10rem"
                 name={item.name}
-                iconUrl={item.iconUrl as string}
+                volume24h={item.volume24H}
                 marketCap={item.quoteBalance}
-                // volume24h={item.volume24h}
-                // allTimeVolume={item.allTimeVolume}
+                iconUrl={item.iconUrl as string}
+                allTimeVolume={item.allTimeVolume}
               />
             ) : (
               <MiniHeroCarouselItem

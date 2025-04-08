@@ -7,10 +7,13 @@ import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
 import { ArrowDownSVG, FiltersSVG } from '../svg';
 import { SORT_OPTIONS } from './filter-button.data';
+import { FilterButtonProps } from './filter-button.types';
 import FilterButtonItem from './filter-button-item';
 
-const FilterButton: FC = () => {
-  const [currentFilter, setCurrentFilter] = useState('Relevance');
+const FilterButton: FC<FilterButtonProps> = ({
+  setFilter,
+  currentFilter = 'Relevance',
+}) => {
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
   const boxId = useId();
 
@@ -34,7 +37,7 @@ const FilterButton: FC = () => {
   };
 
   const handleFilterSelect = (value: string) => {
-    setCurrentFilter(value);
+    setFilter(value);
     setIsDropDownOpen(false);
   };
 

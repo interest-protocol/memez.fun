@@ -12,19 +12,30 @@ export interface TimedSuiTransactionBlockResponse
   time: number;
 }
 
+export interface CoinHistory {
+  low: string;
+  time: number;
+  open: string;
+  high: string;
+  close: string;
+  volume: string;
+}
+
 export interface Pool extends CoinMetadata {
   poolId: string;
   coinType: string;
   metadata: string;
+  volume24H: string;
   updatedAt: string;
   migrated: boolean;
   createdAt: string;
   canonical: boolean;
   lastTradeAt: string;
-  quoteBalance: string;
   coinBalance: string;
   canMigrate: boolean;
   bondingCurve: string;
+  quoteBalance: string;
+  allTimeVolume: string;
   creatorAddress: string;
   virtualLiquidity: string;
 }

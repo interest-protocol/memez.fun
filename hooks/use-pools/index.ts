@@ -1,7 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
-import { CoinMetadataWithType, Pool } from '@/interface';
+import { Pool } from '@/interface';
+import { fetchCoinHistory, fetchMetadata } from '@/utils/pools';
 
 const GET_POOLS = gql`
   query GetPools(
@@ -37,79 +38,64 @@ const GET_POOLS = gql`
   }
 `;
 
-const fetchMetadataBatch = async (
-  coinTypes: string[]
-): Promise<CoinMetadataWithType[]> => {
-  const baseUrl =
-    'https://coin-metadata-api-testnet-staging.up.railway.app/api/v1/fetch-coins';
-  const encodedTypes = coinTypes.map(encodeURIComponent).join(',');
-  const url = `${baseUrl}?coinTypes=${encodedTypes}`;
-
-  try {
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        network: 'sui',
-      },
-    });
-
-    if (!res.ok) throw new Error('Erro ao buscar metadados em lote');
-
-    const data = await res.json();
-
-    return data || [];
-  } catch (err) {
-    console.error('Erro ao buscar metadados externos:', err);
-    return [];
-  }
-};
-
 export const usePools = (
   page = 1,
   pageSize = 10,
   filters = {},
   sortBy = {}
 ) => {
+  const variables = {
+    page,
+    pageSize,
+    filters,
+    ...(Object.keys(sortBy).length > 0 && { sortBy }),
+  };
+
   const { data, loading, error } = useQuery(GET_POOLS, {
-    variables: {
-      page,
-      pageSize,
-      filters,
-      sortBy,
-    },
+    variables,
   });
 
-  const [poolsWithMetadata, setPoolsWithMetadata] = useState<Pool[]>([]);
+  const [poolsWithRemainingData, setPoolsWithRemainingData] = useState<Pool[]>(
+    []
+  );
 
   useEffect(() => {
-    const setCoinsWithMetadata = async () => {
+    const setCoinsRemainingData = async () => {
       const pools: Pool[] = data?.pools?.pools ?? [];
       if (pools.length === 0) return;
 
       const coinTypes = Array.from(new Set(pools.map((p) => p.coinType)));
-      const metadataList = await fetchMetadataBatch(coinTypes);
+      const metadataList = await fetchMetadata(coinTypes);
 
-      const enrichedPools = pools.map((pool) => {
-        const externalMetadata = metadataList.find(
-          (el) => el.type === pool.coinType
-        );
+      const enrichedPools = await Promise.all(
+        pools.map(async (pool) => {
+          const externalMetadata = metadataList.find(
+            (el) => el.type === pool.coinType
+          );
 
-        return {
-          ...pool,
-          ...externalMetadata,
-          iconUrl: 'suiMan.png',
-        };
-      });
+          const [history1D, history12M] = await Promise.all([
+            fetchCoinHistory(pool.coinType, '1D'),
+            fetchCoinHistory(pool.coinType, '12M'),
+          ]);
 
-      setPoolsWithMetadata(enrichedPools);
+          return {
+            ...pool,
+            ...externalMetadata,
+            iconUrl: 'suiMan.png',
+            volume24H: history1D[0].volume,
+            allTimeVolume: history12M[0].volume,
+          };
+        })
+      );
+
+      setPoolsWithRemainingData(enrichedPools);
     };
 
-    setCoinsWithMetadata();
+    setCoinsRemainingData();
   }, [data]);
 
   return {
-    pools: poolsWithMetadata,
+    pools: poolsWithRemainingData,
     total: data?.pools.total ?? 0,
     loading,
     error,

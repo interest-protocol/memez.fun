@@ -1,6 +1,6 @@
 import { Div } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { v4 } from 'uuid';
 
 import { Layout } from '@/components';
@@ -15,7 +15,14 @@ import Card from './card';
 
 const Home: FC = () => {
   const { push } = useRouter();
+
+  const [currentFilter, setCurrentFilter] = useState('Relevance');
+
   const { pools } = usePools(1, 10, {}, undefined);
+
+  const handleFilterSelect = (value: string) => {
+    setCurrentFilter(value);
+  };
 
   const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
 
@@ -33,7 +40,10 @@ const Home: FC = () => {
       <Div pt="3rem" px="1.5rem" maxWidth="1400px" mx="auto">
         <Div py="2rem" display="flex" justifyContent="space-between">
           <Div gap="0.5rem" display="flex">
-            <FilterButton />
+            <FilterButton
+              currentFilter={currentFilter}
+              setFilter={handleFilterSelect}
+            />
             <SearchButton />
           </Div>
           <CreateCoinButton onClick={handleCreateCoinButtonClick} />
@@ -54,6 +64,7 @@ const Home: FC = () => {
         >
           {pools.map(
             ({
+              poolId,
               creatorAddress,
               name,
               iconUrl,
@@ -65,6 +76,7 @@ const Home: FC = () => {
                 <Card
                   key={v4()}
                   name={name}
+                  poolId={poolId}
                   quoteBalance={quoteBalance}
                   imgSrc={iconUrl as string}
                   creatorAddress={creatorAddress}

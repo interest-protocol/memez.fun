@@ -10,6 +10,7 @@ import CardIcon from './card-icon';
 const Card: FC<CardProps> = ({
   name,
   imgSrc,
+  poolId,
   cardNumber,
   isVerified,
   quoteBalance,
@@ -21,7 +22,7 @@ const Card: FC<CardProps> = ({
   const { push } = useRouter();
 
   const handleOnCardClick = () => {
-    push('/details');
+    push(`/details/${poolId}`);
   };
 
   const handleOnMouseEnter = () => {

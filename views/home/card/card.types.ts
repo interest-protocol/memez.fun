@@ -14,5 +14,6 @@ export interface CardBodyProps {
 }
 
 export interface CardProps extends CardIconProps, CardBodyProps {
+  poolId: string;
   onClick?: () => void;
 }
