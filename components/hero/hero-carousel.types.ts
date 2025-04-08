@@ -1,11 +1,11 @@
 export interface HeroCarouselItemProps {
+  name: string;
   iconUrl: string;
   isHot?: boolean;
   iconSize?: string;
   marketCap: string;
-  tokenName: string;
-  volume24h: string;
-  allTimeVolume: string;
+  volume24h?: string;
+  allTimeVolume?: string;
 }
 
 export interface HoverFloatItemProps {
@@ -26,5 +26,5 @@ export interface HeroCarouselItemTokenIconProps {
 export interface MiniHeroCarouselItemProps
   extends Pick<
     HeroCarouselItemProps,
-    'iconUrl' | 'tokenName' | 'isHot' | 'iconSize'
+    'iconUrl' | 'name' | 'isHot' | 'iconSize'
   > {}

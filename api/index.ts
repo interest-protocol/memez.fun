@@ -1,10 +1,8 @@
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const client = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://pump-memez-api-staging.up.railway.app/graphql',
-  }),
+const GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URI || '';
+
+export const graphQLClient = new ApolloClient({
   cache: new InMemoryCache(),
+  uri: GRAPHQL_URL,
 });
-
-export default client;

@@ -1,13 +1,23 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
+import { CoinMetadataWithType, Pool } from '@/interface';
+
 const GET_POOLS = gql`
-  query GetPools($page: Int!, $pageSize: Int!) {
-    pools(page: $page, pageSize: $pageSize) {
+  query GetPools(
+    $page: Int!
+    $pageSize: Int!
+    $filters: PoolsFilters
+    $sortBy: PoolsSortBy
+  ) {
+    pools(
+      page: $page
+      pageSize: $pageSize
+      filters: $filters
+      sortBy: $sortBy
+    ) {
       pools {
         poolId
-        curve
-        config
         coinType
         metadata
         updatedAt
@@ -17,20 +27,21 @@ const GET_POOLS = gql`
         lastTradeAt
         quoteBalance
         coinBalance
+        canMigrate
         bondingCurve
         creatorAddress
-        migrationWitness
         virtualLiquidity
-        targetQuoteLiquidity
-        nsfw
       }
       total
     }
   }
 `;
 
-const fetchMetadataBatch = async (coinTypes: string[]) => {
-  const baseUrl = `${process.env.NEXT_METADATA_API}/api/v1/fetch-coins`;
+const fetchMetadataBatch = async (
+  coinTypes: string[]
+): Promise<CoinMetadataWithType[]> => {
+  const baseUrl =
+    'https://coin-metadata-api-testnet-staging.up.railway.app/api/v1/fetch-coins';
   const encodedTypes = coinTypes.map(encodeURIComponent).join(',');
   const url = `${baseUrl}?coinTypes=${encodedTypes}`;
 
@@ -42,55 +53,64 @@ const fetchMetadataBatch = async (coinTypes: string[]) => {
         network: 'sui',
       },
     });
+
     if (!res.ok) throw new Error('Erro ao buscar metadados em lote');
+
     const data = await res.json();
-    return data;
+
+    return data || [];
   } catch (err) {
-    console.error(err);
+    console.error('Erro ao buscar metadados externos:', err);
     return [];
   }
 };
 
-export const usePools = (page = 1, pageSize = 10) => {
+export const usePools = (
+  page = 1,
+  pageSize = 10,
+  filters = {},
+  sortBy = {}
+) => {
   const { data, loading, error } = useQuery(GET_POOLS, {
-    variables: { page, pageSize },
+    variables: {
+      page,
+      pageSize,
+      filters,
+      sortBy,
+    },
   });
 
-  const [poolsWithMetadata, setPoolsWithMetadata] = useState([]);
+  const [poolsWithMetadata, setPoolsWithMetadata] = useState<Pool[]>([]);
 
   useEffect(() => {
-    const enrichWithMetadata = async () => {
-      if (!data?.pools?.pools) return;
+    const setCoinsWithMetadata = async () => {
+      const pools: Pool[] = data?.pools?.pools ?? [];
+      if (pools.length === 0) return;
 
-      const pools = data.pools.pools;
-      const coinTypes = Array.from(
-        new Set(pools.map((p: string) => p.coinType))
-      );
-
+      const coinTypes = Array.from(new Set(pools.map((p) => p.coinType)));
       const metadataList = await fetchMetadataBatch(coinTypes);
 
-      console.log('metadataList', metadataList);
+      const enrichedPools = pools.map((pool) => {
+        const externalMetadata = metadataList.find(
+          (el) => el.type === pool.coinType
+        );
 
-      const metadataMap = Object.fromEntries(
-        metadataList.map((meta) => [meta.coinType, meta])
-      );
+        return {
+          ...pool,
+          ...externalMetadata,
+          iconUrl: 'suiMan.png',
+        };
+      });
 
-      const enriched = pools.map((pool) => ({
-        ...pool,
-        externalMetadata: metadataMap[pool.coinType] || null,
-      }));
-
-      setPoolsWithMetadata(enriched);
+      setPoolsWithMetadata(enrichedPools);
     };
 
-    enrichWithMetadata();
+    setCoinsWithMetadata();
   }, [data]);
-
-  // console.log('poolsWithMetadata', poolsWithMetadata);
 
   return {
     pools: poolsWithMetadata,
-    total: data?.pools.total || 0,
+    total: data?.pools.total ?? 0,
     loading,
     error,
   };

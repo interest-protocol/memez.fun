@@ -15,9 +15,11 @@ import Card from './card';
 
 const Home: FC = () => {
   const { push } = useRouter();
-  const { pools } = usePools();
+  const { pools } = usePools(1, 10, {}, undefined);
 
   const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
+
+  console.log('pools', pools);
 
   return (
     <Layout>
@@ -50,19 +52,31 @@ const Home: FC = () => {
             'repeat(4, 24.5%)',
           ]}
         >
-          {pools.map(() => {
-            return (
-              <Card
-                key={v4()}
-                user={'teste'}
-                imgSrc={'/suiMan.png'}
-                tokenName={'ytest'}
-                marketCap={2}
-                isVerified
-                cardNumber={2}
-              />
-            );
-          })}
+          {pools.map(
+            ({
+              creatorAddress,
+              name,
+              iconUrl,
+              bondingCurve,
+              quoteBalance,
+              lastTradeAt,
+            }) => {
+              return (
+                <Card
+                  key={v4()}
+                  name={name}
+                  quoteBalance={quoteBalance}
+                  imgSrc={iconUrl as string}
+                  creatorAddress={creatorAddress}
+                  bondingCurve={Number(bondingCurve)}
+                  lastPurchase={lastTradeAt}
+                  // isVerified={isVerified}
+                  // cardNumber={cardNumber}
+                  // lastPurchase={lastPurchase}
+                />
+              );
+            }
+          )}
         </Div>
       </Div>
     </Layout>

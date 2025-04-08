@@ -5,10 +5,10 @@ import { MiniHeroCarouselItemProps } from './hero-carousel.types';
 import HeroCarouselItemTokenIcon from './hero-carousel-item-token-icon';
 
 const MiniHeroCarouselItem: FC<MiniHeroCarouselItemProps> = ({
+  name,
   isHot,
   iconUrl,
   iconSize,
-  tokenName,
 }) => {
   return (
     <Div
@@ -28,7 +28,7 @@ const MiniHeroCarouselItem: FC<MiniHeroCarouselItemProps> = ({
         </Div>
         <Div color="#E4E7EB" alignItems="center" position="relative">
           <Span fontFamily="GoodGame" fontSize="6rem">
-            {tokenName}
+            {name}
           </Span>
         </Div>
       </Div>

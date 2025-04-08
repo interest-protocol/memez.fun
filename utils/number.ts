@@ -141,3 +141,11 @@ export const parseInputEventToNumberString = (
 
   return x;
 };
+
+export const formatNumber = (value: number | string): string => {
+  const num = typeof value === 'string' ? Number(value) : value;
+
+  if (isNaN(num)) return '0';
+
+  return num.toLocaleString('en-US');
+};

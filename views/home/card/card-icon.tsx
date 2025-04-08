@@ -1,6 +1,8 @@
-import { Div, Img } from '@stylin.js/elements';
+import { formatAddress } from '@mysten/sui/utils';
+import { Div, Img, Span } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { DottedArrowSVG, VerifiedSVG } from '@/components/svg';
 import { getImageColor } from '@/utils';
@@ -8,13 +10,18 @@ import { getImageColor } from '@/utils';
 import { CardIconProps } from './card.types';
 
 const CardIcon: FC<CardIconProps> = ({
-  user,
   imgSrc,
   isVerified,
   cardNumber,
   isCardHovered,
+  creatorAddress,
 }) => {
   const [dominantColor, setDominantColor] = useState<string>('#000000');
+
+  const copyAddress = () => {
+    toast.success('Copied!');
+    window.navigator.clipboard.writeText(creatorAddress);
+  };
 
   useEffect(() => {
     const fetchImageColor = async () => {
@@ -37,24 +44,26 @@ const CardIcon: FC<CardIconProps> = ({
         justifyContent="center"
         background={dominantColor ?? 'transparent'}
       >
-        <Div
-          py="0.2rem"
-          px="0.8rem"
-          color="#fff"
-          top="0.7rem"
-          width="auto"
-          left="0.7rem"
-          display="flex"
-          fontFamily="NDot"
-          fontSize="1.8rem"
-          borderRadius="1.5rem"
-          alignItems="center"
-          position="absolute"
-          justifyContent="center"
-          backgroundColor="#0000001A"
-        >
-          {cardNumber}
-        </Div>
+        {cardNumber && (
+          <Div
+            py="0.2rem"
+            px="0.8rem"
+            color="#fff"
+            top="0.7rem"
+            width="auto"
+            left="0.7rem"
+            display="flex"
+            fontFamily="NDot"
+            fontSize="1.8rem"
+            borderRadius="1.5rem"
+            alignItems="center"
+            position="absolute"
+            justifyContent="center"
+            backgroundColor="#0000001A"
+          >
+            {cardNumber}
+          </Div>
+        )}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{
@@ -87,7 +96,7 @@ const CardIcon: FC<CardIconProps> = ({
           </Div>
         </motion.div>
         <Div width="6.25rem" height="6.25rem">
-          <Img src={imgSrc} alt="SuiMan" width="100%" />
+          <Img src={imgSrc} alt="CardIcon" width="100%" />
         </Div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,7 +120,10 @@ const CardIcon: FC<CardIconProps> = ({
             borderBottomRightRadius: '1.3rem',
           }}
         >
-          Created by • {user}
+          Created by •
+          <Span ml="0.2rem" onClick={copyAddress}>
+            {formatAddress(creatorAddress)}
+          </Span>
           <Div
             ml="0.3rem"
             display="flex"
