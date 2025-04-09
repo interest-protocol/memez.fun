@@ -1,4 +1,5 @@
 import { CoinHistory, CoinMetadataWithType } from '@/interface';
+import { Likes } from '@/views/home/card/card.types';
 
 export const fetchCoinHistory = async (
   type: string,
@@ -53,5 +54,27 @@ export const fetchMetadata = async (
   } catch (err) {
     console.error('Error getting coin metadata:', err);
     return [];
+  }
+};
+
+export const fetchPoolLikes = async (poolId: string): Promise<Likes> => {
+  const url = `https://apimemezfun-staging.up.railway.app/api/v1/pools/${encodeURIComponent(poolId)}/likes`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) throw new Error('Error getting pools likes');
+
+    const data = await res.json();
+
+    return data ?? {};
+  } catch (err) {
+    console.error('Error getting pools likes:', err);
+    return { total: 0, data: [] };
   }
 };

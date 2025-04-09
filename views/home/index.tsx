@@ -18,15 +18,13 @@ const Home: FC = () => {
 
   const [currentFilter, setCurrentFilter] = useState('Relevance');
 
-  const { pools } = usePools(1, 10, {}, undefined);
+  const { pools } = usePools(1, 10, {}, undefined, true);
 
   const handleFilterSelect = (value: string) => {
     setCurrentFilter(value);
   };
 
   const handleCreateCoinButtonClick = () => push(Routes[RoutesEnum.CreateCoin]);
-
-  console.log('pools', pools);
 
   return (
     <Layout>
@@ -64,27 +62,28 @@ const Home: FC = () => {
         >
           {pools.map(
             ({
-              poolId,
-              creatorAddress,
               name,
+              likes,
+              poolId,
               iconUrl,
+              lastTradeAt,
               bondingCurve,
               quoteBalance,
-              lastTradeAt,
+              creatorAddress,
             }) => {
               return (
                 <Card
                   key={v4()}
                   name={name}
+                  likes={likes}
                   poolId={poolId}
-                  quoteBalance={quoteBalance}
                   imgSrc={iconUrl as string}
+                  lastPurchase={lastTradeAt}
+                  quoteBalance={quoteBalance}
                   creatorAddress={creatorAddress}
                   bondingCurve={Number(bondingCurve)}
-                  lastPurchase={lastTradeAt}
                   // isVerified={isVerified}
                   // cardNumber={cardNumber}
-                  // lastPurchase={lastPurchase}
                 />
               );
             }

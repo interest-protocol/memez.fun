@@ -13,7 +13,29 @@ export interface CardBodyProps {
   lastPurchase: number | string;
 }
 
+export interface UserLike {
+  id: string;
+  name: string;
+  avatar: string;
+  username: string;
+}
+
+export interface Likes {
+  total: number;
+  data: UserLike[];
+}
+
+export interface CardLikesProps {
+  data: UserLike[];
+  totalLikes: number;
+}
+
+export interface CardFooterProps {
+  likes: Likes;
+}
+
 export interface CardProps extends CardIconProps, CardBodyProps {
+  likes?: Likes;
   poolId: string;
   onClick?: () => void;
 }

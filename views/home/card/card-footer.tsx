@@ -2,11 +2,11 @@ import { Div } from '@stylin.js/elements';
 import { FC } from 'react';
 
 import AvatarGroup from '@/components/avatar-group';
-import { DATA } from '@/components/avatar-group/avatar-group.data';
 
-import CardLikes from './card-likes';
+import { CardFooterProps } from './card.types';
+// import CardLikes from './card-likes';
 
-const CardFooter: FC = () => {
+const CardFooter: FC<CardFooterProps> = ({ likes }) => {
   return (
     <Div
       p="1rem"
@@ -17,8 +17,8 @@ const CardFooter: FC = () => {
       borderBottomLeftRadius="1.5rem"
       borderBottomRightRadius="1.5rem"
     >
-      <AvatarGroup items={DATA} />
-      <CardLikes />
+      <AvatarGroup items={likes.data} />
+      {/* <CardLikes /> */}
     </Div>
   );
 };

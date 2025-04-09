@@ -1,6 +1,8 @@
 import { CoinMetadata, SuiTransactionBlockResponse } from '@mysten/sui/client';
 import BigNumber from 'bignumber.js';
 
+import { Likes } from '@/views/home/card/card.types';
+
 export type BigNumberish = BigNumber | bigint | string | number;
 
 export interface CoinMetadataWithType extends CoinMetadata {
@@ -22,6 +24,7 @@ export interface CoinHistory {
 }
 
 export interface Pool extends CoinMetadata {
+  likes?: Likes;
   poolId: string;
   coinType: string;
   metadata: string;

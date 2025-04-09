@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
 import { Pool } from '@/interface';
-import { fetchCoinHistory, fetchMetadata } from '@/utils/pools';
+import { fetchCoinHistory, fetchMetadata, fetchPoolLikes } from '@/utils/pools';
 
 const GET_POOLS = gql`
   query GetPools(
@@ -42,7 +42,8 @@ export const usePools = (
   page = 1,
   pageSize = 10,
   filters = {},
-  sortBy = {}
+  sortBy = {},
+  getPoolsLikes = false
 ) => {
   const variables = {
     page,
@@ -78,8 +79,13 @@ export const usePools = (
             fetchCoinHistory(pool.coinType, '12M'),
           ]);
 
+          const likes = !getPoolsLikes
+            ? undefined
+            : await fetchPoolLikes(pool.poolId);
+
           return {
             ...pool,
+            likes,
             ...externalMetadata,
             iconUrl: 'suiMan.png',
             volume24H: history1D[0].volume,
