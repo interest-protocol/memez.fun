@@ -15,6 +15,7 @@ const getCookie = (name: string): string | null => {
 const deleteCookie = (name: string) => {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
 };
+
 export const useCookie = (name: string) => {
   const [cookie, setCookieState] = useState<string | null>(() =>
     getCookie(name)
@@ -28,6 +29,7 @@ export const useCookie = (name: string) => {
   const remove = () => {
     deleteCookie(name);
     setCookieState(null);
+    console.log('removed');
   };
 
   return { cookie, set, remove } as const;
