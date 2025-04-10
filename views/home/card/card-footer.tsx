@@ -4,9 +4,9 @@ import { FC } from 'react';
 import AvatarGroup from '@/components/avatar-group';
 
 import { CardFooterProps } from './card.types';
-// import CardLikes from './card-likes';
+import CardLikes from './card-likes';
 
-const CardFooter: FC<CardFooterProps> = ({ likes }) => {
+const CardFooter: FC<CardFooterProps> = ({ data, total }) => {
   return (
     <Div
       p="1rem"
@@ -17,8 +17,8 @@ const CardFooter: FC<CardFooterProps> = ({ likes }) => {
       borderBottomLeftRadius="1.5rem"
       borderBottomRightRadius="1.5rem"
     >
-      <AvatarGroup items={likes.data} />
-      {/* <CardLikes /> */}
+      <AvatarGroup items={data} />
+      {total > 0 && <CardLikes totalLikes={total} />}
     </Div>
   );
 };

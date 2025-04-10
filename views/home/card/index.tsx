@@ -2,7 +2,7 @@ import { Div } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 
-import { CardProps, Likes } from './card.types';
+import { CardProps } from './card.types';
 import CardBody from './card-body';
 import CardFooter from './card-footer';
 import CardIcon from './card-icon';
@@ -61,7 +61,7 @@ const Card: FC<CardProps> = ({
         bondingCurve={bondingCurve}
         lastPurchase={lastPurchase}
       />
-      <CardFooter likes={likes as Likes} />
+      <CardFooter data={likes?.data ?? []} total={likes?.total ?? 0} />
     </Div>
   );
 };

@@ -10,10 +10,7 @@ import { SORT_OPTIONS } from './filter-button.data';
 import { FilterButtonProps } from './filter-button.types';
 import FilterButtonItem from './filter-button-item';
 
-const FilterButton: FC<FilterButtonProps> = ({
-  setFilter,
-  currentFilter = 'Relevance',
-}) => {
+const FilterButton: FC<FilterButtonProps> = ({ setFilter, currentFilter }) => {
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
   const boxId = useId();
 

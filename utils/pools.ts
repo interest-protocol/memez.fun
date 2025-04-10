@@ -29,6 +29,28 @@ export const fetchCoinHistory = async (
   }
 };
 
+export const likePool = async (poolId: string): Promise<boolean> => {
+  const url = `https://apimemezfun-staging.up.railway.app/api/v1/pools/${encodeURIComponent(poolId)}/likes`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao meter like no pool');
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Erro ao meter like no pool:', err);
+    return false;
+  }
+};
+
 export const fetchMetadata = async (
   coinTypes: string[]
 ): Promise<CoinMetadataWithType[]> => {
