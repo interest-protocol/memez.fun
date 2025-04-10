@@ -1,10 +1,13 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { formatNumber } from '@/utils';
 
 import { HeroCarouselItemProps } from './hero-carousel.types';
 import HeroCarouselItemTokenIcon from './hero-carousel-item-token-icon';
+import HeroCarouselItemTokenIconSkeleton from './hero-skeletons/hero-carousel-item-token-icon-skeleton';
+import HeroFloatItemSkeleton from './hero-skeletons/hero-float-item-skeleton';
 import HoverFloatItem from './hover-float-item';
 
 const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
@@ -12,6 +15,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
   isHot,
   iconUrl,
   iconSize,
+  isLoading = true,
   marketCap,
   volume24h,
   allTimeVolume,
@@ -37,17 +41,25 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             mr={['unset', 'unset', 'unset', '2rem', '5rem']}
             display={['none', 'none', 'none', 'block', 'block']}
           >
-            <HoverFloatItem
-              value={formatNumber(marketCap)}
-              labelKey="marketCap"
-            />
+            {isLoading ? (
+              <HeroFloatItemSkeleton />
+            ) : (
+              <HoverFloatItem
+                labelKey="marketCap"
+                value={formatNumber(marketCap)}
+              />
+            )}
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
-            <HeroCarouselItemTokenIcon
-              isHot={isHot}
-              size={iconSize}
-              iconUrl={iconUrl}
-            />
+            {!isLoading ? (
+              <HeroCarouselItemTokenIcon
+                isHot={isHot}
+                size={iconSize}
+                iconUrl={iconUrl}
+              />
+            ) : (
+              <HeroCarouselItemTokenIconSkeleton />
+            )}
           </Div>
         </Div>
       </Div>
@@ -60,9 +72,13 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
         justifyContent="center"
         display={['none', 'none', 'none', 'flex', 'flex']}
       >
-        <Span fontFamily="GoodGame" fontSize="6rem">
-          {name}
-        </Span>
+        {isLoading ? (
+          <Skeleton height="5.688rem" width="21.813rem" />
+        ) : (
+          <Span fontFamily="GoodGame" fontSize="6rem">
+            {name}
+          </Span>
+        )}
       </Div>
       <Div flex="2" height="100%" display="flex" justifyContent="flex-start">
         <Div
@@ -73,29 +89,36 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
           position="relative"
           justifyContent="space-between"
         >
-          {volume24h && (
-            <Div
-              mt="10rem"
-              ml={['5rem', '5rem', '5rem', '-5rem', '5rem']}
-              display={['none', 'none', 'none', 'block', 'block']}
-            >
-              <HoverFloatItem value={volume24h} labelKey="volume24h" />
-            </Div>
-          )}
-          {allTimeVolume && (
-            <Div
-              height="100%"
-              alignItems="flex-start"
-              display={['none', 'none', 'none', 'flex', 'flex']}
-            >
-              <Div mt="6rem">
+          <Div
+            mt="10rem"
+            ml={['5rem', '5rem', '5rem', '-5rem', '5rem']}
+            display={['none', 'none', 'none', 'block', 'block']}
+          >
+            {isLoading ? (
+              <HeroFloatItemSkeleton />
+            ) : (
+              <HoverFloatItem
+                value={formatNumber(Number(volume24h))}
+                labelKey="volume24h"
+              />
+            )}
+          </Div>
+          <Div
+            height="100%"
+            alignItems="flex-start"
+            display={['none', 'none', 'none', 'flex', 'flex']}
+          >
+            <Div mt="6rem">
+              {isLoading ? (
+                <HeroFloatItemSkeleton />
+              ) : (
                 <HoverFloatItem
-                  value={allTimeVolume}
+                  value={formatNumber(Number(allTimeVolume))}
                   labelKey="allTimeVolume"
                 />
-              </Div>
+              )}
             </Div>
-          )}
+          </Div>
         </Div>
       </Div>
     </Div>

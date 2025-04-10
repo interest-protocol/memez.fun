@@ -6,7 +6,7 @@ import AvatarGroup from '@/components/avatar-group';
 import { CardFooterProps } from './card.types';
 import CardLikes from './card-likes';
 
-const CardFooter: FC<CardFooterProps> = ({ data, total }) => {
+const CardFooter: FC<CardFooterProps> = ({ data, total, poolId }) => {
   return (
     <Div
       p="1rem"
@@ -18,7 +18,7 @@ const CardFooter: FC<CardFooterProps> = ({ data, total }) => {
       borderBottomRightRadius="1.5rem"
     >
       <AvatarGroup items={data} />
-      {total > 0 && <CardLikes totalLikes={total} />}
+      {total > 0 && <CardLikes poolId={poolId} totalLikes={total} />}
     </Div>
   );
 };

@@ -52,58 +52,74 @@ export const usePools = (
     ...(Object.keys(sortBy).length > 0 && { sortBy }),
   };
 
-  const { data, loading, error } = useQuery(GET_POOLS, {
+  const {
+    data,
+    loading: graphqlLoading,
+    error,
+  } = useQuery(GET_POOLS, {
     variables,
   });
 
   const [poolsWithRemainingData, setPoolsWithRemainingData] = useState<Pool[]>(
     []
   );
+  const [fullLoading, setFullLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const setCoinsRemainingData = async () => {
       const pools: Pool[] = data?.pools?.pools ?? [];
       if (pools.length === 0) return;
 
-      const coinTypes = Array.from(new Set(pools.map((p) => p.coinType)));
-      const metadataList = await fetchMetadata(coinTypes);
+      setFullLoading(true);
 
-      const enrichedPools = await Promise.all(
-        pools.map(async (pool) => {
-          const externalMetadata = metadataList.find(
-            (el) => el.type === pool.coinType
-          );
+      try {
+        const coinTypes = Array.from(new Set(pools.map((p) => p.coinType)));
+        const metadataList = await fetchMetadata(coinTypes);
 
-          const [history1D, history12M] = await Promise.all([
-            fetchCoinHistory(pool.coinType, '1D'),
-            fetchCoinHistory(pool.coinType, '12M'),
-          ]);
+        const enrichedPools = await Promise.all(
+          pools.map(async (pool) => {
+            const externalMetadata = metadataList.find(
+              (el) => el.type === pool.coinType
+            );
 
-          const likes = !getPoolsLikes
-            ? undefined
-            : await fetchPoolLikes(pool.poolId);
+            const [history1D, history12M] = await Promise.all([
+              fetchCoinHistory(pool.coinType, '1D'),
+              fetchCoinHistory(pool.coinType, '12M'),
+            ]);
 
-          return {
-            ...pool,
-            likes,
-            ...externalMetadata,
-            iconUrl: 'suiMan.png',
-            volume24H: history1D[0].volume,
-            allTimeVolume: history12M[0].volume,
-          };
-        })
-      );
+            const likes = !getPoolsLikes
+              ? undefined
+              : await fetchPoolLikes(pool.poolId);
 
-      setPoolsWithRemainingData(enrichedPools);
+            return {
+              ...pool,
+              likes,
+              ...externalMetadata,
+              iconUrl: 'suiMan.png',
+              volume24H: history1D[0].volume,
+              allTimeVolume: history12M[0].volume,
+            };
+          })
+        );
+
+        setPoolsWithRemainingData(enrichedPools);
+      } catch (err) {
+        console.error('Erro ao carregar dados adicionais dos pools:', err);
+      } finally {
+        setFullLoading(false);
+      }
     };
 
-    setCoinsRemainingData();
-  }, [data]);
+    if (!graphqlLoading && data?.pools?.pools) {
+      setCoinsRemainingData();
+    }
+  }, [data, graphqlLoading, getPoolsLikes]);
 
   return {
+    error,
+    fullLoading,
+    graphqlLoading,
     pools: poolsWithRemainingData,
     total: data?.pools.total ?? 0,
-    loading,
-    error,
   };
 };

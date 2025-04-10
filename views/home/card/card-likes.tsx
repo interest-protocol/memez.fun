@@ -4,10 +4,9 @@ import { FC, MouseEvent, useState } from 'react';
 import LikeComponent from '../components/like';
 import { CardLikesProps } from './card.types';
 
-const CardLikes: FC<CardLikesProps> = ({ totalLikes }) => {
+const CardLikes: FC<CardLikesProps> = ({ poolId, totalLikes }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likeCounter, setLikeCounter] = useState<number>(totalLikes);
-  console.log('totalLikes', totalLikes);
 
   const handleLike = (e: MouseEvent<HTMLDivElement>) => {
     setIsLiked(not);
@@ -16,11 +15,13 @@ const CardLikes: FC<CardLikesProps> = ({ totalLikes }) => {
       isLiked ? likeCounter - 1 : likeCounter + 1
     );
   };
+
   return (
     <LikeComponent
-      likeCounter={likeCounter}
-      handleLikes={handleLike}
+      poolId={poolId}
       isLiked={isLiked}
+      handleLikes={handleLike}
+      likeCounter={likeCounter}
     />
   );
 };

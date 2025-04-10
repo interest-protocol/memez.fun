@@ -1,17 +1,39 @@
 import { Div, P } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 
 import { HeartSVG } from '@/components/svg';
+import { useLikePools } from '@/hooks/use-pool-like';
 
 import { LikeComponentProps } from './like.types';
 
 export const LikeComponent: FC<LikeComponentProps> = ({
-  isLiked,
-  likeCounter,
-  handleLikes,
+  poolId,
   revertOrder,
+  isLiked: isLikedProp = false,
+  likeCounter: initialCounter,
 }) => {
+  const [isLiked, setIsLiked] = useState<boolean>(isLikedProp);
+  const [likeCounter, setLikeCounter] = useState<number>(initialCounter);
+
+  const { toggleLike, isLiking } = useLikePools(poolId);
+
+  const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (isLiking) return;
+
+    const nextIsLiked = !isLiked;
+    setIsLiked(nextIsLiked);
+    setLikeCounter((prev) => prev + (nextIsLiked ? 1 : -1));
+
+    try {
+      await toggleLike();
+    } catch (err) {
+      setIsLiked(!nextIsLiked);
+      setLikeCounter((prev) => prev + (nextIsLiked ? -1 : 1));
+    }
+  };
+
   return (
     <Div
       p="0.5rem"
@@ -37,13 +59,12 @@ export const LikeComponent: FC<LikeComponentProps> = ({
           alignItems: 'center',
           background: '#24282D',
           justifyContent: 'center',
+          opacity: isLiking ? 0.6 : 1,
         }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        onClick={handleLike}
         whileTap={{ scale: 2.2 }}
-        whileHover={{
-          background: '#131419',
-        }}
-        onClick={(e: MouseEvent<HTMLDivElement>) => handleLikes(e)}
+        whileHover={{ background: '#131419' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <HeartSVG
           width="100%"

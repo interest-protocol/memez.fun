@@ -12,13 +12,14 @@ import { Routes, RoutesEnum } from '@/constants';
 import { usePools } from '@/hooks/use-pools';
 
 import Card from './card';
+import CardsSkleton from './components/cards-skeleton';
 
 const Home: FC = () => {
   const { push } = useRouter();
 
   const [currentFilter, setCurrentFilter] = useState('Relevance');
 
-  const { pools } = usePools(1, 10, {}, undefined, true);
+  const { pools, fullLoading } = usePools(1, 10, {}, undefined, true);
 
   const handleFilterSelect = (value: string) => {
     setCurrentFilter(value);
@@ -46,32 +47,34 @@ const Home: FC = () => {
           </Div>
           <CreateCoinButton onClick={handleCreateCoinButtonClick} />
         </Div>
-        <Div
-          width="100%"
-          gap="0.5rem"
-          display="grid"
-          flexWrap="wrap"
-          justifyContent="center"
-          gridTemplateColumns={[
-            '100%',
-            '25rem',
-            'repeat(2, 50%)',
-            'repeat(3, 20rem)',
-            'repeat(4, 24.5%)',
-          ]}
-        >
-          {pools.map(
-            ({
-              name,
-              likes,
-              poolId,
-              iconUrl,
-              lastTradeAt,
-              bondingCurve,
-              quoteBalance,
-              creatorAddress,
-            }) => {
-              return (
+        {fullLoading ? (
+          <CardsSkleton />
+        ) : (
+          <Div
+            width="100%"
+            gap="0.5rem"
+            display="grid"
+            flexWrap="wrap"
+            justifyContent="center"
+            gridTemplateColumns={[
+              '100%',
+              '25rem',
+              'repeat(2, 50%)',
+              'repeat(3, 20rem)',
+              'repeat(4, 24.5%)',
+            ]}
+          >
+            {pools.map(
+              ({
+                name,
+                likes,
+                poolId,
+                iconUrl,
+                lastTradeAt,
+                bondingCurve,
+                quoteBalance,
+                creatorAddress,
+              }) => (
                 <Card
                   key={v4()}
                   name={name}
@@ -82,13 +85,11 @@ const Home: FC = () => {
                   quoteBalance={quoteBalance}
                   creatorAddress={creatorAddress}
                   bondingCurve={Number(bondingCurve)}
-                  // isVerified={isVerified}
-                  // cardNumber={cardNumber}
                 />
-              );
-            }
-          )}
-        </Div>
+              )
+            )}
+          </Div>
+        )}
       </Div>
     </Layout>
   );

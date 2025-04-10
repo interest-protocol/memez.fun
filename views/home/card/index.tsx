@@ -41,9 +41,9 @@ const Card: FC<CardProps> = ({
       transition="0.3s"
       borderRadius="1.5rem"
       onClick={handleOnCardClick}
+      border="1px solid #24282D"
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
-      border="1px solid #24282D"
       nHover={{
         borderColor: isCardHovered ? '#F8D375' : 'none',
       }}
@@ -61,7 +61,11 @@ const Card: FC<CardProps> = ({
         bondingCurve={bondingCurve}
         lastPurchase={lastPurchase}
       />
-      <CardFooter data={likes?.data ?? []} total={likes?.total ?? 0} />
+      <CardFooter
+        poolId={poolId}
+        data={likes?.data ?? []}
+        total={likes?.total ?? 0}
+      />
     </Div>
   );
 };

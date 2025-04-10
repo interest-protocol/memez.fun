@@ -5,6 +5,7 @@ export interface HeroCarouselItemProps {
   iconSize?: string;
   marketCap: string;
   volume24h?: string;
+  isLoading?: boolean;
   allTimeVolume?: string;
 }
 
@@ -28,3 +29,7 @@ export interface MiniHeroCarouselItemProps
     HeroCarouselItemProps,
     'iconUrl' | 'name' | 'isHot' | 'iconSize'
   > {}
+
+export interface HeroCarouselItemTokenIconSkeletonProps {
+  size?: string;
+}

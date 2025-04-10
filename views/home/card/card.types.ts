@@ -26,10 +26,13 @@ export interface Likes {
 }
 
 export interface CardLikesProps {
+  poolId: string;
   totalLikes: number;
 }
 
-export interface CardFooterProps extends Likes {}
+export interface CardFooterProps extends Likes {
+  poolId: string;
+}
 
 export interface CardProps extends CardIconProps, CardBodyProps {
   likes?: Likes;

@@ -12,7 +12,7 @@ import MiniHeroCarouselItem from './mini-hero-carousel-item';
 
 const Hero: FC = () => {
   const { isMobile } = useIsMobile();
-  const { pools } = usePools(
+  const { pools, fullLoading } = usePools(
     1,
     3,
     {
@@ -33,6 +33,7 @@ const Hero: FC = () => {
                 key={v4()}
                 iconSize="10rem"
                 name={item.name}
+                isLoading={fullLoading}
                 volume24h={item.volume24H}
                 marketCap={item.quoteBalance}
                 iconUrl={item.iconUrl as string}
