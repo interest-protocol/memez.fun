@@ -1,4 +1,5 @@
 import { SuiTransactionBlockResponse } from '@mysten/sui/client';
+import { Transaction } from '@mysten/sui/transactions';
 
 import { TimedSuiTransactionBlockResponse } from '@/interface';
 
@@ -23,7 +24,7 @@ export const signAndExecute = async ({
 }: SignAndExecuteArgs): Promise<TimedSuiTransactionBlockResponse> => {
   const { signature, bytes } = await signTransaction.mutateAsync({
     account: currentAccount,
-    transaction: tx,
+    transaction: tx as Transaction | string,
   });
 
   const startTime = Date.now();

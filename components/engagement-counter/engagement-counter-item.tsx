@@ -7,8 +7,9 @@ import { ArrowUpRightFromSquareSVG } from '../svg';
 import { EngagementCounterModalItemProps } from './engagement-counter.types';
 
 const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
-  userName,
-  userAvatar,
+  id,
+  name,
+  avatar,
 }) => {
   return (
     <Div
@@ -24,9 +25,9 @@ const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
       }}
     >
       <Div gap="1rem" display="flex" alignItems="center">
-        <Avatar imgSrc={userAvatar} title={userName} size="large" isVerified />
+        <Avatar id={id} isVerified size="large" name={name} avatar={avatar} />
         <Span color="#E4E7EB" fontSize="1rem">
-          {userName}
+          {name}
         </Span>
       </Div>
       <Div cursor="pointer">

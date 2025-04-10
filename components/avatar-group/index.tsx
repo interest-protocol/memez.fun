@@ -25,13 +25,12 @@ const AvatarGroup: FC<AvatarGroupProps> = ({ items }) => {
 
   return (
     <Div gap="0.5rem" display="flex" cursor="pointer" color="#F6C853">
-      {items.slice(0, MAX_ITEMS).map(({ id, name, avatar, username }) => (
-        <TooltipWrapper key={v4()} tooltipContent={username}>
+      {items.slice(0, MAX_ITEMS).map(({ id, name, avatar }) => (
+        <TooltipWrapper key={v4()} tooltipContent={name}>
           <Avatar
             id={id}
             name={name}
             avatar={avatar}
-            username={username}
             onClick={handleAvatarClick}
           />
         </TooltipWrapper>
