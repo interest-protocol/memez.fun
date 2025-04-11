@@ -11,7 +11,7 @@ import { useConnectModal } from './wallet-button.hook';
 const WalletButton: FC = () => {
   const handleOpenConnectModal = useConnectModal();
   const signMessage = useSignPersonalMessage();
-  const [signedMessage, setSignedMessage] = useLocalStorage<{
+  const [userAuth, setUserAuth] = useLocalStorage<{
     signature: string;
     bytes: string;
   } | null>('ww-signed-messages', null);
@@ -22,14 +22,14 @@ const WalletButton: FC = () => {
   };
 
   useEffect(() => {
-    if (signedMessage || !currentAccount) return;
+    if (userAuth || !currentAccount) return;
     signMessage
       .mutateAsync({
         message: new TextEncoder().encode(
           'Please sign this to make sure verify your identity in our services.'
         ),
       })
-      .then((response) => setSignedMessage(response));
+      .then((response) => setUserAuth(response));
   }, [currentAccount]);
 
   if (currentAccount) return <ConnectedModal />;

@@ -21,3 +21,9 @@ export interface CreateProfileFormProps {
   password: string;
   description: string;
 }
+
+export interface UserDetailsProps extends CreateProfileFormProps {
+  following: number;
+  followers: number;
+  emailVerified: boolean;
+}

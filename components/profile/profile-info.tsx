@@ -2,11 +2,12 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
 import { Div, Img, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { Routes, RoutesEnum } from '@/constants';
 import { useCoinBalance } from '@/hooks/use-coin-balance';
+import { UserDetailsProps } from '@/interface';
 import { FixedPointMath } from '@/lib/entities/fixed-point-math';
 
 import { BannerProfileSVG, CopySVG } from '../svg';
@@ -14,6 +15,38 @@ import { BannerProfileSVG, CopySVG } from '../svg';
 const ProfileInfo: FC = () => {
   const { push } = useRouter();
   const currentAccount = useCurrentAccount();
+  const [user, setUser] = useState<UserDetailsProps>();
+  // const [userAuth, setUserAuth] = useLocalStorage<{
+  //   signature: string;
+  //   bytes: string;
+  // } | null>('user-wallet-info', null);
+
+  const userMessage = 'Hello world';
+  const userSignature =
+    'ABbtymCUeVOfA2OSYy2+pJrVC14eF/hCkkRF4uYQnrc1dMM9QFotXXe0OhrNsXEsJDtAKJs7w7Pssy5LrwHjTwe544a1OxTZsL7XdFoNTtClAUXDEoDgKXWUS5GciuevHQ==';
+
+  console.log('Wallet address _> ', currentAccount?.address);
+
+  const userPrifleData = () => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_AUTH_URL}/users/${currentAccount?.address}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          signature: userSignature,
+          message: userMessage,
+          address: `${currentAccount?.address}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  };
+
+  useEffect(() => {
+    if (currentAccount) return userPrifleData();
+  }, [currentAccount]);
 
   const { balance } = useCoinBalance('0x2::sui::SUI', currentAccount?.address);
 
@@ -69,10 +102,10 @@ const ProfileInfo: FC = () => {
           flexDirection="column"
         >
           <Span color="#fff" lineHeight="1.375rem">
-            name
+            {`${user?.firstName === '' && user?.lastName === '' && 'Unknown'} `}
           </Span>
           <Span color="#90939D" lineHeight="1.375rem">
-            username
+            {user?.username}
           </Span>
         </Div>
         <Div
