@@ -7,7 +7,7 @@ import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
 import { ArrowDownSVG, FiltersSVG } from '../svg';
 import { SORT_OPTIONS } from './filter-button.data';
-import { FilterButtonProps } from './filter-button.types';
+import { FilterButtonProps, SortItem } from './filter-button.types';
 import FilterButtonItem from './filter-button-item';
 
 const FilterButton: FC<FilterButtonProps> = ({ setFilter, currentFilter }) => {
@@ -33,12 +33,14 @@ const FilterButton: FC<FilterButtonProps> = ({ setFilter, currentFilter }) => {
     setIsDropDownOpen(!isDropdownOpen);
   };
 
-  const handleFilterSelect = (value: string) => {
-    setFilter(value);
+  const handleFilterSelect = (sortItem: SortItem) => {
+    setFilter(sortItem);
     setIsDropDownOpen(false);
   };
 
-  const filteredItems = SORT_OPTIONS.filter((el) => el.label !== currentFilter);
+  const filteredItems = SORT_OPTIONS.filter(
+    (el) => el.value !== currentFilter.value
+  );
 
   const dropdownRef = useClickOutsideListenerRef<HTMLDivElement>(closeDropdown);
 
@@ -65,7 +67,7 @@ const FilterButton: FC<FilterButtonProps> = ({ setFilter, currentFilter }) => {
           justifyContent="center"
           display={['none', 'none', 'none', 'flex', 'flex']}
         >
-          {currentFilter}
+          {currentFilter.label}
           <ArrowDownSVG maxHeight="0.9rem" maxWidth="0.9rem" width="0.9rem" />
         </Div>
         <Div display={['flex', 'flex', 'flex', 'none', 'none']}>
@@ -93,7 +95,7 @@ const FilterButton: FC<FilterButtonProps> = ({ setFilter, currentFilter }) => {
               {filteredItems.map((el) => (
                 <FilterButtonItem
                   key={v4()}
-                  title={el.label}
+                  item={el}
                   onClick={handleFilterSelect}
                 />
               ))}

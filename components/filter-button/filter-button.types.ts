@@ -1,9 +1,14 @@
 export interface FilterButtonProps {
-  currentFilter: string;
-  setFilter: (value: string) => void;
+  currentFilter: SortItem;
+  setFilter: (sortItem: SortItem) => void;
 }
 
 export interface FilterButtonItemProps {
-  title: string;
-  onClick: (value: string) => void;
+  item: SortItem;
+  onClick: (sortItem: SortItem) => void;
+}
+
+export interface SortItem {
+  label: string;
+  value: string;
 }
