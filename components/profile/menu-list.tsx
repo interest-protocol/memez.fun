@@ -2,6 +2,9 @@ import { useDisconnectWallet } from '@mysten/dapp-kit';
 import { Div } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
+
+import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 
 import {
   DocIDSVG,
@@ -24,7 +27,13 @@ const MenuList: FC = () => {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isExplorerMenuOpen, setIsExplorerMenuOpen] = useState(false);
 
+  const [, setSignedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+    cookies?: unknown;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
   const handleDisconnectWallet = () => {
+    setSignedPM({ signature: '', message: '' });
     disconnectWallet();
   };
 

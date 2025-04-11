@@ -1,8 +1,10 @@
+import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Div, Span } from '@stylin.js/elements';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { Layout } from '@/components';
 import { useIsMobile } from '@/hooks/use-is-mobile';
+import { UserDetailsProps } from '@/interface';
 
 import ActivityList from './activity-list';
 import HeaderButtons from './header-buttons';
@@ -13,9 +15,38 @@ import { ProfileTabsEnum } from './profile-tabs/profile-tabs.types';
 import UserInfo from './user-info';
 
 const Profile: FC = () => {
+  const isMyProfile = true;
   const { isMobile } = useIsMobile();
   const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
-  const isMyProfile = true;
+  const currentAccount = useCurrentAccount();
+  const [user, setUser] = useState<UserDetailsProps>();
+
+  const userMessage = 'Hello world';
+  const userSignature =
+    'ABbtymCUeVOfA2OSYy2+pJrVC14eF/hCkkRF4uYQnrc1dMM9QFotXXe0OhrNsXEsJDtAKJs7w7Pssy5LrwHjTwe544a1OxTZsL7XdFoNTtClAUXDEoDgKXWUS5GciuevHQ==';
+
+  console.log('Wallet address _> ', currentAccount?.address);
+
+  const userPrifleData = () => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_AUTH_URL}/users/${currentAccount?.address}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          signature: userSignature,
+          message: userMessage,
+          address: `${currentAccount?.address}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  };
+
+  useEffect(() => {
+    if (currentAccount) return userPrifleData();
+  }, [currentAccount]);
 
   const onSelect = (tab: ProfileTabsEnum) => {
     setTabSelect(tab);
@@ -44,8 +75,8 @@ const Profile: FC = () => {
             <UserInfo />
             <HeaderButtons isMyProfile={isMyProfile} />
             <Metric
-              followers="156k"
-              following="130k"
+              followers={user?.followers}
+              following={user?.following}
               coinsOwned="12"
               totalValueCoin="1.43M"
             />
