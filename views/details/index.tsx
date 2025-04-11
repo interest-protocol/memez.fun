@@ -10,7 +10,7 @@ import MiniDetailsTokenBasics from './mini-details-token-basics';
 
 const Details: FC = () => {
   return (
-    <Layout>
+    <Layout centerContent>
       <Div
         mx="auto"
         px="1.5rem"

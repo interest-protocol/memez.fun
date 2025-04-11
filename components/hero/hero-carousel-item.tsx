@@ -15,7 +15,7 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
   isHot,
   iconUrl,
   iconSize,
-  isLoading = true,
+  isLoading,
   marketCap,
   volume24h,
   allTimeVolume,

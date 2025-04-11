@@ -95,7 +95,6 @@ export const usePools = (
               ...pool,
               likes,
               ...externalMetadata,
-              iconUrl: 'suiMan.png',
               volume24H: history1D[0].volume,
               allTimeVolume: history12M[0].volume,
             };
