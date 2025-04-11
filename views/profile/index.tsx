@@ -1,8 +1,10 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Div, Span } from '@stylin.js/elements';
 import { FC, useEffect, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { Layout } from '@/components';
+import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { UserDetailsProps } from '@/interface';
 
@@ -20,26 +22,21 @@ const Profile: FC = () => {
   const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
   const currentAccount = useCurrentAccount();
   const [user, setUser] = useState<UserDetailsProps>();
-
-  const userMessage = 'Hello world';
-  const userSignature =
-    'ABbtymCUeVOfA2OSYy2+pJrVC14eF/hCkkRF4uYQnrc1dMM9QFotXXe0OhrNsXEsJDtAKJs7w7Pssy5LrwHjTwe544a1OxTZsL7XdFoNTtClAUXDEoDgKXWUS5GciuevHQ==';
-
-  console.log('Wallet address _> ', currentAccount?.address);
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
 
   const userPrifleData = () => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_AUTH_URL}/users/${currentAccount?.address}`,
-      {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          signature: userSignature,
-          message: userMessage,
-          address: `${currentAccount?.address}`,
-        },
-      }
-    )
+    fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM?.message,
+        signature: signedPM?.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
       .then((res) => res.json())
       .then((data) => setUser(data));
   };

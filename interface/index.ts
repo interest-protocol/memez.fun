@@ -19,7 +19,7 @@ export interface CreateProfileFormProps {
   firstName: string;
   lastName: string;
   password: string;
-  description: string;
+  bio: string;
 }
 
 export interface UserDetailsProps extends CreateProfileFormProps {

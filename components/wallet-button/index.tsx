@@ -10,7 +10,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import { v4 } from 'uuid';
 
 import { LoaderSVG, MemeZLogoSVG, WalletSVG } from '@/components/svg';
-import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
 
 import ConnectedModal from './connected-modal';
@@ -58,7 +58,7 @@ const WalletButton: FC = () => {
     if (!signedPM.signature || !signedPM.message || !currentAccount || !signing)
       return;
     const signIn = async () => {
-      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/auth/sign-in`, {
+      await fetch(`${BASE_URL}/auth/sign-in`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {

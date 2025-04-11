@@ -2,8 +2,10 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
 import { Div, Img, Span } from '@stylin.js/elements';
 import { FC, useEffect, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { CopySVG, VerifiedSVG } from '@/components/svg';
+import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { UserDetailsProps } from '@/interface';
 import { copyToClipboard } from '@/utils';
 
@@ -11,16 +13,10 @@ const UserInfo: FC = () => {
   const currentAccount = useCurrentAccount();
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
   const [user, setUser] = useState<UserDetailsProps>();
-  // const [userAuth, setUserAuth] = useLocalStorage<{
-  //   signature: string;
-  //   bytes: string;
-  // } | null>('user-wallet-info', null);
-
-  const userMessage = 'Hello world';
-  const userSignature =
-    'ABbtymCUeVOfA2OSYy2+pJrVC14eF/hCkkRF4uYQnrc1dMM9QFotXXe0OhrNsXEsJDtAKJs7w7Pssy5LrwHjTwe544a1OxTZsL7XdFoNTtClAUXDEoDgKXWUS5GciuevHQ==';
-
-  console.log('Wallet address _> ', currentAccount?.address);
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
 
   const userPrifleData = () => {
     fetch(
@@ -29,8 +25,8 @@ const UserInfo: FC = () => {
         method: 'GET',
         mode: 'cors',
         headers: {
-          signature: userSignature,
-          message: userMessage,
+          message: signedPM.message,
+          signature: signedPM.signature,
           address: `${currentAccount?.address}`,
         },
       }
@@ -67,7 +63,7 @@ const UserInfo: FC = () => {
           height="140px"
           objectFit="cover"
           borderRadius="100%"
-          src="/user-default-memez-fun.png"
+          src={user?.imageUrl}
         />
       </Div>
       <Div
