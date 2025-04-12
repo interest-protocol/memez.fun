@@ -86,7 +86,7 @@ const ProfileInfo: FC = () => {
             height="100%"
             objectFit="cover"
             borderRadius="100%"
-            src={user?.imageUrl}
+            src={user?.avatar}
           />
         </Div>
         <Div

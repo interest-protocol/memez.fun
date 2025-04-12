@@ -39,25 +39,25 @@ export const CreateCoinDexData: ReadonlyArray<DexCardProps> = [
   {
     dexId: unikey(),
     dexName: 'Cetus',
-    imageUrl:
+    avatar:
       'https://assets.coingecko.com/markets/images/1134/large/cetus.png?1706865152',
   },
   {
     dexId: unikey(),
     dexName: 'Raidium',
-    imageUrl:
+    avatar:
       'https://assets.coingecko.com/markets/images/649/large/raydium.jpeg?1706864594',
   },
   {
     dexId: unikey(),
     dexName: 'Shadow Exchange',
-    imageUrl:
+    avatar:
       'https://assets.coingecko.com/markets/images/11810/large/shadow.jpg?1735902352',
   },
   {
     dexId: unikey(),
     dexName: 'Hyperliquid',
-    imageUrl:
+    avatar:
       'https://assets.coingecko.com/markets/images/1571/large/PFP.png?1714470912',
   },
 ];

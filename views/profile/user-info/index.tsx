@@ -1,43 +1,21 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
 import { Div, Img, Span } from '@stylin.js/elements';
-import { FC, useEffect, useState } from 'react';
-import { useLocalStorage } from 'usehooks-ts';
+import { FC } from 'react';
 
 import { CopySVG, VerifiedSVG } from '@/components/svg';
-import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { UserDetailsProps } from '@/interface';
 import { copyToClipboard } from '@/utils';
 
-const UserInfo: FC = () => {
+const UserInfo: FC<UserDetailsProps> = ({
+  avatar,
+  firstName,
+  lastName,
+  username,
+  emailVerified,
+}) => {
   const currentAccount = useCurrentAccount();
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
-  const [user, setUser] = useState<UserDetailsProps>();
-  const [signedPM] = useLocalStorage<{
-    signature: string;
-    message: string;
-  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
-
-  const userPrifleData = () => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_AUTH_URL}/users/${currentAccount?.address}`,
-      {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          message: signedPM.message,
-          signature: signedPM.signature,
-          address: `${currentAccount?.address}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => setUser(data));
-  };
-
-  useEffect(() => {
-    if (currentAccount) return userPrifleData();
-  }, [currentAccount]);
 
   return (
     <Div
@@ -63,7 +41,7 @@ const UserInfo: FC = () => {
           height="140px"
           objectFit="cover"
           borderRadius="100%"
-          src={user?.imageUrl}
+          src={avatar}
         />
       </Div>
       <Div
@@ -79,7 +57,7 @@ const UserInfo: FC = () => {
         justifyContent="center"
       >
         <Span width="8rem" color="#fff" lineHeight="1.375rem">
-          {`${user?.firstName === '' && user?.lastName === '' && 'Unknown'} `}
+          {`${firstName === '' && lastName === '' && 'Unknown'} `}
         </Span>
         <Div
           display="flex"
@@ -88,9 +66,9 @@ const UserInfo: FC = () => {
           alignItems="center"
         >
           <Span color="#90939D" lineHeight="1.375rem">
-            {user?.username}
+            {username}
           </Span>
-          {user?.emailVerified && (
+          {emailVerified && (
             <Div width="0.625rem" height="0.625rem" display="flex">
               <VerifiedSVG maxHeight="100%" maxWidth="100%" width="100%" />
             </Div>

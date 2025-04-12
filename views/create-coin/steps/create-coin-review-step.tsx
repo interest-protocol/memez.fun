@@ -33,7 +33,7 @@ const CreateCoinReviewStep: FC = () => {
         <P fontSize="0.875rem" fontWeight="500" textAlign="center">
           Avatar
         </P>
-        <UploadImage name="imageUrl" isReview />
+        <UploadImage name="avatar" isReview />
 
         <P fontSize="0.875rem" fontWeight="500" color="#E4E7EB">
           Details
@@ -71,7 +71,7 @@ const CreateCoinReviewStep: FC = () => {
             <DexCard
               key={unikey()}
               dexName={dex.dexName}
-              imageUrl={dex.imageUrl}
+              avatar={dex.avatar}
               isReview
             />
           )

@@ -32,9 +32,9 @@ const CreateCoinDetailsStep: FC = () => {
           Basic Details
         </P>
         <UploadImage
-          name="imageUrl"
-          status={errors.imageUrl && 'error'}
-          description={errors.imageUrl?.message}
+          name="avatar"
+          status={errors.avatar && 'error'}
+          description={errors.avatar?.message}
         />
         <InputField
           placeholder="Coin name"
@@ -65,7 +65,7 @@ const CreateCoinDetailsStep: FC = () => {
               <DexCard
                 key={unikey()}
                 dexName={dex.dexName}
-                imageUrl={dex.imageUrl}
+                avatar={dex.avatar}
                 onClick={() => {
                   setValue('dex', dex.dexId);
                 }}

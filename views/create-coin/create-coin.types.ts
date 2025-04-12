@@ -47,7 +47,7 @@ export enum CreateCoinStepEnum {
 export interface DexCardProps {
   dexId: string;
   dexName: string;
-  imageUrl: string;
+  avatar: string;
   isReview?: boolean;
   isSelected?: boolean;
   onClick?: () => void;
@@ -64,7 +64,7 @@ export interface CreateCoinForm {
   step?: number;
   success?: boolean;
   name: string;
-  imageUrl: string;
+  avatar: string;
   description: string;
   quoteCoin: string;
   supply: string;

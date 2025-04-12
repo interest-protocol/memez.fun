@@ -4,13 +4,13 @@ import {
   useSwitchAccount,
 } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
-import { Div, Span, Strong } from '@stylin.js/elements';
+import { Div, Img, Span, Strong } from '@stylin.js/elements';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { FC } from 'react';
 import toast from 'react-hot-toast';
 
-import { ChevronDownSVG, CopySVG, LogoutSVG, UserSVG } from '@/components/svg';
+import { ChevronDownSVG, CopySVG, LogoutSVG } from '@/components/svg';
 import { ExplorerMode } from '@/constants';
 import { useCoinBalance } from '@/hooks/use-coin-balance';
 import { useGetExplorerUrl } from '@/hooks/use-get-explorer-url';
@@ -28,6 +28,7 @@ const ConnectedWalletItem: FC<ConnectedWalletItemProps> = ({ account }) => {
   const { mutate: disconnectWallet } = useDisconnectWallet();
 
   const { balance } = useCoinBalance('0x2::sui::SUI', account.address);
+  const imageURL = localStorage.getItem('imageURL');
 
   const copyAddress = () => {
     toast.success('Copied!');
@@ -71,8 +72,14 @@ const ConnectedWalletItem: FC<ConnectedWalletItemProps> = ({ account }) => {
             alignItems="center"
             borderBottom={isCurrentAccount ? '1px solid #242424' : 'none'}
           >
-            <Span color="#F5B722">
-              <UserSVG maxWidth="1rem" maxHeight="1rem" width="100%" />
+            <Span color="#F5B722" width="1rem" height="1rem">
+              <Img
+                width="100%"
+                height="100%"
+                objectFit="cover"
+                borderRadius="100%"
+                src={imageURL ?? ''}
+              />
             </Span>
             <Span
               flex="1"

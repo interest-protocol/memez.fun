@@ -12,7 +12,7 @@ import { IEditProfileForm } from './edit-profile-modal.types';
 
 const EditProfileModalButton: FC = () => {
   const { trigger, getValues } = useFormContext<IEditProfileForm>();
-  const { username, name, bio, imageUrl } = getValues();
+  const { username, name, bio, avatar } = getValues();
 
   const { dialog, handleClose } = useDialog();
   const { push } = useRouter();
@@ -23,7 +23,7 @@ const EditProfileModalButton: FC = () => {
       mode: 'cors',
       body: JSON.stringify({
         name: name,
-        avatar: imageUrl,
+        avatar: avatar,
         bio: bio,
         username: username,
       }),

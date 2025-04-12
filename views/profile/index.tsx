@@ -69,7 +69,14 @@ const Profile: FC = () => {
             borderBottomLeftRadius={['0', '0', '0', '2rem']}
             borderBottomRightRadius={['0', '0', '0', '2rem']}
           >
-            <UserInfo />
+            <UserInfo
+              emailVerified={user?.emailVerified ?? false}
+              avatar={user?.avatar ?? ''}
+              username={user?.username ?? ''}
+              firstName={user?.firstName ?? ''}
+              lastName={user?.lastName ?? ''}
+              bio={user?.bio ?? ''}
+            />
             <HeaderButtons isMyProfile={isMyProfile} />
             <Metric
               followers={user?.followers}

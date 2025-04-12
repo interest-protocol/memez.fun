@@ -13,17 +13,16 @@ export interface TimedSuiTransactionBlockResponse
 }
 
 export interface CreateProfileFormProps {
-  email: string;
-  imageUrl: string;
+  email?: string;
+  avatar: string;
   username: string;
   firstName: string;
   lastName: string;
-  password: string;
   bio: string;
 }
 
 export interface UserDetailsProps extends CreateProfileFormProps {
-  following: number;
-  followers: number;
+  following?: number;
+  followers?: number;
   emailVerified: boolean;
 }

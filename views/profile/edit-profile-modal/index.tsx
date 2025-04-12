@@ -31,6 +31,7 @@ const EditProfileModal = () => {
     signature: string;
     message: string;
   }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
+  localStorage.setItem('imageURL', user?.avatar ?? '');
 
   const userPrifleData = () => {
     fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
@@ -47,7 +48,7 @@ const EditProfileModal = () => {
   };
 
   const updateFields = () => {
-    setValue('imageUrl', user?.imageUrl ?? '');
+    setValue('avatar', user?.avatar ?? '');
     setValue('name', user?.firstName ?? '');
     setValue('username', user?.username ?? '');
     setValue('bio', user?.bio ?? '');
@@ -83,9 +84,9 @@ const EditProfileModal = () => {
               Basic Details
             </P>
             <UploadImage
-              name="imageUrl"
-              status={errors.imageUrl && 'error'}
-              description={errors.imageUrl?.message}
+              name="avatar"
+              status={errors.avatar && 'error'}
+              description={errors.avatar?.message}
             />
             <InputField
               placeholder="name"
