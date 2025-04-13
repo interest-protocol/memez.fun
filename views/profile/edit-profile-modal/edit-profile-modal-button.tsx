@@ -30,7 +30,7 @@ const EditProfileModalButton: FC = () => {
     }).then((res) => res.ok);
   };
 
-  const handleEditProfiel = async () => {
+  const handleEditProfile = async () => {
     const isValid = await trigger();
 
     if (!isValid) return;
@@ -112,7 +112,7 @@ const EditProfileModalButton: FC = () => {
         transition="all .3s"
         justifyContent="center"
         border="1px solid #F6C853"
-        onClick={async () => await handleEditProfiel()}
+        onClick={async () => handleEditProfile()}
         nHover={{
           transform: 'scale(1.05)',
         }}

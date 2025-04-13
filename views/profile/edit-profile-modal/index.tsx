@@ -63,7 +63,7 @@ const EditProfileModal = () => {
   }, [user]);
   return (
     <FormProvider {...form}>
-      <Div maxHeight="90vh" overflowY="auto">
+      <Div maxHeight="90vh" overflow="hidden">
         <Div
           p="1.5rem"
           bg="#131419"
@@ -91,7 +91,7 @@ const EditProfileModal = () => {
             <InputField
               placeholder="name"
               {...register('name')}
-              tooltipDescription="username"
+              tooltipDescription="name"
               status={errors.username && 'error'}
               supportingText={errors.username?.message}
             />

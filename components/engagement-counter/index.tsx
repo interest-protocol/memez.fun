@@ -5,11 +5,13 @@ import { v4 } from 'uuid';
 import { useModal } from '@/hooks/use-modal';
 
 import { TimesSVG } from '../svg';
-import { DATA } from './engagement-counter.data';
 import { EngagementCounterModalProps } from './engagement-counter.types';
 import UserLikeItem from './engagement-counter-item';
 
-const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
+const EngagementCounterModal: FC<EngagementCounterModalProps> = ({
+  title,
+  data,
+}) => {
   const { handleClose } = useModal();
 
   return (
@@ -37,7 +39,7 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
               {title}
             </Span>
             <Span fontSize="0.875rem" fontWeight="300" color="#90939D">
-              All(14)
+              All {data?.length ?? 0}
             </Span>
           </Div>
           <Div
@@ -63,16 +65,12 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
           gap="1rem"
           pt="1rem"
           display="flex"
-          overflowY="scroll"
+          overflowY="auto"
           flexDirection="column"
           className="engagement-scroll"
         >
-          {DATA.map(({ userName, userAvatar }) => (
-            <UserLikeItem
-              key={v4()}
-              userName={userName}
-              userAvatar={userAvatar}
-            />
+          {data?.map(({ username, avatar }) => (
+            <UserLikeItem key={v4()} username={username} avatar={avatar} />
           ))}
         </Div>
       </Div>

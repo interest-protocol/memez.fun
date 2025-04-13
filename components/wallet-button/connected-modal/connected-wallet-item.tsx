@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 
 import { ChevronDownSVG, CopySVG, LogoutSVG } from '@/components/svg';
 import { ExplorerMode } from '@/constants';
+import { DEFAULT_IMAGE } from '@/constants/index';
 import { useCoinBalance } from '@/hooks/use-coin-balance';
 import { useGetExplorerUrl } from '@/hooks/use-get-explorer-url';
 import { FixedPointMath } from '@/lib/entities/fixed-point-math';
@@ -26,7 +27,6 @@ const ConnectedWalletItem: FC<ConnectedWalletItemProps> = ({ account }) => {
   const getExplorerUrl = useGetExplorerUrl();
   const { mutate: switchAccount } = useSwitchAccount();
   const { mutate: disconnectWallet } = useDisconnectWallet();
-
   const { balance } = useCoinBalance('0x2::sui::SUI', account.address);
   const imageURL = localStorage.getItem('imageURL');
 
@@ -72,15 +72,14 @@ const ConnectedWalletItem: FC<ConnectedWalletItemProps> = ({ account }) => {
             alignItems="center"
             borderBottom={isCurrentAccount ? '1px solid #242424' : 'none'}
           >
-            <Span color="#F5B722" width="1rem" height="1rem">
-              <Img
-                width="100%"
-                height="100%"
-                objectFit="cover"
-                borderRadius="100%"
-                src={imageURL ?? ''}
-              />
-            </Span>
+            <Img
+              width="2rem"
+              height="2rem"
+              bg="#F5B722"
+              objectFit="cover"
+              borderRadius="100%"
+              src={imageURL ?? DEFAULT_IMAGE}
+            />
             <Span
               flex="1"
               cursor="pointer"

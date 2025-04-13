@@ -1,7 +1,10 @@
+import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Div, Span } from '@stylin.js/elements';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import EngagementCounterModal from '@/components/engagement-counter';
+import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { useModal } from '@/hooks/use-modal';
 
 import { MetricProps } from './metric.types';
@@ -13,9 +16,61 @@ const Metric: FC<MetricProps> = ({
   totalValueCoin,
 }) => {
   const { setContent, onClose } = useModal();
+  const currentAccount = useCurrentAccount();
+  const [followingData, setFollowingData] = useState();
+  const [followersData, setFollowersData] = useState();
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+    cookies?: unknown;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
 
-  const handleClick = () =>
-    setContent(<EngagementCounterModal title="Followers" />, { onClose });
+  const getFollowing = () => {
+    fetch(`${BASE_URL}/users/${currentAccount?.address}/following`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM?.message,
+        signature: signedPM?.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setFollowingData(data));
+  };
+
+  const getFollowers = () => {
+    fetch(`${BASE_URL}/users/${currentAccount?.address}/followers`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM?.message,
+        signature: signedPM?.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setFollowersData(data));
+  };
+
+  useEffect(() => {
+    if (currentAccount) {
+      getFollowing();
+      getFollowers();
+    }
+  }, [currentAccount]);
+
+  const handleFollowers = () =>
+    setContent(
+      <EngagementCounterModal title="Followers" data={followersData} />,
+      { onClose }
+    );
+
+  const handleFollowing = () =>
+    setContent(
+      <EngagementCounterModal title="Following" data={followingData} />,
+      { onClose }
+    );
   return (
     <Div
       pb="2rem"
@@ -31,7 +86,7 @@ const Metric: FC<MetricProps> = ({
         cursor="pointer"
         transition="0.3s"
         alignItems="center"
-        onClick={handleClick}
+        onClick={handleFollowers}
         flexDirection="column"
         nHover={{
           opacity: '0.8',
@@ -50,6 +105,7 @@ const Metric: FC<MetricProps> = ({
       </Div>
       <Div
         display="flex"
+        onClick={handleFollowing}
         alignItems="center"
         flexDirection="column"
         fontSize={['1rem', '1rem', '1rem', '1.25rem']}

@@ -8,6 +8,7 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import {
   BASE_URL,
+  DEFAULT_IMAGE,
   MEMEZ_FUN_TOKEN_AUTH,
   Routes,
   RoutesEnum,
@@ -84,9 +85,10 @@ const ProfileInfo: FC = () => {
           <Img
             width="100%"
             height="100%"
+            bg="#F5B722"
             objectFit="cover"
             borderRadius="100%"
-            src={user?.avatar}
+            src={user?.avatar ?? DEFAULT_IMAGE}
           />
         </Div>
         <Div

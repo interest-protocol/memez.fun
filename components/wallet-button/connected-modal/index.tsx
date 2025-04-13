@@ -1,6 +1,6 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
-import { Button, Div, DivElementProps, Img, Span } from '@stylin.js/elements';
+import { Button, Div, DivElementProps, Img } from '@stylin.js/elements';
 import { AnimatePresence } from 'motion/react';
 import { useRouter } from 'next/router';
 import { not } from 'ramda';
@@ -9,6 +9,7 @@ import { FC, useState } from 'react';
 import Profile from '@/components/profile';
 import ChevronDown from '@/components/svg/chevron-down';
 import { Routes, RoutesEnum } from '@/constants';
+import { DEFAULT_IMAGE } from '@/constants/index';
 import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
 const ConnectedModal: FC = () => {
@@ -56,15 +57,14 @@ const ConnectedModal: FC = () => {
             push(Routes[RoutesEnum.Profile]);
           }}
         >
-          <Span color="#F5B722" width="1rem" height="1rem">
-            <Img
-              width="100%"
-              height="100%"
-              objectFit="cover"
-              borderRadius="100%"
-              src={imageURL ?? ''}
-            />
-          </Span>
+          <Img
+            width="2rem"
+            height="2rem"
+            bg="#F5B722"
+            objectFit="cover"
+            borderRadius="100%"
+            src={imageURL ?? DEFAULT_IMAGE}
+          />
         </Div>
         {formatAddress(currentAccount!.address)}
         <Div display={['none', 'block']}>

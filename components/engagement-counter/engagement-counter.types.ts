@@ -1,6 +1,6 @@
 export interface EngagementCounterModalItemProps {
-  userName: string;
-  userAvatar: string;
+  username: string;
+  avatar: string;
 }
 
 export interface EngagementCounterModalProps {
