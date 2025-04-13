@@ -20,10 +20,10 @@ const ActionCardBuyButton: FC<ActionCardButtonProps> = ({ onClick }) => {
           borderRadius: '0.875rem',
           backgroundColor: '#8BF3C5',
         }}
-        animate={{
-          width: ['11.063rem', '11.5rem', '11.5rem', '11.063rem'],
-          height: ['2rem', '2.3rem', '2.3rem', '2rem'],
-        }}
+        // animate={{
+        //   width: ['11.063rem', '11.5rem', '11.5rem', '11.063rem'],
+        //   height: ['2rem', '2.3rem', '2.3rem', '2rem'],
+        // }}
         transition={{
           duration: 1.2,
           times: [0, 0.3, 0.7, 1],

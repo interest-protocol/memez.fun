@@ -9,6 +9,8 @@ import { DetailsForm } from '../details.types';
 const DetailsCenterContent = () => {
   const formValues = useWatch<DetailsForm>();
 
+  const { bondingCurve } = formValues;
+
   return (
     <Div
       flex="1"
@@ -34,7 +36,7 @@ const DetailsCenterContent = () => {
             Bonding
           </Span>
           <Span fontSize="1.5rem" color="#90939D">
-            {formValues.bonding}
+            {formValues.bondingCurve}
           </Span>
         </Div>
         <Div
@@ -44,9 +46,9 @@ const DetailsCenterContent = () => {
           width="100%"
           bg="#24282D"
         >
-          <RangeBar value={formValues.range as number} />
+          <RangeBar value={Number(bondingCurve)} />
           <P mt="0.9rem" fontWeight="300" fontSize="0.75rem" color="#FFFFFF">
-            Bonding progress • {formValues.range}%
+            Bonding progress • {bondingCurve}%
           </P>
         </Div>
       </Div>

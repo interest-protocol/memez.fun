@@ -36,7 +36,7 @@ export const usePool = (poolId: string) => {
 
   useEffect(() => {
     const fetchPoolData = async () => {
-      const pool = data?.pool?.pool?.[0];
+      const pool = data?.pool;
       if (!pool) return;
 
       const [metadata] = await fetchMetadata([pool.coinType]);

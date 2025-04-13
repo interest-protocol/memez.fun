@@ -1,3 +1,4 @@
+import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
@@ -27,6 +28,8 @@ const MiniDetailsTokenBasics: FC = () => {
   const [isliked, setIsLiked] = useState<boolean>(false);
 
   const formValues = useWatch<DetailsForm>();
+
+  const { type } = formValues;
 
   const handleClick = () => {
     setShowMoreDetails(!showMoreDetails);
@@ -73,7 +76,9 @@ const MiniDetailsTokenBasics: FC = () => {
                 color="#90939D"
                 alignItems="center"
               >
-                <P fontSize="0.75rem">{formValues.type}</P>{' '}
+                {type && (
+                  <P fontSize="0.75rem">{formatAddress(type as string)}</P>
+                )}
                 <Div
                   cursor="pointer"
                   onClick={() =>
@@ -93,6 +98,7 @@ const MiniDetailsTokenBasics: FC = () => {
             </Div>
           </Div>
           <LikeComponent
+            poolId={formValues.poolId as string}
             revertOrder
             likeCounter={50}
             isLiked={isliked}

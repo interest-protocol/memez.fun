@@ -1,4 +1,6 @@
+import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { not } from 'ramda';
 import { useState } from 'react';
 import { useWatch } from 'react-hook-form';
@@ -22,6 +24,11 @@ const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
 
   const formValues = useWatch<DetailsForm>();
+
+  const { coinType, creatorAddress, allTimeVolume } = formValues;
+
+  const router = useRouter();
+  const { id: poolId } = router.query;
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likeCounter, setLikeCounter] = useState<number>(100);
@@ -56,31 +63,37 @@ const DetailsTokenBasics = () => {
           {formValues.name}
         </Span>
         <LikeComponent
+          poolId={poolId as string}
           revertOrder
           isLiked={isLiked}
           likeCounter={likeCounter}
           handleLikes={handleLike}
         />
       </Div>
-      <TokenCardIcon imgSrc={formValues.tokenIcon as string} />
-      <Div
-        py="0.75rem"
-        gap="0.5rem"
-        display="flex"
-        color="#FBFBFB"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <P fontSize="0.75rem">{formValues.type}</P>
+      <TokenCardIcon imgSrc={formValues.iconUrl as string} />
+      {coinType && (
         <Div
-          cursor="pointer"
-          onClick={() =>
-            copyToClipboard(formValues.type as string, clipBoardSuccessMessage)
-          }
+          py="0.75rem"
+          gap="0.5rem"
+          display="flex"
+          color="#FBFBFB"
+          alignItems="center"
+          justifyContent="center"
         >
-          <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
+          <P fontSize="0.75rem">{formatAddress(coinType as string)}</P>
+          <Div
+            cursor="pointer"
+            onClick={() =>
+              copyToClipboard(
+                formValues.coinType as string,
+                clipBoardSuccessMessage
+              )
+            }
+          >
+            <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
+          </Div>
         </Div>
-      </Div>
+      )}
       <Div
         py="2rem"
         gap="0.5rem"
@@ -88,7 +101,9 @@ const DetailsTokenBasics = () => {
         color="#FBFBFB"
         justifyContent="center"
       >
-        <P fontSize="1rem">Created by • {formValues.createdBy}</P>
+        <P fontSize="1rem">
+          Created by • {formatAddress(creatorAddress as string)}
+        </P>
       </Div>
       <DetailsTokenBasicsSocials />
       <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
@@ -126,7 +141,7 @@ const DetailsTokenBasics = () => {
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
               <CetusSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-              <Span fontSize="1.25rem">{formValues.dex}</Span>{' '}
+              <Span fontSize="1.25rem">{formValues.symbol}</Span>
             </Div>
           </Div>
           <Div
@@ -154,7 +169,7 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Total supply:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">{formValues.volume}</Span>
+              <Span fontSize="1.25rem">{allTimeVolume}</Span>
             </Div>
           </Div>
           <Div
@@ -182,7 +197,7 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Quote coin:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>{' '}
+              <Span fontSize="1.25rem">{formValues.virtualLiquidity}</Span>
             </Div>
           </Div>
         </Div>

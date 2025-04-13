@@ -12,14 +12,16 @@ import { FixedPointMath } from '@/lib/entities/fixed-point-math';
 import { BannerProfileSVG, CopySVG } from '../svg';
 
 const ProfileInfo: FC = () => {
-  const currentAccount = useCurrentAccount();
   const { push } = useRouter();
+  const currentAccount = useCurrentAccount();
 
   const { balance } = useCoinBalance('0x2::sui::SUI', currentAccount?.address);
 
   const copyAddress = () => {
     toast.success('Copied!');
-    window.navigator.clipboard.writeText('0x2::sui::SUI');
+    window.navigator.clipboard.writeText(
+      formatAddress(currentAccount?.address || '')
+    );
   };
 
   return (
@@ -67,10 +69,10 @@ const ProfileInfo: FC = () => {
           flexDirection="column"
         >
           <Span color="#fff" lineHeight="1.375rem">
-            Name
+            name
           </Span>
           <Span color="#90939D" lineHeight="1.375rem">
-            {formatAddress(currentAccount?.address || '')}
+            username
           </Span>
         </Div>
         <Div

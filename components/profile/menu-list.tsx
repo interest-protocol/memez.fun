@@ -2,6 +2,9 @@ import { useDisconnectWallet } from '@mysten/dapp-kit';
 import { Div } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
+
+import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 
 import {
   DocIDSVG,
@@ -20,9 +23,19 @@ import RPCCollapseMenuInfo from './rpc-collapse-info';
 const MenuList: FC = () => {
   const [isActiveNSFE, setIsActiveNSFE] = useState(false);
   const [isRPCMenuOpen, setIsRPCMenuOpen] = useState(false);
+  const { mutate: disconnectWallet } = useDisconnectWallet();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isExplorerMenuOpen, setIsExplorerMenuOpen] = useState(false);
-  const { mutate: disconnectWallet } = useDisconnectWallet();
+
+  const [, setSignedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+    cookies?: unknown;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
+  const handleDisconnectWallet = () => {
+    setSignedPM({ signature: '', message: '' });
+    disconnectWallet();
+  };
 
   return (
     <Div>
@@ -58,7 +71,7 @@ const MenuList: FC = () => {
         Icon={LogoutSVG}
         title="Disconnect"
         color="#E85965"
-        onClick={() => disconnectWallet()}
+        onClick={handleDisconnectWallet}
       />
     </Div>
   );
