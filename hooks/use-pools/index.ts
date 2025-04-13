@@ -82,7 +82,7 @@ export const usePools = (
         );
       } catch (err) {
         setError(err as Error);
-        return pools; // Retorna os pools não enriquecidos em caso de erro
+        return pools;
       }
     },
     [getPoolsLikes]
@@ -106,11 +106,10 @@ export const usePools = (
         const enrichedPools = await enrichPoolsData(data.pools.pools);
 
         setAllPools((prev) => {
-          // Se for a primeira página, substitui todos os pools
           if (currentPage === 1) {
             return enrichedPools;
           }
-          // Se for uma página adicional, concatena os novos pools enriquecidos
+
           return [...prev, ...enrichedPools];
         });
       } catch (err) {

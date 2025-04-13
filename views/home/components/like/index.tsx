@@ -37,7 +37,7 @@ export const LikeComponent: FC<LikeComponentProps> = ({
   return (
     <Div
       p="0.5rem"
-      gap=".5rem"
+      gap="0.5rem"
       display="flex"
       color="#F6C853"
       borderRadius="1rem"

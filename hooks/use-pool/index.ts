@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
 import { Pool } from '@/interface';
-import { fetchCoinHistory, fetchMetadata } from '@/utils/pools';
+import { fetchCoinHistory, fetchMetadata, fetchPoolLikes } from '@/utils/pools';
 
 const GET_POOL = gql`
   query GetPool($poolId: String!) {
@@ -41,14 +41,21 @@ export const usePool = (poolId: string) => {
 
       const [metadata] = await fetchMetadata([pool.coinType]);
 
-      const [history1D, history12M] = await Promise.all([
+      const [likes, history1D, history12M] = await Promise.all([
+        fetchPoolLikes(pool.poolId),
         fetchCoinHistory(pool.coinType, '1D'),
         fetchCoinHistory(pool.coinType, '12M'),
       ]);
 
+      const { data: likesData, total: likesTotal } = likes;
+
       setPoolWithRemainingData({
         ...pool,
         ...metadata,
+        likes: {
+          data: likesData[0],
+          total: likesTotal,
+        },
         iconUrl: 'suiMan.png',
         volume24H: history1D[0].volume,
         allTimeVolume: history12M[0].volume,

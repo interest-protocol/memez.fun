@@ -29,7 +29,7 @@ const MiniDetailsTokenBasics: FC = () => {
 
   const formValues = useWatch<DetailsForm>();
 
-  const { type } = formValues;
+  const { coinType } = formValues;
 
   const handleClick = () => {
     setShowMoreDetails(!showMoreDetails);
@@ -76,16 +76,13 @@ const MiniDetailsTokenBasics: FC = () => {
                 color="#90939D"
                 alignItems="center"
               >
-                {type && (
-                  <P fontSize="0.75rem">{formatAddress(type as string)}</P>
+                {coinType && (
+                  <P fontSize="0.75rem">{formatAddress(coinType as string)}</P>
                 )}
                 <Div
                   cursor="pointer"
                   onClick={() =>
-                    copyToClipboard(
-                      formValues.type as string,
-                      clipBoardSuccessMessage
-                    )
+                    copyToClipboard(coinType as string, clipBoardSuccessMessage)
                   }
                 >
                   <ClipBoardPaperSVG
@@ -114,7 +111,7 @@ const MiniDetailsTokenBasics: FC = () => {
           borderRadius="0.75rem"
           justifyContent="center"
         >
-          <RangeBar value={formValues.range as number} />
+          <RangeBar value={Number(formValues.bondingCurve)} />
           <P fontWeight="300" fontSize="0.875rem" color="#FFFFFF">
             Bonding
           </P>
@@ -137,7 +134,7 @@ const MiniDetailsTokenBasics: FC = () => {
             color="#FBFBFB"
             justifyContent="center"
           >
-            <P fontSize="1rem">Created by • {formValues.createdBy}</P>
+            <P fontSize="1rem">Created by • {formValues.creatorAddress}</P>
           </Div>
         </Div>
         <Div px="1rem">
@@ -177,7 +174,7 @@ const MiniDetailsTokenBasics: FC = () => {
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
                 <SuiLogoSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-                <Span fontSize="1.25rem">{formValues.dex}</Span>
+                <Span fontSize="1.25rem">{formValues.symbol}</Span>
               </Div>
             </Div>
             <Div
@@ -205,7 +202,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Total supply:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">{formValues.volume}</Span>
+                <Span fontSize="1.25rem">{formValues.allTimeVolume}</Span>
               </Div>
             </Div>
             <Div
@@ -233,7 +230,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Quote coin:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>
+                <Span fontSize="1.25rem">{formValues.virtualLiquidity}</Span>
               </Div>
             </Div>
           </Div>

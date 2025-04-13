@@ -2,7 +2,7 @@ import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { not } from 'ramda';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 
 import {
@@ -25,17 +25,25 @@ const DetailsTokenBasics = () => {
 
   const formValues = useWatch<DetailsForm>();
 
-  const { coinType, creatorAddress, allTimeVolume } = formValues;
+  const { coinType, creatorAddress, allTimeVolume, likes } = formValues;
+  const [likeCounter, setLikeCounter] = useState<number>(
+    () => likes?.total ?? 0
+  );
 
   const router = useRouter();
   const { id: poolId } = router.query;
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCounter, setLikeCounter] = useState<number>(100);
+
+  useEffect(() => {
+    if (likes?.total !== undefined) {
+      setLikeCounter(likes.total);
+    }
+  }, [likes?.total]);
 
   const handleLike = () => {
     setIsLiked(not);
-    setLikeCounter((likeCounter) =>
+    setLikeCounter((likeCounter: number) =>
       isLiked ? likeCounter - 1 : likeCounter + 1
     );
   };
@@ -47,27 +55,27 @@ const DetailsTokenBasics = () => {
       transition="0.3s"
       borderRadius="1.5rem"
       maxHeight="53.438rem"
-      border="1px solid #24282D"
-      display={['none', 'none', 'none', 'flex', 'flex']}
       flexDirection="column"
+      border="1px solid #24282D"
       justifyContent="space-between"
+      display={['none', 'none', 'none', 'flex', 'flex']}
     >
       <Div
         px="1rem"
         pb="1.25rem"
         display="flex"
         color="#fff"
+        alignItems="center"
         justifyContent="space-between"
       >
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
           {formValues.name}
         </Span>
         <LikeComponent
-          poolId={poolId as string}
           revertOrder
-          isLiked={isLiked}
-          likeCounter={likeCounter}
           handleLikes={handleLike}
+          poolId={poolId as string}
+          likeCounter={likeCounter}
         />
       </Div>
       <TokenCardIcon imgSrc={formValues.iconUrl as string} />
@@ -94,17 +102,19 @@ const DetailsTokenBasics = () => {
           </Div>
         </Div>
       )}
-      <Div
-        py="2rem"
-        gap="0.5rem"
-        display="flex"
-        color="#FBFBFB"
-        justifyContent="center"
-      >
-        <P fontSize="1rem">
-          Created by • {formatAddress(creatorAddress as string)}
-        </P>
-      </Div>
+      {creatorAddress && (
+        <Div
+          py="2rem"
+          gap="0.5rem"
+          display="flex"
+          color="#FBFBFB"
+          justifyContent="center"
+        >
+          <P fontSize="1rem">
+            Created by • {formatAddress(creatorAddress as string)}
+          </P>
+        </Div>
+      )}
       <DetailsTokenBasicsSocials />
       <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
         <Div
@@ -161,9 +171,9 @@ const DetailsTokenBasics = () => {
                 justifyContent="center"
               >
                 <DollarSignSVG
-                  maxHeight="0.8rem"
-                  maxWidth="0.8rem"
                   width="0.8rem"
+                  maxWidth="0.8rem"
+                  maxHeight="0.8rem"
                 />
               </Div>
               <P fontSize="0.875rem">Total supply:</P>

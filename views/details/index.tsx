@@ -23,16 +23,17 @@ const Details: FC = () => {
 
   useEffect(() => {
     if (pool) {
-      setValue('name', pool.name || '');
-      setValue('poolId', pool.poolId || '');
-      setValue('coinType', pool.coinType || '');
-      setValue('bondingCurve', pool.bondingCurve || '');
+      setValue('name', pool.name);
+      setValue('poolId', pool.poolId);
+      setValue('coinType', pool.coinType);
+      setValue('bondingCurve', pool.bondingCurve);
+      setValue('likes', pool.likes);
       // setValue('dex', 'Your DEX');
-      setValue('volume24H', pool.volume24H || '');
-      setValue('symbol', pool.symbol || '');
-      setValue('iconUrl', pool.iconUrl || '');
-      setValue('creatorAddress', pool.creatorAddress || '');
-      setValue('quoteBalance', pool.quoteBalance || '');
+      setValue('volume24H', pool.volume24H);
+      setValue('symbol', pool.symbol);
+      setValue('iconUrl', pool.iconUrl);
+      setValue('creatorAddress', pool.creatorAddress);
+      setValue('quoteBalance', pool.quoteBalance);
     }
   }, [pool, setValue]);
 
