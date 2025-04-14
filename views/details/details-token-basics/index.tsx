@@ -2,8 +2,8 @@ import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { not } from 'ramda';
-import { useEffect, useState } from 'react';
-import { useWatch } from 'react-hook-form';
+import { useState } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import {
   CetusSVG,
@@ -18,28 +18,33 @@ import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsFooter from './details-token-basics-footer';
-import DetailsTokenBasicsSocials from './details-token-basics-social';
+// import DetailsTokenBasicsSocials from './details-token-basics-social';
 
 const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
 
+  const { control } = useFormContext<DetailsForm>();
+
   const formValues = useWatch<DetailsForm>();
 
-  const { coinType, creatorAddress, allTimeVolume, likes } = formValues;
-  const [likeCounter, setLikeCounter] = useState<number>(
-    () => likes?.total ?? 0
-  );
+  const likes = useWatch<DetailsForm>({ control, name: 'likes' });
+
+  const {
+    coinType,
+    creatorAddress,
+    allTimeVolume,
+    // socials,
+    name,
+    iconUrl,
+    virtualLiquidity,
+  } = formValues;
+
+  const [likeCounter, setLikeCounter] = useState<number>(likes?.total || 0);
 
   const router = useRouter();
   const { id: poolId } = router.query;
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (likes?.total !== undefined) {
-      setLikeCounter(likes.total);
-    }
-  }, [likes?.total]);
 
   const handleLike = () => {
     setIsLiked(not);
@@ -69,7 +74,7 @@ const DetailsTokenBasics = () => {
         justifyContent="space-between"
       >
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
-          {formValues.name}
+          {name}
         </Span>
         <LikeComponent
           revertOrder
@@ -78,7 +83,7 @@ const DetailsTokenBasics = () => {
           likeCounter={likeCounter}
         />
       </Div>
-      <TokenCardIcon imgSrc={formValues.iconUrl as string} />
+      <TokenCardIcon imgSrc={String(iconUrl)} />
       {coinType && (
         <Div
           py="0.75rem"
@@ -92,10 +97,7 @@ const DetailsTokenBasics = () => {
           <Div
             cursor="pointer"
             onClick={() =>
-              copyToClipboard(
-                formValues.coinType as string,
-                clipBoardSuccessMessage
-              )
+              copyToClipboard(coinType as string, clipBoardSuccessMessage)
             }
           >
             <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
@@ -115,7 +117,7 @@ const DetailsTokenBasics = () => {
           </P>
         </Div>
       )}
-      <DetailsTokenBasicsSocials />
+      {/* <DetailsTokenBasicsSocials socials={socials || []} /> */}
       <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
         <Div
           p="1rem"
@@ -207,7 +209,7 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Quote coin:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">{formValues.virtualLiquidity}</Span>
+              <Span fontSize="1.25rem">{virtualLiquidity}</Span>
             </Div>
           </Div>
         </Div>

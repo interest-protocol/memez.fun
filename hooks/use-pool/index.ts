@@ -26,48 +26,60 @@ const GET_POOL = gql`
 `;
 
 export const usePool = (poolId: string) => {
-  const { data, loading, error } = useQuery(GET_POOL, {
+  const { data, error } = useQuery(GET_POOL, {
     variables: { poolId },
     skip: !poolId,
   });
 
   const [poolWithRemainingData, setPoolWithRemainingData] =
     useState<Pool | null>(null);
+  const [isFullyLoading, setIsFullyLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchPoolData = async () => {
       const pool = data?.pool;
       if (!pool) return;
 
-      const [metadata] = await fetchMetadata([pool.coinType]);
+      setIsFullyLoading(true);
 
-      const [likes, history1D, history12M] = await Promise.all([
-        fetchPoolLikes(pool.poolId),
-        fetchCoinHistory(pool.coinType, '1D'),
-        fetchCoinHistory(pool.coinType, '12M'),
-      ]);
+      try {
+        const [metadata] = await fetchMetadata([pool.coinType]);
 
-      const { data: likesData, total: likesTotal } = likes;
+        const [likes, history1D, history12M] = await Promise.all([
+          fetchPoolLikes(pool.poolId),
+          fetchCoinHistory(pool.coinType, '1D'),
+          fetchCoinHistory(pool.coinType, '12M'),
+        ]);
 
-      setPoolWithRemainingData({
-        ...pool,
-        ...metadata,
-        likes: {
-          data: likesData[0],
-          total: likesTotal,
-        },
-        iconUrl: 'suiMan.png',
-        volume24H: history1D[0].volume,
-        allTimeVolume: history12M[0].volume,
-      });
+        const { data: likesData, total: likesTotal } = likes;
+
+        setPoolWithRemainingData({
+          ...pool,
+          ...metadata,
+          // socials,
+          likes: {
+            data: likesData[0],
+            total: likesTotal,
+          },
+          iconUrl: 'suiMan.png',
+          volume24H: history1D[0].volume,
+          allTimeVolume: history12M[0].volume,
+        });
+      } catch (err) {
+        console.error('Erro ao buscar dados do pool:', err);
+      } finally {
+        setIsFullyLoading(false);
+      }
     };
 
-    if (data) fetchPoolData();
+    if (data) {
+      fetchPoolData();
+    }
   }, [data]);
 
   return {
     pool: poolWithRemainingData,
-    loading,
+    loading: isFullyLoading,
     error,
   };
 };

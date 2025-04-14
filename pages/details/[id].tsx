@@ -7,7 +7,9 @@ import { DetailsForm } from '@/views/details/details.types';
 
 const DetailsPage: NextPage = () => {
   const form = useForm<DetailsForm>({
-    defaultValues: {},
+    defaultValues: {
+      socials: [],
+    },
   });
 
   return (

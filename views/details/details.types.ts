@@ -1,5 +1,7 @@
 import { CoinMetadata } from '@mysten/sui/client';
 
+import { SocialProps } from '@/components/layout/footer/footer.types';
+
 import { Likes } from '../home/card/card.types';
 
 export interface DetailsForm extends CoinMetadata {
@@ -20,4 +22,5 @@ export interface DetailsForm extends CoinMetadata {
   allTimeVolume: string;
   creatorAddress: string;
   virtualLiquidity: string;
+  socials: Array<SocialProps>;
 }

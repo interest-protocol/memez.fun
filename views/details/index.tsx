@@ -6,6 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { Layout } from '@/components';
 import { usePool } from '@/hooks/use-pool';
 
+import DetailsSkeleton from './components/skeletons';
 import { DetailsForm } from './details.types';
 import DetailsCenterContent from './details-center-content';
 import DetailsRightContent from './details-right-content';
@@ -17,7 +18,7 @@ const Details: FC = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  const { pool } = usePool(id as string);
+  const { pool, loading } = usePool(id as string);
 
   console.log('pool', pool);
 
@@ -28,39 +29,42 @@ const Details: FC = () => {
       setValue('coinType', pool.coinType);
       setValue('bondingCurve', pool.bondingCurve);
       setValue('likes', pool.likes);
-      // setValue('dex', 'Your DEX');
       setValue('volume24H', pool.volume24H);
       setValue('symbol', pool.symbol);
       setValue('iconUrl', pool.iconUrl);
       setValue('creatorAddress', pool.creatorAddress);
       setValue('quoteBalance', pool.quoteBalance);
+      setValue('socials', pool.socials);
     }
   }, [pool, setValue]);
 
   return (
-    <Layout centerContent>
-      <Div
-        mx="auto"
-        px="1.5rem"
-        gap="1.5rem"
-        display="grid"
-        flexWrap="wrap"
-        maxWidth="1400px"
-        justifyContent="center"
-        gridTemplateColumns={[
-          '100%',
-          '100%',
-          'repeat(1, 98%)',
-          'repeat(3, 1fr)',
-          '1fr 2fr 1fr',
-        ]}
-      >
-        {/* <DetailsSkeleton /> */}
-        <MiniDetailsTokenBasics />
-        <DetailsTokenBasics />
-        <DetailsCenterContent />
-        <DetailsRightContent />
-      </Div>
+    <Layout>
+      {loading ? (
+        <DetailsSkeleton />
+      ) : (
+        <Div
+          mx="auto"
+          px="1.5rem"
+          gap="1.5rem"
+          display="grid"
+          flexWrap="wrap"
+          maxWidth="1400px"
+          justifyContent="center"
+          gridTemplateColumns={[
+            '100%',
+            '100%',
+            'repeat(1, 98%)',
+            'repeat(3, 1fr)',
+            '1fr 2fr 1fr',
+          ]}
+        >
+          <MiniDetailsTokenBasics />
+          <DetailsTokenBasics />
+          <DetailsCenterContent />
+          <DetailsRightContent />
+        </Div>
+      )}
     </Layout>
   );
 };
