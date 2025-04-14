@@ -121,7 +121,11 @@ const CardIcon: FC<CardIconProps> = ({
           }}
         >
           Created by •
-          <Span ml="0.2rem" onClick={copyAddress}>
+          <Span
+            nHover={{ opacity: 0.8, cursor: 'pointer' }}
+            ml="0.2rem"
+            onClick={copyAddress}
+          >
             {formatAddress(creatorAddress)}
           </Span>
           <Div

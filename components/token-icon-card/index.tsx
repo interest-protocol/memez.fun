@@ -9,6 +9,7 @@ import { TokenCardIconProps } from './token-icon-card.types';
 
 const TokenCardIcon: FC<TokenCardIconProps> = ({
   imgSrc,
+  userAddress,
   isCardHovered,
   showCardDetails,
   isMiniDetailsCard,
@@ -124,7 +125,7 @@ const TokenCardIcon: FC<TokenCardIconProps> = ({
             borderBottomRightRadius: '1.3rem',
           }}
         >
-          Created by • username
+          Created by • {userAddress}
           <Div
             ml="0.3rem"
             display="flex"

@@ -1,5 +1,6 @@
 export interface TokenCardIconProps {
   imgSrc: string;
+  userAddress: string;
   isCardHovered?: boolean;
   showCardDetails?: boolean;
   isMiniDetailsCard?: boolean;

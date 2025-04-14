@@ -39,8 +39,6 @@ const DetailsTokenBasics = () => {
     virtualLiquidity,
   } = formValues;
 
-  const [likeCounter, setLikeCounter] = useState<number>(likes?.total || 0);
-
   const router = useRouter();
   const { id: poolId } = router.query;
 
@@ -48,9 +46,6 @@ const DetailsTokenBasics = () => {
 
   const handleLike = () => {
     setIsLiked(not);
-    setLikeCounter((likeCounter: number) =>
-      isLiked ? likeCounter - 1 : likeCounter + 1
-    );
   };
 
   return (
@@ -78,12 +73,16 @@ const DetailsTokenBasics = () => {
         </Span>
         <LikeComponent
           revertOrder
+          isLiked={isLiked}
           handleLikes={handleLike}
           poolId={poolId as string}
-          likeCounter={likeCounter}
+          likeCounter={likes?.total || 0}
         />
       </Div>
-      <TokenCardIcon imgSrc={String(iconUrl)} />
+      <TokenCardIcon
+        userAddress={creatorAddress as string}
+        imgSrc={String(iconUrl)}
+      />
       {coinType && (
         <Div
           py="0.75rem"
@@ -111,8 +110,11 @@ const DetailsTokenBasics = () => {
           display="flex"
           color="#FBFBFB"
           justifyContent="center"
+          onClick={() =>
+            copyToClipboard(creatorAddress as string, clipBoardSuccessMessage)
+          }
         >
-          <P fontSize="1rem">
+          <P nHover={{ opacity: 0.8, cursor: 'pointer' }} fontSize="1rem">
             Created by • {formatAddress(creatorAddress as string)}
           </P>
         </Div>
