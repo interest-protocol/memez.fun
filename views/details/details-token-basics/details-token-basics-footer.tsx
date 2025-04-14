@@ -1,47 +1,13 @@
 import { Div } from '@stylin.js/elements';
-import { FC, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { FC } from 'react';
 
 import AvatarGroup from '@/components/avatar-group';
-import { fetchPoolLikes } from '@/utils/pools';
 
-import { DetailsForm } from '../details.types';
 import { DetailsTokenBasicsFooterProps } from './details-token-basics.types';
 
 const DetailsTokenBasicsFooter: FC<DetailsTokenBasicsFooterProps> = ({
-  poolId,
+  usersLikes,
 }) => {
-  const { control } = useFormContext<DetailsForm>();
-
-  const [likes, setLikes] = useState({
-    data: [],
-    loading: false,
-    error: null,
-  });
-
-  useEffect(() => {
-    const getPoolLikes = async () => {
-      setLikes((prev) => ({ ...prev, loading: true }));
-
-      try {
-        const res = await fetchPoolLikes(poolId as string);
-        setLikes({
-          data: res.data.map((el) => ({ ...el, name: el.username })),
-          loading: false,
-          error: null,
-        });
-      } catch (err) {
-        setLikes({
-          data: [],
-          loading: false,
-          error: err,
-        });
-      }
-    };
-
-    getPoolLikes();
-  }, [poolId]);
-
   return (
     <Div
       pt="1rem"
@@ -57,7 +23,7 @@ const DetailsTokenBasicsFooter: FC<DetailsTokenBasicsFooterProps> = ({
     >
       <AvatarGroup
         items={
-          likes?.data || [
+          usersLikes || [
             {
               id: '',
               name: '',

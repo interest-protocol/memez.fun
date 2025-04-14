@@ -1,4 +1,5 @@
 import { SocialProps } from '@/components/layout/footer/footer.types';
+import { UserLike } from '@/views/home/card/card.types';
 
 export interface DetailsTokenBasicsSocialsProps {
   isDisabled?: boolean;
@@ -6,5 +7,6 @@ export interface DetailsTokenBasicsSocialsProps {
 }
 
 export interface DetailsTokenBasicsFooterProps {
-  poolId: string;
+  totalLikes?: number;
+  usersLikes: UserLike[];
 }

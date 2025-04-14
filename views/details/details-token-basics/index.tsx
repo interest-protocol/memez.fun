@@ -2,8 +2,8 @@ import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
 import { not } from 'ramda';
-import { useState } from 'react';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useWatch } from 'react-hook-form';
 
 import {
   CetusSVG,
@@ -13,6 +13,7 @@ import {
   VerticalCoinSVG,
 } from '@/components/svg';
 import TokenCardIcon from '@/components/token-icon-card';
+import { useFetchPoolLikes } from '@/hooks/use-pool-likes';
 import { copyToClipboard } from '@/utils';
 import LikeComponent from '@/views/home/components/like';
 
@@ -23,11 +24,7 @@ import DetailsTokenBasicsFooter from './details-token-basics-footer';
 const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
 
-  const { control } = useFormContext<DetailsForm>();
-
   const formValues = useWatch<DetailsForm>();
-
-  const likes = useWatch<DetailsForm>({ control, name: 'likes' });
 
   const {
     coinType,
@@ -42,7 +39,16 @@ const DetailsTokenBasics = () => {
   const router = useRouter();
   const { id: poolId } = router.query;
 
+  const likes = useFetchPoolLikes(poolId as string);
+
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [numberOfLikes, setNumberOfLikes] = useState(likes.total);
+
+  console.log('numberOfLikes', numberOfLikes);
+
+  useEffect(() => {
+    setNumberOfLikes(likes.total);
+  }, [likes.total]);
 
   const handleLike = () => {
     setIsLiked(not);
@@ -76,7 +82,7 @@ const DetailsTokenBasics = () => {
           isLiked={isLiked}
           handleLikes={handleLike}
           poolId={poolId as string}
-          likeCounter={likes?.total || 0}
+          likeCounter={numberOfLikes}
         />
       </Div>
       <TokenCardIcon
@@ -216,7 +222,14 @@ const DetailsTokenBasics = () => {
           </Div>
         </Div>
       </Div>
-      <DetailsTokenBasicsFooter />
+      <DetailsTokenBasicsFooter
+        usersLikes={likes.data.map((el) => {
+          return {
+            ...el,
+            name: el.username,
+          };
+        })}
+      />
     </Div>
   );
 };

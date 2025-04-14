@@ -20,7 +20,7 @@ import { copyToClipboard } from '@/utils';
 import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
-import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
+// import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
 
 const MiniDetailsTokenBasics: FC = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
@@ -60,7 +60,11 @@ const MiniDetailsTokenBasics: FC = () => {
           justifyContent="space-between"
         >
           <Div gap="0.5rem" display="flex" alignItems="center">
-            <TokenCardIcon imgSrc="/suiMan.png" isMiniDetailsCard />
+            <TokenCardIcon
+              userAddress={formValues.creatorAddress as string}
+              imgSrc="/suiMan.png"
+              isMiniDetailsCard
+            />
             <Div display="flex" flexDirection="column" justifyContent="center">
               <Span
                 color="#fff"
@@ -126,7 +130,7 @@ const MiniDetailsTokenBasics: FC = () => {
         transition="max-height 0.5s ease, opacity 0.3s ease, transform 0.3s ease"
       >
         <Div py="2rem" gap="1rem" display="flex" flexDirection="column">
-          <DetailsTokenBasicsSocials />
+          {/* <DetailsTokenBasicsSocials /> */}
           <Div
             pb="0.75rem"
             gap="0.5rem"

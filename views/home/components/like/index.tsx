@@ -1,9 +1,9 @@
 import { Div, P } from '@stylin.js/elements';
 import { motion } from 'framer-motion';
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 
 import { HeartSVG } from '@/components/svg';
-import { useLikePools } from '@/hooks/use-pool-like';
+import { useLikePools } from '@/hooks/use-like-pool';
 
 import { LikeComponentProps } from './like.types';
 
@@ -17,6 +17,10 @@ export const LikeComponent: FC<LikeComponentProps> = ({
   const [likeCounter, setLikeCounter] = useState<number>(initialCounter);
 
   const { toggleLike, isLiking } = useLikePools(poolId);
+
+  useEffect(() => {
+    setLikeCounter(initialCounter);
+  }, [initialCounter]);
 
   const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
