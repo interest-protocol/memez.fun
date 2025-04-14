@@ -19,7 +19,6 @@ import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsFooter from './details-token-basics-footer';
-// import DetailsTokenBasicsSocials from './details-token-basics-social';
 
 const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
@@ -30,7 +29,6 @@ const DetailsTokenBasics = () => {
     coinType,
     creatorAddress,
     allTimeVolume,
-    // socials,
     name,
     iconUrl,
     virtualLiquidity,
@@ -43,8 +41,6 @@ const DetailsTokenBasics = () => {
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [numberOfLikes, setNumberOfLikes] = useState(likes.total);
-
-  console.log('numberOfLikes', numberOfLikes);
 
   useEffect(() => {
     setNumberOfLikes(likes.total);
@@ -125,7 +121,16 @@ const DetailsTokenBasics = () => {
           </P>
         </Div>
       )}
-      {/* <DetailsTokenBasicsSocials socials={socials || []} /> */}
+      {/* <DetailsTokenBasicsSocials
+        socials={(socials || []).map(
+          (social) =>
+            ({
+              title: social.title,
+              link: social.link,
+              Icon: social.Icon,
+            }) as SocialProps
+        )}
+      /> */}
       <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
         <Div
           p="1rem"

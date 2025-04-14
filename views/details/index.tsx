@@ -20,8 +20,6 @@ const Details: FC = () => {
   const { id } = router.query;
   const { pool, loading } = usePool(id as string);
 
-  console.log('pool', pool);
-
   useEffect(() => {
     if (pool) {
       setValue('name', pool.name);

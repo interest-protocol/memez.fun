@@ -1,8 +1,16 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
+import { GlobeSVG, TelegramSVG, XSVG } from '@/components/svg';
+import { SVGProps } from '@/components/svg/svg.types';
 import { Pool } from '@/interface';
 import { fetchCoinHistory, fetchMetadata } from '@/utils/pools';
+
+const iconMap: Record<string, React.FC<SVGProps>> = {
+  Telegram: TelegramSVG,
+  Website: GlobeSVG,
+  X: XSVG,
+};
 
 const GET_POOL = gql`
   query GetPool($poolId: String!) {
@@ -46,26 +54,32 @@ export const usePool = (poolId: string) => {
         const [metadata] = await fetchMetadata([pool.coinType]);
 
         const [history1D, history12M] = await Promise.all([
-          // fetchPoolLikes(pool.poolId),
           fetchCoinHistory(pool.coinType, '1D'),
           fetchCoinHistory(pool.coinType, '12M'),
         ]);
 
-        // const { data: likesData, total: likesTotal } = likes;
+        const allowedSocials = [
+          'Twitter',
+          'GitHub',
+          'Telegram',
+          'Website',
+          'X',
+        ];
 
-        // const allLikes = likesData.map((el: UserLike) => ({
-        //   ...el,
-        //   name: el.username,
-        // }));
+        const socialsArray = pool.metadata
+          ? Object.entries(pool.metadata)
+              .filter(([key, value]) => allowedSocials.includes(key) && !!value)
+              .map(([key, value]) => ({
+                title: key,
+                link: value as string,
+                Icon: iconMap[key],
+              }))
+          : [];
 
         setPoolWithRemainingData({
           ...pool,
           ...metadata,
-          // socials,
-          // likes: {
-          //   data: allLikes,
-          //   total: likesTotal,
-          // },
+          socials: socialsArray,
           iconUrl: 'suiMan.png',
           volume24H: history1D[0].volume,
           allTimeVolume: history12M[0].volume,

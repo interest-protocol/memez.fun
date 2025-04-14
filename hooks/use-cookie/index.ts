@@ -29,7 +29,6 @@ export const useCookie = (name: string) => {
   const remove = () => {
     deleteCookie(name);
     setCookieState(null);
-    console.log('removed');
   };
 
   return { cookie, set, remove } as const;

@@ -7,7 +7,7 @@ import SocialLink from '@/views/home/components/social';
 import { DetailsTokenBasicsSocialsProps } from './details-token-basics.types';
 
 const DetailsTokenBasicsSocials: FC<DetailsTokenBasicsSocialsProps> = ({
-  socials = [],
+  socials,
   isDisabled,
 }) => {
   if (!socials || socials.length === 0) return null;
