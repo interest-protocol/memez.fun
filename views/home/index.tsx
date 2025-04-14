@@ -30,7 +30,7 @@ const Home: FC = () => {
       ? undefined
       : { field: currentFilter.value, direction: 'DESC' };
 
-  const { pools, total, isLoading } = usePools(1, 10, {}, sortBy, true);
+  const { pools, total, isLoading } = usePools(page, 10, {}, sortBy, true);
 
   const handleFilterSelect = (sortItem: SortItem) => {
     setCurrentFilter(sortItem);
@@ -48,7 +48,7 @@ const Home: FC = () => {
       return <CardsSkleton />;
     }
 
-    if (pools.length === 0) {
+    if (!pools || pools.length === 0) {
       return <NoResults />;
     }
 

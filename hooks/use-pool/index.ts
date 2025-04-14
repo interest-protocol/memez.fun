@@ -66,7 +66,7 @@ export const usePool = (poolId: string) => {
           allTimeVolume: history12M[0].volume,
         });
       } catch (err) {
-        console.error('Erro ao buscar dados do pool:', err);
+        console.error('Error getting pool data:', err);
       } finally {
         setIsFullyLoading(false);
       }

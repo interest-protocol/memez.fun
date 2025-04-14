@@ -1,10 +1,21 @@
 import { Div } from '@stylin.js/elements';
 import { FC } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import AvatarGroup from '@/components/avatar-group';
-import { DATA } from '@/components/avatar-group/avatar-group.data';
+
+import { DetailsForm } from '../details.types';
 
 const DetailsTokenBasicsFooter: FC = () => {
+  const { control } = useFormContext<DetailsForm>();
+
+  const likes = useWatch<DetailsForm>({
+    control,
+    name: 'likes',
+  });
+
+  console.log('likes', likes);
+
   return (
     <Div
       pt="1rem"
@@ -18,7 +29,7 @@ const DetailsTokenBasicsFooter: FC = () => {
       borderBottomLeftRadius="1.5rem"
       borderBottomRightRadius="1.5rem"
     >
-      <AvatarGroup items={DATA} />
+      <AvatarGroup items={likes.data} />
     </Div>
   );
 };
