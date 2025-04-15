@@ -49,7 +49,7 @@ const EditProfileModal = () => {
 
   const updateFields = () => {
     setValue('avatar', user?.avatar ?? '');
-    setValue('name', user?.firstName ?? '');
+    setValue('name', `${user?.firstName + ' ' + user?.lastName}`);
     setValue('username', user?.username ?? '');
     setValue('bio', user?.bio ?? '');
   };

@@ -19,15 +19,15 @@ import UserInfo from './user-info';
 const Profile: FC = () => {
   const isMyProfile = true;
   const { isMobile } = useIsMobile();
-  const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
   const currentAccount = useCurrentAccount();
+  const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
   const [user, setUser] = useState<UserDetailsProps>();
   const [signedPM] = useLocalStorage<{
     signature: string;
     message: string;
   }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
 
-  const userPrifleData = () => {
+  const userProfileData = () => {
     fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
       method: 'GET',
       mode: 'cors',
@@ -42,7 +42,7 @@ const Profile: FC = () => {
   };
 
   useEffect(() => {
-    if (currentAccount) return userPrifleData();
+    if (currentAccount) return userProfileData();
   }, [currentAccount]);
 
   const onSelect = (tab: ProfileTabsEnum) => {

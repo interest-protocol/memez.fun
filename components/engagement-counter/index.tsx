@@ -62,15 +62,22 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({
           </Div>
         </Div>
         <Div
-          gap="1rem"
           pt="1rem"
+          gap="1rem"
+          height="100%"
           display="flex"
-          overflowY="auto"
+          overflow="auto"
           flexDirection="column"
           className="engagement-scroll"
         >
-          {data?.map(({ username, avatar }) => (
-            <UserLikeItem key={v4()} username={username} avatar={avatar} />
+          {data?.map(({ id, bio, username, avatar }) => (
+            <UserLikeItem
+              key={v4()}
+              username={username}
+              avatar={avatar}
+              bio={bio}
+              id={id}
+            />
           ))}
         </Div>
       </Div>

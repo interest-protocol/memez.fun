@@ -21,6 +21,13 @@ export interface CreateProfileFormProps {
   bio: string;
 }
 
+export interface UserProps {
+  id: string;
+  bio: string;
+  avatar: string;
+  username: string;
+}
+
 export interface UserDetailsProps extends CreateProfileFormProps {
   following?: number;
   followers?: number;

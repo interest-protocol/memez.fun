@@ -1,9 +1,13 @@
+import { UserProps } from '@/interface';
+
 export interface EngagementCounterModalItemProps {
-  username: string;
+  id: string;
+  bio: string;
   avatar: string;
+  username: string;
 }
 
 export interface EngagementCounterModalProps {
   title: string;
-  data?: Array<EngagementCounterModalItemProps>;
+  data?: Array<UserProps>;
 }

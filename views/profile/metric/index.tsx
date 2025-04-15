@@ -4,7 +4,11 @@ import { FC, useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import EngagementCounterModal from '@/components/engagement-counter';
-import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import {
+  BASE_URL,
+  MEMEZ_FUN_TOKEN_AUTH,
+  MOCK_FOLLOWING_DATA,
+} from '@/constants';
 import { useModal } from '@/hooks/use-modal';
 
 import { MetricProps } from './metric.types';
@@ -36,7 +40,7 @@ const Metric: FC<MetricProps> = ({
       },
     })
       .then((res) => res.json())
-      .then((data) => setFollowingData(data));
+      .then((userFollowing) => setFollowingData(userFollowing.data));
   };
 
   const getFollowers = () => {
@@ -50,7 +54,7 @@ const Metric: FC<MetricProps> = ({
       },
     })
       .then((res) => res.json())
-      .then((data) => setFollowersData(data));
+      .then((userFollowers) => setFollowersData(userFollowers.data));
   };
 
   useEffect(() => {
@@ -58,19 +62,20 @@ const Metric: FC<MetricProps> = ({
       getFollowing();
       getFollowers();
     }
-  }, [currentAccount]);
+  }, [currentAccount, followersData, followingData]);
 
   const handleFollowers = () =>
     setContent(
-      <EngagementCounterModal title="Followers" data={followersData} />,
+      <EngagementCounterModal title="Followers" data={MOCK_FOLLOWING_DATA} />,
       { onClose }
     );
 
   const handleFollowing = () =>
     setContent(
-      <EngagementCounterModal title="Following" data={followingData} />,
+      <EngagementCounterModal title="Following" data={MOCK_FOLLOWING_DATA} />,
       { onClose }
     );
+
   return (
     <Div
       pb="2rem"
