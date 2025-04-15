@@ -60,7 +60,7 @@ const WalletButton: FC = () => {
     const signIn = async () => {
       await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/auth/sign-in`, {
         method: 'POST',
-        credentials: 'same-origin',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -87,6 +87,7 @@ const WalletButton: FC = () => {
         });
       setSigning(not);
     };
+
     dialog.promise(signIn(), {
       success: () => ({
         timeout: 10000,

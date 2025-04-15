@@ -32,8 +32,13 @@ const MenuList: FC = () => {
     message: string;
     cookies?: unknown;
   }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
-  const handleDisconnectWallet = () => {
+
+  const handleDisconnectWallet = async () => {
     setSignedPM({ signature: '', message: '' });
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/auth/sign-out`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
     disconnectWallet();
   };
 
