@@ -47,7 +47,7 @@ export const usePool = (poolId: string) => {
     const fetchPoolData = async () => {
       const pool = data?.pool;
 
-      if (!pool.data) return null;
+      if (!pool) return null;
 
       setIsFullyLoading(true);
 
