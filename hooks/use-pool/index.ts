@@ -46,7 +46,8 @@ export const usePool = (poolId: string) => {
   useEffect(() => {
     const fetchPoolData = async () => {
       const pool = data?.pool;
-      if (!pool) return;
+
+      if (!pool.data) return null;
 
       setIsFullyLoading(true);
 

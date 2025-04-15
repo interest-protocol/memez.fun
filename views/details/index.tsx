@@ -18,7 +18,7 @@ const Details: FC = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  const { pool, loading } = usePool(id as string);
+  const { pool, loading, error } = usePool(id as string);
 
   useEffect(() => {
     if (pool) {
@@ -38,7 +38,19 @@ const Details: FC = () => {
 
   return (
     <Layout>
-      {loading ? (
+      {error?.message.includes('not found') ? (
+        <Div
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="90vh"
+          width="100vw"
+        >
+          <Div color="#FBFBFB" fontSize="4rem">
+            Pool not found
+          </Div>
+        </Div>
+      ) : loading ? (
         <DetailsSkeleton />
       ) : (
         <Div
