@@ -10,10 +10,8 @@ const FooterBar = () => {
     <Footer
       px="1rem"
       py="2rem"
-      mx="auto"
-      display="flex"
-      maxWidth="1400px"
       width="100%"
+      display="flex"
       alignItems="center"
       justifyContent="space-between"
     >
