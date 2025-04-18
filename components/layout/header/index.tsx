@@ -15,10 +15,8 @@ const HeaderBar: FC = () => {
       px="1.5rem"
       width="100%"
       display="flex"
-      maxWidth="1400px"
       alignItems="center"
       justifyContent="space-between"
-      mx="auto"
     >
       <Div
         ml="-0.8rem"
