@@ -5,19 +5,10 @@ import Footer from './footer';
 import Header from './header';
 import { LayoutProps } from './layout.types';
 
-const Layout: FC<PropsWithChildren<LayoutProps>> = ({
-  noFooter,
-  children,
-  centerContent,
-}) => (
-  <Div display="flex" minHeight="100vh" flexDirection="column">
+const Layout: FC<PropsWithChildren<LayoutProps>> = ({ noFooter, children }) => (
+  <Div display="flex" flexDirection="column">
     <Header />
-    <Main
-      flex="1"
-      {...(centerContent
-        ? { display: 'flex', justifyContent: 'center', alignItems: 'center' }
-        : {})}
-    >
+    <Main flex="1" minHeight="100vh">
       {children}
     </Main>
     {!noFooter && (

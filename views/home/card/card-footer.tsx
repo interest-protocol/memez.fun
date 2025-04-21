@@ -7,6 +7,8 @@ import { CardFooterProps } from './card.types';
 import CardLikes from './card-likes';
 
 const CardFooter: FC<CardFooterProps> = ({ data, total, poolId }) => {
+  console.log('data', data);
+
   return (
     <Div
       p="1rem"
