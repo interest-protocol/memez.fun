@@ -8,6 +8,7 @@ import CardFooter from './card-footer';
 import CardIcon from './card-icon';
 
 const Card: FC<CardProps> = ({
+  id,
   imgSrc,
   user,
   cardNumber,
@@ -20,7 +21,7 @@ const Card: FC<CardProps> = ({
   const { push } = useRouter();
 
   const handleOnCardClick = () => {
-    push('/details');
+    push(`/details/${id}`);
   };
 
   const handleOnMouseEnter = () => {

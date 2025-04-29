@@ -13,5 +13,6 @@ export interface CardBodyProps {
 }
 
 export interface CardProps extends CardIconProps, CardBodyProps {
+  id: string | number;
   onClick?: () => void;
 }

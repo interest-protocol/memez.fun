@@ -1,5 +1,6 @@
 export const CARDS = [
   {
+    id: 1,
     cardNumber: 1,
     user: 'McBattle',
     isVerified: false,
@@ -10,6 +11,7 @@ export const CARDS = [
     tokenName: 'FUD the Pug',
   },
   {
+    id: 2,
     cardNumber: 2,
     user: 'McBattle',
     isVerified: true,
@@ -19,6 +21,7 @@ export const CARDS = [
     tokenName: 'USDT',
   },
   {
+    id: 3,
     cardNumber: 3,
     user: 'UnKnown',
     isVerified: true,
@@ -28,6 +31,7 @@ export const CARDS = [
     imgSrc: 'https://s2.coinmarketcap.com/static/img/coins/200x200/10297.png',
   },
   {
+    id: 4,
     cardNumber: 4,
     user: 'Kipas',
     isVerified: false,
@@ -38,6 +42,7 @@ export const CARDS = [
       'https://coin-images.coingecko.com/coins/images/50648/large/DEEP_Logo_256x256_px_%282%29.png?1728612340',
   },
   {
+    id: 5,
     cardNumber: 5,
     user: 'Kipas',
     isVerified: false,
@@ -48,6 +53,7 @@ export const CARDS = [
       'https://sui.directory/wp-content/uploads/2023/04/Cetus-1000x600-1.png',
   },
   {
+    id: 6,
     cardNumber: 6,
     user: 'UnKnown',
     isVerified: false,
@@ -57,6 +63,7 @@ export const CARDS = [
     imgSrc: 'https://s2.coinmarketcap.com/static/img/coins/200x200/10297.png',
   },
   {
+    id: 7,
     cardNumber: 7,
     user: 'Kipas',
     isVerified: true,
@@ -66,6 +73,7 @@ export const CARDS = [
     imgSrc: '/suiMan.png',
   },
   {
+    id: 8,
     cardNumber: 8,
     user: 'McBattle',
     isVerified: true,
