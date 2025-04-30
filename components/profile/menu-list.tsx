@@ -3,6 +3,9 @@ import { Div } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
 
+import { MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import { useCookie } from '@/hooks/use-cookie';
+
 import {
   DocIDSVG,
   ExplorerSVG,
@@ -20,9 +23,22 @@ import RPCCollapseMenuInfo from './rpc-collapse-info';
 const MenuList: FC = () => {
   const [isActiveNSFE, setIsActiveNSFE] = useState(false);
   const [isRPCMenuOpen, setIsRPCMenuOpen] = useState(false);
+  const { mutate: disconnectWallet } = useDisconnectWallet();
+  const { cookie: bearerToken } = useCookie(MEMEZ_FUN_TOKEN_AUTH);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isExplorerMenuOpen, setIsExplorerMenuOpen] = useState(false);
-  const { mutate: disconnectWallet } = useDisconnectWallet();
+
+  const handleDisconnectWallet = () => {
+    fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/sign-out`, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    }).then((res) => {
+      res.ok && disconnectWallet();
+    });
+  };
 
   return (
     <Div>
@@ -58,7 +74,7 @@ const MenuList: FC = () => {
         Icon={LogoutSVG}
         title="Disconnect"
         color="#E85965"
-        onClick={() => disconnectWallet()}
+        onClick={handleDisconnectWallet}
       />
     </Div>
   );
