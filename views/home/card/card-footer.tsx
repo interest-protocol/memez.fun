@@ -2,11 +2,13 @@ import { Div } from '@stylin.js/elements';
 import { FC } from 'react';
 
 import AvatarGroup from '@/components/avatar-group';
-import { DATA } from '@/components/avatar-group/avatar-group.data';
 
+import { CardFooterProps } from './card.types';
 import CardLikes from './card-likes';
 
-const CardFooter: FC = () => {
+const CardFooter: FC<CardFooterProps> = ({ data, total, poolId }) => {
+  console.log('data', data);
+
   return (
     <Div
       p="1rem"
@@ -17,8 +19,8 @@ const CardFooter: FC = () => {
       borderBottomLeftRadius="1.5rem"
       borderBottomRightRadius="1.5rem"
     >
-      <AvatarGroup items={DATA} />
-      <CardLikes />
+      <AvatarGroup items={data} />
+      {total > 0 && <CardLikes poolId={poolId} totalLikes={total} />}
     </Div>
   );
 };

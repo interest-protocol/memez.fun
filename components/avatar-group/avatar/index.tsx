@@ -5,8 +5,8 @@ import { VerifiedSVG } from '../../svg';
 import { AvatarProps } from './avatar.types';
 
 const Avatar: FC<AvatarProps> = ({
-  title,
-  imgSrc,
+  name,
+  avatar,
   onClick,
   isVerified,
   size = 'small',
@@ -43,7 +43,7 @@ const Avatar: FC<AvatarProps> = ({
         height={avatarSize}
         justifyContent="center"
       >
-        <Img src={imgSrc} alt={title} width="100%" height="100%" />
+        <Img src={avatar} alt={name} width="100%" height="100%" />
       </Div>
       {isVerified && (
         <Div

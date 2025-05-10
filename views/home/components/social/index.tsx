@@ -5,9 +5,9 @@ import { FC } from 'react';
 import { SocialLinkProps } from './social.types';
 
 const SocialLink: FC<SocialLinkProps> = ({
-  pathname,
-  title,
   Icon,
+  title,
+  pathname,
   isDisabled,
 }) => {
   return (

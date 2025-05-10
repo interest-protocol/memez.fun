@@ -1,6 +1,8 @@
+import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
+import { useRouter } from 'next/router';
 import { not } from 'ramda';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 
 import {
@@ -11,26 +13,41 @@ import {
   VerticalCoinSVG,
 } from '@/components/svg';
 import TokenCardIcon from '@/components/token-icon-card';
+import { useFetchPoolLikes } from '@/hooks/use-pool-likes';
 import { copyToClipboard } from '@/utils';
 import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
 import DetailsTokenBasicsFooter from './details-token-basics-footer';
-import DetailsTokenBasicsSocials from './details-token-basics-social';
 
 const DetailsTokenBasics = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
 
   const formValues = useWatch<DetailsForm>();
 
+  const {
+    coinType,
+    creatorAddress,
+    allTimeVolume,
+    name,
+    iconUrl,
+    virtualLiquidity,
+  } = formValues;
+
+  const router = useRouter();
+  const { id: poolId } = router.query;
+
+  const likes = useFetchPoolLikes(poolId as string);
+
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCounter, setLikeCounter] = useState<number>(100);
+  const [numberOfLikes, setNumberOfLikes] = useState(likes.total);
+
+  useEffect(() => {
+    setNumberOfLikes(likes.total);
+  }, [likes.total]);
 
   const handleLike = () => {
     setIsLiked(not);
-    setLikeCounter((likeCounter) =>
-      isLiked ? likeCounter - 1 : likeCounter + 1
-    );
   };
 
   return (
@@ -40,57 +57,80 @@ const DetailsTokenBasics = () => {
       transition="0.3s"
       borderRadius="1.5rem"
       maxHeight="53.438rem"
-      border="1px solid #24282D"
-      display={['none', 'none', 'none', 'flex', 'flex']}
       flexDirection="column"
+      border="1px solid #24282D"
       justifyContent="space-between"
+      display={['none', 'none', 'none', 'flex', 'flex']}
     >
       <Div
         px="1rem"
         pb="1.25rem"
         display="flex"
         color="#fff"
+        alignItems="center"
         justifyContent="space-between"
       >
         <Span fontSize="1.5rem" fontWeight="500" fontFamily="Satoshi">
-          {formValues.name}
+          {name}
         </Span>
         <LikeComponent
           revertOrder
           isLiked={isLiked}
-          likeCounter={likeCounter}
           handleLikes={handleLike}
+          poolId={poolId as string}
+          likeCounter={numberOfLikes}
         />
       </Div>
-      <TokenCardIcon imgSrc={formValues.tokenIcon as string} />
-      <Div
-        py="0.75rem"
-        gap="0.5rem"
-        display="flex"
-        color="#FBFBFB"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <P fontSize="0.75rem">{formValues.type}</P>
+      <TokenCardIcon
+        userAddress={creatorAddress as string}
+        imgSrc={String(iconUrl)}
+      />
+      {coinType && (
         <Div
-          cursor="pointer"
+          py="0.75rem"
+          gap="0.5rem"
+          display="flex"
+          color="#FBFBFB"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <P fontSize="0.75rem">{formatAddress(coinType as string)}</P>
+          <Div
+            cursor="pointer"
+            onClick={() =>
+              copyToClipboard(coinType as string, clipBoardSuccessMessage)
+            }
+          >
+            <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
+          </Div>
+        </Div>
+      )}
+      {creatorAddress && (
+        <Div
+          py="2rem"
+          gap="0.5rem"
+          display="flex"
+          color="#FBFBFB"
+          justifyContent="center"
           onClick={() =>
-            copyToClipboard(formValues.type as string, clipBoardSuccessMessage)
+            copyToClipboard(creatorAddress as string, clipBoardSuccessMessage)
           }
         >
-          <ClipBoardSVG maxHeight="0.8rem" maxWidth="0.8rem" width="0.8rem" />
+          <P nHover={{ opacity: 0.8, cursor: 'pointer' }} fontSize="1rem">
+            Created by • {formatAddress(creatorAddress as string)}
+          </P>
         </Div>
-      </Div>
-      <Div
-        py="2rem"
-        gap="0.5rem"
-        display="flex"
-        color="#FBFBFB"
-        justifyContent="center"
-      >
-        <P fontSize="1rem">Created by • {formValues.createdBy}</P>
-      </Div>
-      <DetailsTokenBasicsSocials />
+      )}
+      {/* <DetailsTokenBasicsSocials
+        socials={(socials || []).map(
+          (social) =>
+            ({
+              title: social.title,
+              link: social.link,
+              Icon: social.Icon,
+            }) as SocialProps
+        )}
+      /> */}
       <Div mt="4rem" mb="1.2rem" display="flex" justifyContent="center">
         <Div
           p="1rem"
@@ -126,7 +166,7 @@ const DetailsTokenBasics = () => {
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
               <CetusSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-              <Span fontSize="1.25rem">{formValues.dex}</Span>{' '}
+              <Span fontSize="1.25rem">{formValues.symbol}</Span>
             </Div>
           </Div>
           <Div
@@ -146,15 +186,15 @@ const DetailsTokenBasics = () => {
                 justifyContent="center"
               >
                 <DollarSignSVG
-                  maxHeight="0.8rem"
-                  maxWidth="0.8rem"
                   width="0.8rem"
+                  maxWidth="0.8rem"
+                  maxHeight="0.8rem"
                 />
               </Div>
               <P fontSize="0.875rem">Total supply:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">{formValues.volume}</Span>
+              <Span fontSize="1.25rem">{allTimeVolume}</Span>
             </Div>
           </Div>
           <Div
@@ -182,12 +222,19 @@ const DetailsTokenBasics = () => {
               <P fontSize="0.875rem">Quote coin:</P>
             </Div>
             <Div gap="0.6rem" display="flex" alignItems="center">
-              <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>{' '}
+              <Span fontSize="1.25rem">{virtualLiquidity}</Span>
             </Div>
           </Div>
         </Div>
       </Div>
-      <DetailsTokenBasicsFooter />
+      <DetailsTokenBasicsFooter
+        usersLikes={likes.data.map((el) => {
+          return {
+            ...el,
+            name: el.username,
+          };
+        })}
+      />
     </Div>
   );
 };

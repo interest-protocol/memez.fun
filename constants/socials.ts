@@ -1,4 +1,4 @@
-import { GlobeSVG, Telegram, XSVG } from '@/components/svg';
+import { GlobeSVG, TelegramSVG, XSVG } from '@/components/svg';
 
 export const SOCIAL = [
   {
@@ -13,7 +13,7 @@ export const SOCIAL = [
   },
   {
     title: 'Telegram',
-    Icon: Telegram,
+    Icon: TelegramSVG,
     link: '',
   },
 ];

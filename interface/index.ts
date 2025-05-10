@@ -1,6 +1,9 @@
 import { CoinMetadata, SuiTransactionBlockResponse } from '@mysten/sui/client';
 import BigNumber from 'bignumber.js';
 
+import { SocialProps } from '@/components/layout/footer/footer.types';
+import { Likes } from '@/views/home/card/card.types';
+
 export type BigNumberish = BigNumber | bigint | string | number;
 
 export interface CoinMetadataWithType extends CoinMetadata {
@@ -10,4 +13,47 @@ export interface CoinMetadataWithType extends CoinMetadata {
 export interface TimedSuiTransactionBlockResponse
   extends SuiTransactionBlockResponse {
   time: number;
+}
+
+export interface CoinHistory {
+  low: string;
+  time: number;
+  open: string;
+  high: string;
+  close: string;
+  volume: string;
+}
+
+export interface Pool extends CoinMetadata {
+  likes?: Likes;
+  poolId: string;
+  coinType: string;
+  volume24H: string;
+  updatedAt: string;
+  migrated: boolean;
+  createdAt: string;
+  canonical: boolean;
+  lastTradeAt: string;
+  coinBalance: string;
+  canMigrate: boolean;
+  bondingCurve: string;
+  quoteBalance: string;
+  allTimeVolume: string;
+  creatorAddress: string;
+  virtualLiquidity: string;
+  socials: Array<SocialProps>;
+}
+
+export type PoolsData = {
+  pools: Pool[];
+  total: number;
+};
+export interface CreateProfileFormProps {
+  email: string;
+  imageUrl: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  description: string;
 }

@@ -7,7 +7,7 @@ import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
 import { Routes, RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
-import { CreateProfileFormProps } from '@/views/create-profile/create-profile.types';
+import { CreateProfileFormProps } from '@/interface';
 
 const EditProfileModalButton: FC = () => {
   const { trigger } = useFormContext<CreateProfileFormProps>();

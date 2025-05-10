@@ -1,17 +1,23 @@
 import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
+import Skeleton from 'react-loading-skeleton';
+
+import { formatNumber } from '@/utils';
 
 import { HeroCarouselItemProps } from './hero-carousel.types';
 import HeroCarouselItemTokenIcon from './hero-carousel-item-token-icon';
+import HeroCarouselItemTokenIconSkeleton from './hero-skeletons/hero-carousel-item-token-icon-skeleton';
+import HeroFloatItemSkeleton from './hero-skeletons/hero-float-item-skeleton';
 import HoverFloatItem from './hover-float-item';
 
 const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
+  name,
   isHot,
   iconUrl,
   iconSize,
+  isLoading,
   marketCap,
   volume24h,
-  tokenName,
   allTimeVolume,
 }) => {
   return (
@@ -35,14 +41,25 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             mr={['unset', 'unset', 'unset', '2rem', '5rem']}
             display={['none', 'none', 'none', 'block', 'block']}
           >
-            <HoverFloatItem value={marketCap} labelKey="marketCap" />
+            {isLoading ? (
+              <HeroFloatItemSkeleton />
+            ) : (
+              <HoverFloatItem
+                labelKey="marketCap"
+                value={formatNumber(marketCap)}
+              />
+            )}
           </Div>
           <Div mr={['unset', 'unset', 'unset', '5rem', '5rem']}>
-            <HeroCarouselItemTokenIcon
-              isHot={isHot}
-              size={iconSize}
-              iconUrl={iconUrl}
-            />
+            {!isLoading ? (
+              <HeroCarouselItemTokenIcon
+                isHot={isHot}
+                size={iconSize}
+                iconUrl={iconUrl}
+              />
+            ) : (
+              <HeroCarouselItemTokenIconSkeleton />
+            )}
           </Div>
         </Div>
       </Div>
@@ -55,9 +72,13 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
         justifyContent="center"
         display={['none', 'none', 'none', 'flex', 'flex']}
       >
-        <Span fontFamily="GoodGame" fontSize="6rem">
-          {tokenName}
-        </Span>
+        {isLoading ? (
+          <Skeleton height="5.688rem" width="21.813rem" />
+        ) : (
+          <Span fontFamily="GoodGame" fontSize="6rem">
+            {name}
+          </Span>
+        )}
       </Div>
       <Div flex="2" height="100%" display="flex" justifyContent="flex-start">
         <Div
@@ -73,7 +94,14 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             ml={['5rem', '5rem', '5rem', '-5rem', '5rem']}
             display={['none', 'none', 'none', 'block', 'block']}
           >
-            <HoverFloatItem value={volume24h} labelKey="volume24h" />
+            {isLoading ? (
+              <HeroFloatItemSkeleton />
+            ) : (
+              <HoverFloatItem
+                value={formatNumber(Number(volume24h))}
+                labelKey="volume24h"
+              />
+            )}
           </Div>
           <Div
             height="100%"
@@ -81,7 +109,14 @@ const HeroCarouselItem: FC<HeroCarouselItemProps> = ({
             display={['none', 'none', 'none', 'flex', 'flex']}
           >
             <Div mt="6rem">
-              <HoverFloatItem value={allTimeVolume} labelKey="allTimeVolume" />
+              {isLoading ? (
+                <HeroFloatItemSkeleton />
+              ) : (
+                <HoverFloatItem
+                  value={formatNumber(Number(allTimeVolume))}
+                  labelKey="allTimeVolume"
+                />
+              )}
             </Div>
           </Div>
         </Div>

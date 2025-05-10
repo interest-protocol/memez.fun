@@ -1,3 +1,4 @@
+import { formatAddress } from '@mysten/sui/utils';
 import { Div, P, Span } from '@stylin.js/elements';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
@@ -19,7 +20,7 @@ import { copyToClipboard } from '@/utils';
 import LikeComponent from '@/views/home/components/like';
 
 import { DetailsForm } from '../details.types';
-import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
+// import DetailsTokenBasicsSocials from '../details-token-basics/details-token-basics-social';
 
 const MiniDetailsTokenBasics: FC = () => {
   const clipBoardSuccessMessage = 'Address copied to the clipboard';
@@ -27,6 +28,8 @@ const MiniDetailsTokenBasics: FC = () => {
   const [isliked, setIsLiked] = useState<boolean>(false);
 
   const formValues = useWatch<DetailsForm>();
+
+  const { coinType } = formValues;
 
   const handleClick = () => {
     setShowMoreDetails(!showMoreDetails);
@@ -57,7 +60,11 @@ const MiniDetailsTokenBasics: FC = () => {
           justifyContent="space-between"
         >
           <Div gap="0.5rem" display="flex" alignItems="center">
-            <TokenCardIcon imgSrc="/suiMan.png" isMiniDetailsCard />
+            <TokenCardIcon
+              userAddress={formValues.creatorAddress as string}
+              imgSrc="/suiMan.png"
+              isMiniDetailsCard
+            />
             <Div display="flex" flexDirection="column" justifyContent="center">
               <Span
                 color="#fff"
@@ -73,14 +80,13 @@ const MiniDetailsTokenBasics: FC = () => {
                 color="#90939D"
                 alignItems="center"
               >
-                <P fontSize="0.75rem">{formValues.type}</P>{' '}
+                {coinType && (
+                  <P fontSize="0.75rem">{formatAddress(coinType as string)}</P>
+                )}
                 <Div
                   cursor="pointer"
                   onClick={() =>
-                    copyToClipboard(
-                      formValues.type as string,
-                      clipBoardSuccessMessage
-                    )
+                    copyToClipboard(coinType as string, clipBoardSuccessMessage)
                   }
                 >
                   <ClipBoardPaperSVG
@@ -93,6 +99,7 @@ const MiniDetailsTokenBasics: FC = () => {
             </Div>
           </Div>
           <LikeComponent
+            poolId={formValues.poolId as string}
             revertOrder
             likeCounter={50}
             isLiked={isliked}
@@ -108,7 +115,7 @@ const MiniDetailsTokenBasics: FC = () => {
           borderRadius="0.75rem"
           justifyContent="center"
         >
-          <RangeBar value={formValues.range as number} />
+          <RangeBar value={Number(formValues.bondingCurve)} />
           <P fontWeight="300" fontSize="0.875rem" color="#FFFFFF">
             Bonding
           </P>
@@ -123,7 +130,7 @@ const MiniDetailsTokenBasics: FC = () => {
         transition="max-height 0.5s ease, opacity 0.3s ease, transform 0.3s ease"
       >
         <Div py="2rem" gap="1rem" display="flex" flexDirection="column">
-          <DetailsTokenBasicsSocials />
+          {/* <DetailsTokenBasicsSocials /> */}
           <Div
             pb="0.75rem"
             gap="0.5rem"
@@ -131,7 +138,7 @@ const MiniDetailsTokenBasics: FC = () => {
             color="#FBFBFB"
             justifyContent="center"
           >
-            <P fontSize="1rem">Created by • {formValues.createdBy}</P>
+            <P fontSize="1rem">Created by • {formValues.creatorAddress}</P>
           </Div>
         </Div>
         <Div px="1rem">
@@ -171,7 +178,7 @@ const MiniDetailsTokenBasics: FC = () => {
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
                 <SuiLogoSVG maxHeight="2rem" maxWidth="2rem" width="2rem" />
-                <Span fontSize="1.25rem">{formValues.dex}</Span>
+                <Span fontSize="1.25rem">{formValues.symbol}</Span>
               </Div>
             </Div>
             <Div
@@ -199,7 +206,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Total supply:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">{formValues.volume}</Span>
+                <Span fontSize="1.25rem">{formValues.allTimeVolume}</Span>
               </Div>
             </Div>
             <Div
@@ -227,7 +234,7 @@ const MiniDetailsTokenBasics: FC = () => {
                 <P fontSize="0.875rem">Quote coin:</P>
               </Div>
               <Div gap="0.6rem" display="flex" alignItems="center">
-                <Span fontSize="1.25rem">{formValues.quoteCoin}</Span>
+                <Span fontSize="1.25rem">{formValues.virtualLiquidity}</Span>
               </Div>
             </Div>
           </Div>

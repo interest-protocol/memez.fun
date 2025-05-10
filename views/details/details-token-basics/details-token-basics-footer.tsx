@@ -2,9 +2,12 @@ import { Div } from '@stylin.js/elements';
 import { FC } from 'react';
 
 import AvatarGroup from '@/components/avatar-group';
-import { DATA } from '@/components/avatar-group/avatar-group.data';
 
-const DetailsTokenBasicsFooter: FC = () => {
+import { DetailsTokenBasicsFooterProps } from './details-token-basics.types';
+
+const DetailsTokenBasicsFooter: FC<DetailsTokenBasicsFooterProps> = ({
+  usersLikes,
+}) => {
   return (
     <Div
       pt="1rem"
@@ -18,7 +21,17 @@ const DetailsTokenBasicsFooter: FC = () => {
       borderBottomLeftRadius="1.5rem"
       borderBottomRightRadius="1.5rem"
     >
-      <AvatarGroup items={DATA} />
+      <AvatarGroup
+        items={
+          usersLikes || [
+            {
+              id: '',
+              name: '',
+              avatar: '',
+            },
+          ]
+        }
+      />
     </Div>
   );
 };

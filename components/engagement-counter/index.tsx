@@ -70,8 +70,9 @@ const EngagementCounterModal: FC<EngagementCounterModalProps> = ({ title }) => {
           {DATA.map(({ userName, userAvatar }) => (
             <UserLikeItem
               key={v4()}
-              userName={userName}
-              userAvatar={userAvatar}
+              id={v4()}
+              name={userName}
+              avatar={userAvatar}
             />
           ))}
         </Div>

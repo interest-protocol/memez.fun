@@ -8,19 +8,22 @@ import CardFooter from './card-footer';
 import CardIcon from './card-icon';
 
 const Card: FC<CardProps> = ({
+  name,
+  likes,
   imgSrc,
-  user,
+  poolId,
   cardNumber,
   isVerified,
-  tokenName,
-  marketCap,
+  quoteBalance,
   lastPurchase,
+  bondingCurve,
+  creatorAddress,
 }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
   const { push } = useRouter();
 
   const handleOnCardClick = () => {
-    push('/details');
+    push(`/details/${poolId}`);
   };
 
   const handleOnMouseEnter = () => {
@@ -38,26 +41,31 @@ const Card: FC<CardProps> = ({
       transition="0.3s"
       borderRadius="1.5rem"
       onClick={handleOnCardClick}
+      border="1px solid #24282D"
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
-      border="1px solid #24282D"
       nHover={{
         borderColor: isCardHovered ? '#F8D375' : 'none',
       }}
     >
       <CardIcon
-        user={user}
         imgSrc={imgSrc}
         isVerified={isVerified}
         cardNumber={cardNumber}
         isCardHovered={isCardHovered}
+        creatorAddress={creatorAddress}
       />
       <CardBody
-        tokenName={tokenName}
-        marketCap={marketCap}
+        name={name}
+        quoteBalance={quoteBalance}
+        bondingCurve={bondingCurve}
         lastPurchase={lastPurchase}
       />
-      <CardFooter />
+      <CardFooter
+        poolId={poolId}
+        data={likes?.data ?? []}
+        total={likes?.total ?? 0}
+      />
     </Div>
   );
 };

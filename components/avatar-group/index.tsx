@@ -9,8 +9,9 @@ import { TooltipWrapper } from '../tooltip';
 import Avatar from './avatar';
 import { AvatarGroupProps } from './avatar-group.types';
 
+const MAX_ITEMS = 5;
+
 const AvatarGroup: FC<AvatarGroupProps> = ({ items }) => {
-  const MAX_ITEMS = 5;
   const { setContent, onClose } = useModal();
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -24,12 +25,12 @@ const AvatarGroup: FC<AvatarGroupProps> = ({ items }) => {
 
   return (
     <Div gap="0.5rem" display="flex" cursor="pointer" color="#F6C853">
-      {items.slice(0, MAX_ITEMS).map(({ title, imgSrc }) => (
-        <TooltipWrapper key={v4()} tooltipContent={title}>
+      {items.slice(0, MAX_ITEMS).map(({ id, username, avatar }) => (
+        <TooltipWrapper key={v4()} tooltipContent={username}>
           <Avatar
-            isVerified
-            title={title}
-            imgSrc={imgSrc}
+            id={id}
+            avatar={avatar}
+            username={username}
             onClick={handleAvatarClick}
           />
         </TooltipWrapper>

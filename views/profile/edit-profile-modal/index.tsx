@@ -48,6 +48,13 @@ const EditProfileModal = () => {
               description={errors.imageUrl?.message}
             />
             <InputField
+              placeholder="name"
+              {...register('name')}
+              tooltipDescription="username"
+              status={errors.username && 'error'}
+              supportingText={errors.username?.message}
+            />
+            <InputField
               placeholder="username"
               {...register('username')}
               tooltipDescription="username"
