@@ -35,6 +35,7 @@ const Avatar: FC<AvatarProps> = ({
   return (
     <Div onClick={onClick} width={avatarSize} position="relative">
       <Div
+        bg="#F6C853"
         display="flex"
         overflow="hidden"
         width={avatarSize}

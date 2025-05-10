@@ -1,9 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Div, H1, P } from '@stylin.js/elements';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useLocalStorage } from 'usehooks-ts';
 
 import InputField from '@/components/input-field';
 import UploadImage from '@/components/upload-image';
+import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
+import { UserDetailsProps } from '@/interface';
 
 import { editProfileValidationSchema } from './edit-profile.validations';
 import { IEditProfileForm } from './edit-profile-modal.types';
@@ -17,12 +22,48 @@ const EditProfileModal = () => {
   });
   const {
     register,
+    setValue,
     formState: { errors },
   } = form;
+  const currentAccount = useCurrentAccount();
+  const [user, setUser] = useState<UserDetailsProps>();
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
+  localStorage.setItem('imageURL', user?.avatar ?? '');
 
+  const userPrifleData = () => {
+    fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM?.message,
+        signature: signedPM?.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  };
+
+  const updateFields = () => {
+    setValue('avatar', user?.avatar ?? '');
+    setValue('name', `${user?.firstName + ' ' + user?.lastName}`);
+    setValue('username', user?.username ?? '');
+    setValue('bio', user?.bio ?? '');
+  };
+
+  useEffect(() => {
+    if (currentAccount) return userPrifleData();
+  }, [currentAccount]);
+
+  useEffect(() => {
+    updateFields();
+  }, [user]);
   return (
     <FormProvider {...form}>
-      <Div maxHeight="90vh" overflowY="auto">
+      <Div maxHeight="90vh" overflow="hidden">
         <Div
           p="1.5rem"
           bg="#131419"
@@ -43,9 +84,16 @@ const EditProfileModal = () => {
               Basic Details
             </P>
             <UploadImage
-              name="imageUrl"
-              status={errors.imageUrl && 'error'}
-              description={errors.imageUrl?.message}
+              name="avatar"
+              status={errors.avatar && 'error'}
+              description={errors.avatar?.message}
+            />
+            <InputField
+              placeholder="name"
+              {...register('name')}
+              tooltipDescription="name"
+              status={errors.username && 'error'}
+              supportingText={errors.username?.message}
             />
             <InputField
               placeholder="username"
@@ -57,10 +105,10 @@ const EditProfileModal = () => {
             <InputField
               isTextArea
               placeholder="Description"
-              {...register('description')}
-              status={errors.description && 'error'}
+              {...register('bio')}
+              status={errors.bio && 'error'}
               tooltipDescription="Profile description"
-              supportingText={errors.description?.message}
+              supportingText={errors.bio?.message}
             />
           </Div>
         </Div>

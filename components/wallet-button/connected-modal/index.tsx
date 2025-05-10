@@ -1,21 +1,22 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
-import { Button, Div, DivElementProps } from '@stylin.js/elements';
+import { Button, Div, DivElementProps, Img } from '@stylin.js/elements';
 import { AnimatePresence } from 'motion/react';
 import { useRouter } from 'next/router';
 import { not } from 'ramda';
 import { FC, useState } from 'react';
 
 import Profile from '@/components/profile';
-import { UserSVG } from '@/components/svg';
 import ChevronDown from '@/components/svg/chevron-down';
 import { Routes, RoutesEnum } from '@/constants';
+import { DEFAULT_IMAGE } from '@/constants/index';
 import useClickOutsideListenerRef from '@/hooks/use-click-outside-listener-ref';
 
 const ConnectedModal: FC = () => {
   const [show, setShow] = useState(false);
   const { push } = useRouter();
   const currentAccount = useCurrentAccount();
+  const imageURL = localStorage.getItem('imageURL');
 
   const menuRef = useClickOutsideListenerRef<DivElementProps>(() =>
     setShow(false)
@@ -56,7 +57,14 @@ const ConnectedModal: FC = () => {
             push(Routes[RoutesEnum.Profile]);
           }}
         >
-          <UserSVG maxWidth="1.5rem" maxHeight="1.5rem" width="100%" />
+          <Img
+            width="2rem"
+            height="2rem"
+            bg="#F5B722"
+            objectFit="cover"
+            borderRadius="100%"
+            src={imageURL ?? DEFAULT_IMAGE}
+          />
         </Div>
         {formatAddress(currentAccount!.address)}
         <Div display={['none', 'block']}>

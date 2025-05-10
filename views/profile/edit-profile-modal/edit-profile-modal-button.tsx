@@ -5,35 +5,37 @@ import { useFormContext } from 'react-hook-form';
 
 import DialogCountdown from '@/components/dialog/dialog-countdown';
 import { LoaderSVG } from '@/components/svg';
-import { Routes, RoutesEnum } from '@/constants';
+import { BASE_URL, Routes, RoutesEnum } from '@/constants';
 import { useDialog } from '@/hooks/use-dialog';
-import { CreateProfileFormProps } from '@/views/create-profile/create-profile.types';
+
+import { IEditProfileForm } from './edit-profile-modal.types';
 
 const EditProfileModalButton: FC = () => {
-  const { trigger } = useFormContext<CreateProfileFormProps>();
+  const { trigger, getValues } = useFormContext<IEditProfileForm>();
+  const { username, name, bio, avatar } = getValues();
 
   const { dialog, handleClose } = useDialog();
   const { push } = useRouter();
-  const handleCreateProfile = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const isSuccess = Math.random() > 0.5;
-        if (isSuccess) {
-          handleClose();
-          resolve('success');
-          return;
-        }
-        reject('Error');
-      }, 1000);
-    });
+
+  const saveEditProfile = async () => {
+    fetch(`${BASE_URL}/users`, {
+      method: 'PATCH',
+      mode: 'cors',
+      body: JSON.stringify({
+        name: name,
+        avatar: avatar,
+        bio: bio,
+        username: username,
+      }),
+    }).then((res) => res.ok);
   };
 
-  const handleEditProfiel = async () => {
+  const handleEditProfile = async () => {
     const isValid = await trigger();
 
     if (!isValid) return;
 
-    await dialog.promise(handleCreateProfile(), {
+    await dialog.promise(saveEditProfile(), {
       success: () => ({
         title: 'Profile Edited',
         message: 'Profile successfully edited',
@@ -110,7 +112,7 @@ const EditProfileModalButton: FC = () => {
         transition="all .3s"
         justifyContent="center"
         border="1px solid #F6C853"
-        onClick={async () => await handleEditProfiel()}
+        onClick={async () => handleEditProfile()}
         nHover={{
           transform: 'scale(1.05)',
         }}

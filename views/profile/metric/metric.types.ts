@@ -1,6 +1,6 @@
 export interface MetricProps {
-  followers: string;
-  following: string;
+  followers?: number;
+  following?: number;
   coinsOwned: string;
   totalValueCoin: string;
 }

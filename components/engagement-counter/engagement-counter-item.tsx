@@ -2,14 +2,36 @@ import { Div, Span } from '@stylin.js/elements';
 import { FC } from 'react';
 import { v4 } from 'uuid';
 
+import { DEFAULT_IMAGE } from '@/constants';
+import { useModal } from '@/hooks/use-modal';
+
 import Avatar from '../avatar-group/avatar';
 import { ArrowUpRightFromSquareSVG } from '../svg';
 import { EngagementCounterModalItemProps } from './engagement-counter.types';
 
 const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
-  userName,
-  userAvatar,
+  id,
+  bio,
+  avatar,
+  username,
 }) => {
+  const { handleClose } = useModal();
+  const hasAvatar = avatar === '' ? DEFAULT_IMAGE : avatar;
+  const hasUsername = username === '' ? 'Unknown' : username;
+
+  const onSelect = () => {
+    const selectedUser = [
+      {
+        id,
+        bio,
+        avatar,
+        username,
+      },
+    ];
+    console.log('Selected user _>', selectedUser);
+    handleClose();
+    return selectedUser;
+  };
   return (
     <Div
       p="0.8rem"
@@ -24,12 +46,17 @@ const EngagementCounterModalItem: FC<EngagementCounterModalItemProps> = ({
       }}
     >
       <Div gap="1rem" display="flex" alignItems="center">
-        <Avatar imgSrc={userAvatar} title={userName} size="large" isVerified />
+        <Avatar
+          imgSrc={hasAvatar}
+          title={hasUsername}
+          size="large"
+          isVerified
+        />
         <Span color="#E4E7EB" fontSize="1rem">
-          {userName}
+          {hasUsername}
         </Span>
       </Div>
-      <Div cursor="pointer">
+      <Div cursor="pointer" onClick={onSelect}>
         <ArrowUpRightFromSquareSVG
           width="1rem"
           maxWidth="1rem"

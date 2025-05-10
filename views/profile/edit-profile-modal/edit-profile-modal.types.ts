@@ -1,5 +1,6 @@
 export interface IEditProfileForm {
-  imageUrl: string;
+  name: string;
+  avatar: string;
   username: string;
-  description: string;
+  bio: string;
 }

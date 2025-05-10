@@ -2,24 +2,57 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { formatAddress } from '@mysten/sui/utils';
 import { Div, Img, Span } from '@stylin.js/elements';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useLocalStorage } from 'usehooks-ts';
 
-import { Routes, RoutesEnum } from '@/constants';
+import {
+  BASE_URL,
+  DEFAULT_IMAGE,
+  MEMEZ_FUN_TOKEN_AUTH,
+  Routes,
+  RoutesEnum,
+} from '@/constants';
 import { useCoinBalance } from '@/hooks/use-coin-balance';
+import { UserDetailsProps } from '@/interface';
 import { FixedPointMath } from '@/lib/entities/fixed-point-math';
 
 import { BannerProfileSVG, CopySVG } from '../svg';
 
 const ProfileInfo: FC = () => {
-  const currentAccount = useCurrentAccount();
   const { push } = useRouter();
+  const currentAccount = useCurrentAccount();
+  const [user, setUser] = useState<UserDetailsProps>();
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
+
+  const userPrifleData = () => {
+    fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM.message,
+        signature: signedPM.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  };
+
+  useEffect(() => {
+    if (currentAccount) return userPrifleData();
+  }, [currentAccount]);
 
   const { balance } = useCoinBalance('0x2::sui::SUI', currentAccount?.address);
 
   const copyAddress = () => {
     toast.success('Copied!');
-    window.navigator.clipboard.writeText('0x2::sui::SUI');
+    window.navigator.clipboard.writeText(
+      formatAddress(currentAccount?.address || '')
+    );
   };
 
   return (
@@ -52,9 +85,10 @@ const ProfileInfo: FC = () => {
           <Img
             width="100%"
             height="100%"
+            bg="#F5B722"
             objectFit="cover"
             borderRadius="100%"
-            src="/user-default-memez-fun.png"
+            src={user?.avatar ?? DEFAULT_IMAGE}
           />
         </Div>
         <Div
@@ -67,10 +101,10 @@ const ProfileInfo: FC = () => {
           flexDirection="column"
         >
           <Span color="#fff" lineHeight="1.375rem">
-            Name
+            {`${user?.firstName === '' && user?.lastName === '' && 'Unknown'} `}
           </Span>
           <Span color="#90939D" lineHeight="1.375rem">
-            {formatAddress(currentAccount?.address || '')}
+            {user?.username}
           </Span>
         </Div>
         <Div

@@ -13,10 +13,10 @@ const UploadImage: FC<UploadImageProps> = ({
   status,
   isReview,
   description,
-  name = 'imageUrl',
+  name = 'avatar',
 }) => {
   const { setValue, control } = useFormContext();
-  const currentImageUrl = useWatch({ control, name });
+  const currentavatar = useWatch({ control, name });
   const [dragging, setDragging] = useState(false);
 
   const handleChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -94,7 +94,7 @@ const UploadImage: FC<UploadImageProps> = ({
         onDragLeave={() => setDragging(false)}
         onDragOver={(e) => e.preventDefault()}
         borderStyle={dragging ? 'solid' : 'dashed'}
-        backgroundImage={`url('${currentImageUrl}')`}
+        backgroundImage={`url('${currentavatar}')`}
         borderColor={dragging ? '#F6C853' : '#90939D'}
       >
         {!isReview && (

@@ -8,7 +8,7 @@ import { DexCardProps } from '../../create-coin.types';
 const DexCard: FC<Omit<DexCardProps, 'dexId'>> = ({
   dexName,
   onClick,
-  imageUrl,
+  avatar,
   isReview,
   isSelected,
 }) => (
@@ -40,7 +40,7 @@ const DexCard: FC<Omit<DexCardProps, 'dexId'>> = ({
         justifyContent="center"
       >
         <Div width="1.5rem" height="1.5rem">
-          <img src={imageUrl} alt="cetus-dex" width="100%" height="100%" />
+          <img src={avatar} alt="cetus-dex" width="100%" height="100%" />
         </Div>
       </Div>
       <Span fontSize="0.875rem" fontWeight="500">

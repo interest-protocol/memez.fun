@@ -1,8 +1,12 @@
+import { useCurrentAccount } from '@mysten/dapp-kit';
 import { Div, Span } from '@stylin.js/elements';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import { Layout } from '@/components';
+import { BASE_URL, MEMEZ_FUN_TOKEN_AUTH } from '@/constants';
 import { useIsMobile } from '@/hooks/use-is-mobile';
+import { UserDetailsProps } from '@/interface';
 
 import ActivityList from './activity-list';
 import HeaderButtons from './header-buttons';
@@ -13,9 +17,33 @@ import { ProfileTabsEnum } from './profile-tabs/profile-tabs.types';
 import UserInfo from './user-info';
 
 const Profile: FC = () => {
-  const { isMobile } = useIsMobile();
-  const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
   const isMyProfile = true;
+  const { isMobile } = useIsMobile();
+  const currentAccount = useCurrentAccount();
+  const [tabSelect, setTabSelect] = useState(ProfileTabsEnum.History);
+  const [user, setUser] = useState<UserDetailsProps>();
+  const [signedPM] = useLocalStorage<{
+    signature: string;
+    message: string;
+  }>(MEMEZ_FUN_TOKEN_AUTH, { signature: '', message: '' });
+
+  const userProfileData = () => {
+    fetch(`${BASE_URL}/users/${currentAccount?.address}`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        message: signedPM?.message,
+        signature: signedPM?.signature,
+        address: currentAccount?.address ?? '',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  };
+
+  useEffect(() => {
+    if (currentAccount) return userProfileData();
+  }, [currentAccount]);
 
   const onSelect = (tab: ProfileTabsEnum) => {
     setTabSelect(tab);
@@ -41,11 +69,18 @@ const Profile: FC = () => {
             borderBottomLeftRadius={['0', '0', '0', '2rem']}
             borderBottomRightRadius={['0', '0', '0', '2rem']}
           >
-            <UserInfo />
+            <UserInfo
+              emailVerified={user?.emailVerified ?? false}
+              avatar={user?.avatar ?? ''}
+              username={user?.username ?? ''}
+              firstName={user?.firstName ?? ''}
+              lastName={user?.lastName ?? ''}
+              bio={user?.bio ?? ''}
+            />
             <HeaderButtons isMyProfile={isMyProfile} />
             <Metric
-              followers="156k"
-              following="130k"
+              followers={user?.followers}
+              following={user?.following}
               coinsOwned="12"
               totalValueCoin="1.43M"
             />
